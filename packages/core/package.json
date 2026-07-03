@@ -10,5 +10,9 @@
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "chessops": "^0.15.0",
+    "zod": "^4.4.3"
   }
 }

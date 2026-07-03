@@ -1,0 +1,103 @@
+/**
+ * Thin wrappers around chessops so the rest of core (and downstream packages)
+ * never touch raw rules-library APIs. This is the ONLY file allowed to import
+ * from 'chessops' — one library boundary, one place to swap it.
+ */
+import { Chess } from 'chessops/chess';
+import { INITIAL_FEN, makeFen, parseFen } from 'chessops/fen';
+import { makeSan, parseSan } from 'chessops/san';
+import { makeSquare, makeUci, parseUci, squareRank } from 'chessops/util';
+import type { Role } from 'chessops/types';
+
+import { IllegalMoveError, MalformedUciError, PuzzleDataError } from './errors.js';
+import { UCI_REGEX } from './schema.js';
+
+export type Position = Chess;
+export type { Role };
+
+export const initialPosition = (): Position => Chess.default();
+
+export const positionFromFen = (fen: string): Position => {
+  const setup = parseFen(fen).unwrap(
+    (s) => s,
+    (e) => {
+      throw new PuzzleDataError(`Invalid FEN "${fen}": ${e.message}`);
+    },
+  );
+  return Chess.fromSetup(setup).unwrap(
+    (p) => p,
+    (e) => {
+      throw new PuzzleDataError(`Illegal position "${fen}": ${e.message}`);
+    },
+  );
+};
+
+export const fenOf = (pos: Position): string => makeFen(pos.toSetup());
+
+export const turnOf = (pos: Position): 'white' | 'black' => pos.turn;
+
+/** Every legal move in the position as UCI strings (promotions expanded). */
+export const legalUcis = (pos: Position): string[] => {
+  const ucis: string[] = [];
+  for (const [from, tos] of pos.allDests()) {
+    const isPawn = pos.board.get(from)?.role === 'pawn';
+    for (const to of tos) {
+      if (isPawn && (squareRank(to) === 0 || squareRank(to) === 7)) {
+        for (const promotion of ['queen', 'rook', 'bishop', 'knight'] as const) {
+          ucis.push(makeUci({ from, to, promotion }));
+        }
+      } else {
+        ucis.push(makeUci({ from, to }));
+      }
+    }
+  }
+  return ucis;
+};
+
+/** Normalize + validate a guess string. Throws MalformedUciError. */
+export const normalizeUci = (raw: string): string => {
+  const uci = raw.trim().toLowerCase();
+  if (!UCI_REGEX.test(uci)) throw new MalformedUciError(raw);
+  return uci;
+};
+
+/** Play a UCI move in place. Throws IllegalMoveError if not legal. */
+export const playUci = (pos: Position, uci: string): void => {
+  const move = parseUci(uci);
+  if (!move || !pos.isLegal(move)) throw new IllegalMoveError(uci, fenOf(pos));
+  pos.play(move);
+};
+
+/** Play a SAN move in place, returning its UCI. Throws PuzzleDataError if not legal. */
+export const playSan = (pos: Position, san: string): string => {
+  const move = parseSan(pos, san);
+  if (!move) throw new PuzzleDataError(`SAN "${san}" is not legal in ${fenOf(pos)}`);
+  const uci = makeUci(move);
+  pos.play(move);
+  return uci;
+};
+
+/** SAN for a UCI move in the given position (does not mutate). */
+export const sanOfUci = (pos: Position, uci: string): string => {
+  const move = parseUci(uci);
+  if (!move || !pos.isLegal(move)) throw new IllegalMoveError(uci, fenOf(pos));
+  return makeSan(pos, move);
+};
+
+/** Role of the piece standing on the from-square of a UCI move. */
+export const roleAtFrom = (pos: Position, uci: string): Role => {
+  const move = parseUci(uci);
+  if (!move || !('from' in move)) throw new MalformedUciError(uci);
+  const piece = pos.board.get(move.from);
+  if (!piece) throw new IllegalMoveError(uci, fenOf(pos));
+  return piece.role;
+};
+
+/** Destination square name of a UCI move, e.g. "d4". */
+export const toSquareOf = (uci: string): string => {
+  const move = parseUci(uci);
+  if (!move || !('to' in move)) throw new MalformedUciError(uci);
+  return makeSquare(move.to);
+};
+
+export { INITIAL_FEN };
