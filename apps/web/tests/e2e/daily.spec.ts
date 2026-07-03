@@ -82,7 +82,7 @@ test('completing the daily: locked share format, streak, countdown', async ({ pa
   expect(clipboard).toBe(
     [
       `Play the Legend #${dayIndex + 1} — ${puzzle!.meta.heroName}, ${puzzle!.meta.event} ${puzzle!.meta.year}`,
-      '🟩'.repeat(n),
+      `♞${'🟩'.repeat(n)}`,
       `❤❤❤ ${n * 100}/${n * 100}`,
     ].join('\n'),
   );

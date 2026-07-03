@@ -27,10 +27,13 @@ import {
 import type { DrawShape } from 'chessground/draw';
 
 import Board from './Board';
+import { Confetti, CountUp, GridReveal } from './Celebration';
 import Countdown from './Countdown';
 import { track } from '../lib/analytics';
 import { destsFromUcis, promotionChoices } from '../lib/dests';
 import { previousDateKey } from '../lib/daily';
+import { percentile } from '../lib/stats';
+import { playSound, setSoundEnabled, soundEnabled } from '../lib/sound';
 import { unsealPuzzle, type SealedPuzzle } from '../lib/seal';
 import {
   appendAction,
@@ -101,6 +104,23 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
   const [streakNow, setStreakNow] = useState<number | null>(null);
   const [board, setBoard] = useState<string | null>(null); // leaderboard submit status
   const submittedRef = useRef(false);
+  const [showRules, setShowRules] = useState(false);
+  const [soundOn, setSoundOn] = useState(false);
+  const [stats, setStats] = useState<{ foundFirstTry: number[]; scores: number[] } | null>(null);
+
+  useEffect(() => {
+    setSoundOn(soundEnabled());
+    if (!isDaily) return;
+    // Anonymous social proof — quietly absent when unconfigured or thin.
+    void fetch('/api/stats')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: { usable?: boolean; foundFirstTry?: number[]; scores?: number[] } | null) => {
+        if (d?.usable && d.foundFirstTry && d.scores) {
+          setStats({ foundFirstTry: d.foundFirstTry, scores: d.scores });
+        }
+      })
+      .catch(() => {});
+  }, [isDaily]);
 
   const persist = (action: DailyAction, done: boolean) => {
     if (!isDaily || !dateKey) return;
@@ -230,6 +250,7 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
       setUciText('');
 
       if (outcome.result === 'miss') {
+        playSound('miss');
         if (outcome.done) {
           setStatus({ kind: 'miss', text: `Out of lives. Watch how ${heroLastName} finished it.` });
           setQueue(remainderFrames(puzzle, before.currentIndex, before.fen));
@@ -253,9 +274,13 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
       }
 
       const dp = puzzle.decisionPoints[before.currentIndex]!;
+      const found = stats?.foundFirstTry[before.currentIndex];
+      const proof =
+        outcome.result === 'exact' && found !== undefined ? ` ${found}% found it first try.` : '';
+      playSound(outcome.done && session.state().phase === 'solved' ? 'solved' : outcome.result);
       setStatus(
         outcome.result === 'exact'
-          ? { kind: 'exact', text: `${dp.hero.san} — exactly what ${heroLastName} played.` }
+          ? { kind: 'exact', text: `${dp.hero.san} — exactly what ${heroLastName} played.${proof}` }
           : {
               kind: 'equivalent',
               text: `The engine rates your move just as strong — but ${heroLastName} played ${dp.hero.san}. The game continues on his path.`,
@@ -367,8 +392,39 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
               </div>
               <div className="you-are">You are {puzzle.meta.heroName}.</div>
               <p className="blurb">{puzzle.meta.blurb}</p>
+              <div className="rules-strip" data-testid="rules-strip">
+                Find the moves they actually played · 🟩 exact · 🟨 engine says just as good · ❤❤❤
+                three lives
+              </div>
               <button className="btn" data-testid="start-btn" onClick={startGame}>
                 Take the board
+              </button>
+            </div>
+          </div>
+        )}
+        {showRules && (
+          <div className="overlay" data-testid="rules" onClick={() => setShowRules(false)}>
+            <div className="card" onClick={(e) => e.stopPropagation()}>
+              <h2>How to play</h2>
+              <p className="blurb" style={{ textAlign: 'left' }}>
+                Every day, one legendary game — you play it from the legend&apos;s side.
+                <br />
+                <br />
+                🟩 You found the <strong>exact move</strong> they played.
+                <br />
+                🟨 The engine rates your move <strong>just as strong</strong> — the real game
+                continues.
+                <br />
+                🟥 You needed misses or hints to get there.
+                <br />
+                ❤❤❤ A miss costs a life. Three misses, and you watch the legend finish without you.
+                <br />
+                <br />
+                Move pieces by dragging, tapping, or typing (e.g. <code>e2e4</code>). Hints reveal
+                the piece, then the square, then the move — each dims your square.
+              </p>
+              <button className="btn" onClick={() => setShowRules(false)}>
+                Got it
               </button>
             </div>
           </div>
@@ -396,18 +452,23 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
         )}
         {phase === 'done' && (
           <div className="overlay" data-testid="done-card">
+            {snap.phase === 'solved' && <Confetti />}
             <div className="card">
               <h2>
                 {snap.phase === 'solved'
                   ? `You played like ${heroLastName}.`
                   : 'The legend finishes without you.'}
               </h2>
-              <div className="result-grid" data-testid="grid">
-                {finalGrid}
+              <GridReveal grid={finalGrid} />
+              <div>
+                <CountUp to={scoreSession(snap.records)} max={maxScore(puzzle)} suffix={hearts} />
               </div>
-              <div data-testid="final-score">
-                {scoreSession(snap.records)} / {maxScore(puzzle)} · {hearts}
-              </div>
+              {stats && (
+                <div className="meta" data-testid="percentile">
+                  Better than {percentile(scoreSession(snap.records), stats.scores)}% of
+                  today&apos;s players
+                </div>
+              )}
               {isDaily && streakNow !== null && streakNow > 0 && (
                 <div data-testid="streak">🔥 {streakNow}-day streak</div>
               )}
@@ -433,10 +494,35 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
       </div>
 
       <aside className="panel">
-        <h1>
-          {dayTag}
-          {puzzle.meta.title}
-        </h1>
+        <div className="panel-head">
+          <h1>
+            {dayTag}
+            {puzzle.meta.title}
+          </h1>
+          <div className="panel-tools">
+            <button
+              className="icon-btn"
+              data-testid="sound-btn"
+              title={soundOn ? 'Sound on' : 'Sound off'}
+              onClick={() => {
+                const next = !soundOn;
+                setSoundOn(next);
+                setSoundEnabled(next);
+                if (next) playSound('exact');
+              }}
+            >
+              {soundOn ? '🔊' : '🔇'}
+            </button>
+            <button
+              className="icon-btn"
+              data-testid="rules-btn"
+              title="How to play"
+              onClick={() => setShowRules(true)}
+            >
+              ?
+            </button>
+          </div>
+        </div>
         <div className="meta">
           {puzzle.meta.heroName} vs {puzzle.meta.opponentName} · {puzzle.meta.event} ·{' '}
           {puzzle.meta.year}

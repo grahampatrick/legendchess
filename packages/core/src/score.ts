@@ -26,8 +26,9 @@ export interface ShareTextInput {
 }
 
 /**
- * The shareable result block. From M4 on this format is a public API
- * (snapshot-tested; changes need an ADR).
+ * The shareable result block. This format is a public API (snapshot-tested;
+ * changes need an ADR — see 0007). The ♞ prefix is the grid's signature: it
+ * makes a pasted result recognizably OURS in any feed or group chat.
  */
 export const formatShareText = ({
   puzzle,
@@ -40,7 +41,7 @@ export const formatShareText = ({
   const score = scoreSession(state.records, rules);
   return [
     `Play the Legend${day} — ${puzzle.meta.heroName}, ${puzzle.meta.event} ${puzzle.meta.year}`,
-    emojiGrid(state.records),
+    `♞${emojiGrid(state.records)}`,
     `${hearts} ${score}/${maxScore(puzzle, rules)}`,
   ].join('\n');
 };

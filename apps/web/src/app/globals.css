@@ -229,6 +229,82 @@ input.uci {
   padding: 8px 14px;
 }
 
+/* ---- celebration ---- */
+.tile-flip {
+  display: inline-block;
+  animation: tileFlip 0.5s both;
+}
+@keyframes tileFlip {
+  0% {
+    transform: rotateX(90deg) scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: rotateX(-20deg) scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateX(0) scale(1);
+  }
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 6;
+}
+.confetti span {
+  position: absolute;
+  top: -12px;
+  width: 8px;
+  height: 12px;
+  border-radius: 2px;
+  animation: confettiFall linear both;
+}
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(540deg);
+    opacity: 0.6;
+  }
+}
+
+.rules-strip {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  border-top: 1px solid #3a3835;
+  padding-top: 10px;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.panel-tools {
+  display: flex;
+  gap: 6px;
+}
+button.icon-btn {
+  background: var(--bg-card);
+  border: none;
+  color: var(--text);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+button.icon-btn:hover {
+  background: #3a3835;
+}
+
 /* ---- index ---- */
 ul.puzzle-list {
   list-style: none;
