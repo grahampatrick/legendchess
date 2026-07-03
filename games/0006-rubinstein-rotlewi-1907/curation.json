@@ -1,0 +1,12 @@
+{
+  "id": "0006-rubinstein-rotlewi-1907",
+  "title": "Rubinstein's Immortal",
+  "heroName": "Akiba Rubinstein",
+  "heroColor": "black",
+  "window": { "fromMove": 17, "toMove": 25 },
+  "blurb": "Łódź, 1907. Both sides have aimed everything at the enemy king, but it is your move — and you are Akiba Rubinstein. What follows is the most beautiful queen sacrifice ever accepted out of sheer helplessness: every capture loses, every refusal loses, and the final position is a painting.",
+  "sources": ["https://en.wikipedia.org/wiki/Rotlewi_versus_Rubinstein"],
+  "overrides": {
+    "opponentName": "Georg Rotlewi"
+  }
+}

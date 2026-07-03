@@ -3,11 +3,18 @@
  * never touch raw rules-library APIs. This is the ONLY file allowed to import
  * from 'chessops' — one library boundary, one place to swap it.
  */
-import { Chess } from 'chessops/chess';
+import { Chess, castlingSide } from 'chessops/chess';
 import { INITIAL_FEN, makeFen, parseFen } from 'chessops/fen';
 import { makeSan, parseSan } from 'chessops/san';
-import { makeSquare, makeUci, parseUci, squareRank } from 'chessops/util';
-import type { Role } from 'chessops/types';
+import {
+  kingCastlesTo,
+  makeSquare,
+  makeUci,
+  parseUci,
+  squareFile,
+  squareRank,
+} from 'chessops/util';
+import type { Move, Role } from 'chessops/types';
 
 import { IllegalMoveError, MalformedUciError, PuzzleDataError } from './errors.js';
 import { UCI_REGEX } from './schema.js';
@@ -36,6 +43,33 @@ export const fenOf = (pos: Position): string => makeFen(pos.toSetup());
 
 export const turnOf = (pos: Position): 'white' | 'black' => pos.turn;
 
+/**
+ * UCI convention note: chessops encodes castling as king-takes-rook (e1h1,
+ * the Chess960-safe lichess form); standard UCI engines and this project's
+ * puzzle format use the classical form (e1g1). These two helpers convert at
+ * the boundary so every UCI string outside this file is engine-convention.
+ */
+const toEngineUci = (pos: Position, move: Move): string => {
+  const side = castlingSide(pos, move);
+  if (side && 'from' in move)
+    return makeUci({ from: move.from, to: kingCastlesTo(pos.turn, side) });
+  return makeUci(move);
+};
+
+const moveFromEngineUci = (pos: Position, uci: string): Move | undefined => {
+  const move = parseUci(uci);
+  if (!move || !('from' in move) || move.promotion) return move;
+  const piece = pos.board.get(move.from);
+  if (piece?.role === 'king' && piece.color === pos.turn) {
+    const fileDelta = squareFile(move.to) - squareFile(move.from);
+    if (Math.abs(fileDelta) === 2 && squareRank(move.to) === squareRank(move.from)) {
+      const rook = pos.castles.rook[pos.turn][fileDelta > 0 ? 'h' : 'a'];
+      if (rook !== undefined) return { from: move.from, to: rook };
+    }
+  }
+  return move;
+};
+
 /** Every legal move in the position as UCI strings (promotions expanded). */
 export const legalUcis = (pos: Position): string[] => {
   const ucis: string[] = [];
@@ -47,7 +81,7 @@ export const legalUcis = (pos: Position): string[] => {
           ucis.push(makeUci({ from, to, promotion }));
         }
       } else {
-        ucis.push(makeUci({ from, to }));
+        ucis.push(toEngineUci(pos, { from, to }));
       }
     }
   }
@@ -63,7 +97,7 @@ export const normalizeUci = (raw: string): string => {
 
 /** Play a UCI move in place. Throws IllegalMoveError if not legal. */
 export const playUci = (pos: Position, uci: string): void => {
-  const move = parseUci(uci);
+  const move = moveFromEngineUci(pos, uci);
   if (!move || !pos.isLegal(move)) throw new IllegalMoveError(uci, fenOf(pos));
   pos.play(move);
 };
@@ -72,7 +106,7 @@ export const playUci = (pos: Position, uci: string): void => {
 export const uciOfSan = (pos: Position, san: string): string => {
   const move = parseSan(pos, san);
   if (!move) throw new PuzzleDataError(`SAN "${san}" is not legal in ${fenOf(pos)}`);
-  return makeUci(move);
+  return toEngineUci(pos, move);
 };
 
 /** Play a SAN move in place, returning its UCI. Throws PuzzleDataError if not legal. */
@@ -86,7 +120,7 @@ export const playSan = (pos: Position, san: string): string => {
 
 /** SAN for a UCI move in the given position (does not mutate). */
 export const sanOfUci = (pos: Position, uci: string): string => {
-  const move = parseUci(uci);
+  const move = moveFromEngineUci(pos, uci);
   if (!move || !pos.isLegal(move)) throw new IllegalMoveError(uci, fenOf(pos));
   return makeSan(pos, move);
 };

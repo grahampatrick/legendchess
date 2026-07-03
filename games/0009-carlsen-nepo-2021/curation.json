@@ -1,0 +1,12 @@
+{
+  "id": "0009-carlsen-nepo-2021",
+  "title": "The Longest Game",
+  "heroName": "Magnus Carlsen",
+  "heroColor": "white",
+  "window": { "fromMove": 127, "toMove": 136 },
+  "blurb": "Dubai, 2021, game six of the World Championship — after seven hours and 45 minutes, the longest world title game ever played. You are Magnus Carlsen: rook, knight and two pawns against a queen that will not stop checking. Nepomniachtchi has finally slipped. Ten precise moves separate you from the win that broke the match open.",
+  "sources": ["https://en.wikipedia.org/wiki/World_Chess_Championship_2021"],
+  "overrides": {
+    "opponentName": "Ian Nepomniachtchi"
+  }
+}

@@ -23,8 +23,12 @@ interface Flags {
   threads: number;
 }
 
+/** pnpm runs scripts with the package as cwd; resolve user paths from where they invoked. */
+const INVOKE_CWD = process.env['INIT_CWD'] ?? process.cwd();
+const fromInvokeCwd = (p: string): string => path.resolve(INVOKE_CWD, p);
+
 const parseArgs = (argv: string[]): { command: string; targets: string[]; flags: Flags } => {
-  const [command = '', ...rest] = argv;
+  const [command = '', ...rest] = argv.filter((a) => a !== '--');
   const targets: string[] = [];
   const flags: Flags = {
     out: 'dist/puzzles',
@@ -59,8 +63,10 @@ const build = async (targets: string[], flags: Flags): Promise<void> => {
   });
   console.log(`engine: ${engine.name} · depth ${flags.depth} · threads ${flags.threads}`);
   try {
-    mkdirSync(flags.out, { recursive: true });
-    for (const dir of targets) {
+    const outDir = fromInvokeCwd(flags.out);
+    mkdirSync(outDir, { recursive: true });
+    for (const target of targets) {
+      const dir = fromInvokeCwd(target);
       const config = CurationConfigSchema.parse(
         JSON.parse(readFileSync(path.join(dir, 'curation.json'), 'utf8')),
       );
@@ -68,7 +74,7 @@ const build = async (targets: string[], flags: Flags): Promise<void> => {
       const started = performance.now();
       const puzzle = await buildPuzzle({ game, config, evaluate: engine.evaluate });
       const { warnings } = gatePuzzle(puzzle); // belt and braces before writing
-      const outPath = path.join(flags.out, `${puzzle.id}.json`);
+      const outPath = path.join(outDir, `${puzzle.id}.json`);
       writeFileSync(outPath, puzzleToJson(puzzle));
       const secs = ((performance.now() - started) / 1000).toFixed(1);
       console.log(`✓ ${puzzle.id} — ${puzzle.decisionPoints.length} points, ${secs}s → ${outPath}`);
@@ -81,7 +87,7 @@ const build = async (targets: string[], flags: Flags): Promise<void> => {
 
 const validate = (targets: string[]): void => {
   if (targets.length === 0) throw new Error('validate: no files or directories given');
-  const files = targets.flatMap((t) =>
+  const files = targets.map(fromInvokeCwd).flatMap((t) =>
     statSync(t).isDirectory()
       ? readdirSync(t)
           .filter((f) => f.endsWith('.json'))

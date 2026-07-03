@@ -1,0 +1,13 @@
+{
+  "id": "0005-nimzowitsch-zugzwang-1923",
+  "title": "The Immortal Zugzwang Game",
+  "heroName": "Aron Nimzowitsch",
+  "heroColor": "black",
+  "window": { "fromMove": 18, "toMove": 25 },
+  "blurb": "Copenhagen, 1923. You are Aron Nimzowitsch, prophet of prophylaxis, playing Black. No mate is coming and you will finish a piece down for two pawns — yet after your final quiet move, White has a full board of pieces and not a single move that doesn't lose. Resignation by suffocation: the Immortal Zugzwang.",
+  "sources": ["https://en.wikipedia.org/wiki/Immortal_Zugzwang_Game"],
+  "overrides": {
+    "year": 1923,
+    "opponentName": "Friedrich Sämisch"
+  }
+}

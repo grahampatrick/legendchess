@@ -1,0 +1,12 @@
+{
+  "id": "0007-marshall-levitsky-1912",
+  "title": "The Gold Coins Game",
+  "heroName": "Frank Marshall",
+  "heroColor": "black",
+  "window": { "fromMove": 17, "toMove": 23 },
+  "blurb": "Breslau, 1912. Legend says the spectators showered the board with gold coins when this one finished. You are Frank Marshall, playing Black, and your queen is about to move to the one square where all three ways of capturing her lose on the spot. Find the shot they still argue about a century later.",
+  "sources": ["https://en.wikipedia.org/wiki/Levitsky_versus_Marshall"],
+  "overrides": {
+    "opponentName": "Stefan Levitsky"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "0010-kasparov-world-1999",
+  "title": "Kasparov versus the World",
+  "heroName": "Garry Kasparov",
+  "heroColor": "white",
+  "window": { "fromMove": 11, "toMove": 20 },
+  "blurb": "Summer 1999. Over 50,000 people from 75 countries vote on every Black move, advised by a panel of young grandmasters. You are Garry Kasparov, alone against the entire internet — and the World has just played a gambit your own team called the critical test. Show the planet why you are the World Champion.",
+  "sources": ["https://en.wikipedia.org/wiki/Kasparov_versus_the_World"],
+  "overrides": {
+    "opponentName": "The World",
+    "year": 1999
+  }
+}

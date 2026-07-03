@@ -1,0 +1,12 @@
+{
+  "id": "0008-fischer-byrne-1956",
+  "title": "The Game of the Century",
+  "heroName": "Bobby Fischer",
+  "heroColor": "black",
+  "window": { "fromMove": 11, "toMove": 20 },
+  "blurb": "New York, 1956. You are Bobby Fischer. You are thirteen years old, playing Black against a US Championship contender, and your queen is about to be trapped in the middle of the board. Let her go — the windmill of checks you get in exchange will be called the Game of the Century before the pieces are back in the box.",
+  "sources": ["https://en.wikipedia.org/wiki/Game_of_the_Century_(chess)"],
+  "overrides": {
+    "opponentName": "Donald Byrne"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "0003-anderssen-immortal-1851",
+  "title": "The Immortal Game",
+  "heroName": "Adolf Anderssen",
+  "heroColor": "white",
+  "window": { "fromMove": 11, "toMove": 23 },
+  "blurb": "London, 1851 — a casual game at Simpson's Divan during the first international tournament. You are Adolf Anderssen, and you are about to give away a bishop, both rooks, and your queen. In return: checkmate with the three minor pieces you have left. They named it the Immortal Game for a reason.",
+  "sources": ["https://en.wikipedia.org/wiki/Immortal_Game"],
+  "overrides": {
+    "opponentName": "Lionel Kieseritzky"
+  }
+}

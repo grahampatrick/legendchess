@@ -1,0 +1,12 @@
+{
+  "id": "0002-morphy-opera-1858",
+  "title": "The Opera Game",
+  "heroName": "Paul Morphy",
+  "heroColor": "white",
+  "window": { "fromMove": 9, "toMove": 17 },
+  "blurb": "Paris, 1858. A box at the Italian Opera during a performance of Norma. The Duke of Brunswick and Count Isouard consult against you between arias — and keep you facing away from the stage. You are Paul Morphy, you would quite like to watch the opera, and the fastest way back to the music is the most famous attacking miniature ever played.",
+  "sources": ["https://en.wikipedia.org/wiki/Opera_Game"],
+  "overrides": {
+    "opponentName": "Duke of Brunswick & Count Isouard"
+  }
+}

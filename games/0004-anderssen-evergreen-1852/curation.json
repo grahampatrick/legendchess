@@ -1,0 +1,13 @@
+{
+  "id": "0004-anderssen-evergreen-1852",
+  "title": "The Evergreen Game",
+  "heroName": "Adolf Anderssen",
+  "heroColor": "white",
+  "window": { "fromMove": 15, "toMove": 24 },
+  "blurb": "Berlin, 1852. Your opponent's queen has wandered deep into your position and Black's attack looks faster than yours. You are Adolf Anderssen, one year after the Immortal Game, about to plant 'the evergreen in the laurel wreath' — a quiet rook move, a double-rook sacrifice, and a queen sacrifice that mates with two bishops.",
+  "sources": ["https://en.wikipedia.org/wiki/Evergreen_Game"],
+  "overrides": {
+    "year": 1852,
+    "opponentName": "Jean Dufresne"
+  }
+}
