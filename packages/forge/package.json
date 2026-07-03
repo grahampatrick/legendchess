@@ -1,0 +1,14 @@
+{
+  "name": "@playthelegend/forge",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Authoring pipeline: PGN + curation config in, validated puzzle JSON with Stockfish eval tables out.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@playthelegend/core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Pure game domain: puzzle schema, guess grading, lives, hints, scoring, share grid. No DOM, no network, no engine.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  }
+}
