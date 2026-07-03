@@ -26,6 +26,7 @@ export {
   playSan,
   playUci,
   sanOfUci,
+  uciOfSan,
   INITIAL_FEN,
   type Position,
 } from './chess.js';

@@ -68,6 +68,13 @@ export const playUci = (pos: Position, uci: string): void => {
   pos.play(move);
 };
 
+/** UCI for a SAN move in the given position (does not mutate). */
+export const uciOfSan = (pos: Position, san: string): string => {
+  const move = parseSan(pos, san);
+  if (!move) throw new PuzzleDataError(`SAN "${san}" is not legal in ${fenOf(pos)}`);
+  return makeUci(move);
+};
+
 /** Play a SAN move in place, returning its UCI. Throws PuzzleDataError if not legal. */
 export const playSan = (pos: Position, san: string): string => {
   const move = parseSan(pos, san);

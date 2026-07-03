@@ -1,0 +1,13 @@
+{
+  "id": "0001-kasparov-topalov-1999",
+  "title": "Kasparov's Immortal",
+  "heroName": "Garry Kasparov",
+  "heroColor": "white",
+  "window": { "fromMove": 24, "toMove": 33 },
+  "blurb": "Round 4, Wijk aan Zee, January 1999. Topalov has just dropped his queen back to d6, offering a trade that would drain all the venom from the position. You are Garry Kasparov — and the next ten moves are often called the greatest combination ever played: a rook sacrifice that sends the black king marching from a7 into your half of the board, never to return.",
+  "sources": ["https://en.wikipedia.org/wiki/Kasparov%27s_Immortal"],
+  "overrides": {
+    "event": "Hoogovens Tournament, Wijk aan Zee",
+    "opponentName": "Veselin Topalov"
+  }
+}

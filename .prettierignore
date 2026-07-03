@@ -4,3 +4,6 @@ dist
 coverage
 pnpm-lock.yaml
 LICENSE
+# byte-exact pipeline outputs — never reformat
+**/test/golden/
+fixtures/puzzles/

@@ -16,6 +16,9 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: sudo bash scripts/ci/install-stockfish.sh
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
+        env:
+          STOCKFISH_PATH: /usr/local/bin/stockfish
