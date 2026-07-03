@@ -1,5 +1,8 @@
 node_modules/
-dist/
+# package build outputs are ephemeral; root dist/puzzles/ holds FROZEN
+# published puzzle artifacts and is committed (see packages/forge/README.md)
+packages/*/dist/
+apps/*/dist/
 .next/
 coverage/
 .DS_Store

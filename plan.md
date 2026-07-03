@@ -107,16 +107,18 @@ pnpm typecheck && pnpm lint
 
 **Deliverables**
 
-- [ ] PGN ingestion via chessops; curation config per game (hero, color, ply window, blurb, sources)
-- [ ] Stockfish integration (local binary via UCI, depth/time configurable): evaluate **every legal move** at each hero decision point, emit cp table
-- [ ] Validation gate: every emitted puzzle is loaded by `core`'s schema AND auto-played through `createSession` (exact-path) before it's accepted
-- [ ] Window auto-lint: warn on forced/only-move sequences (recaptures, checks with one reply) — those are boring guesses; suggest trimming
-- [ ] `games/` directory with **first 10 curated famous games** (bare PGNs + curation configs): e.g. Kasparov–Topalov 1999, Fischer–Byrne 1956, Morphy Opera Game 1858, Tal–Larsen 1965, Carlsen–Karjakin WC 2016 tiebreak, Kasparov–Karpov Seville 1987 G24, Anand–Aronian 2013, Carlsen–Anand WC 2013 G5, Byrne–Fischer 1963, Short–Timman 1991
-- [ ] Golden-file tests: fixed PGN + fixed engine depth → byte-identical puzzle JSON (pin Stockfish version in CI via download script)
+- [x] PGN ingestion via chessops; curation config per game (hero, color, ply window, blurb, sources)
+- [x] Stockfish integration (local binary via UCI, depth/time configurable): evaluate **every legal move** at each hero decision point, emit cp table
+- [x] Validation gate: every emitted puzzle is loaded by `core`'s schema AND auto-played through `createSession` (exact-path) before it's accepted
+- [x] Window auto-lint: warn on forced/only-move sequences (recaptures, checks with one reply) — those are boring guesses; suggest trimming
+- [x] `games/` directory with **first 10 curated famous games** (bare PGNs + curation configs). _Shipped (chosen for Wikipedia-verifiable movetext): Kasparov–Topalov 1999, Opera Game 1858, Immortal Game 1851, Evergreen Game 1852, Immortal Zugzwang 1923, Rubinstein's Immortal 1907, Gold Coins Game 1912, Game of the Century 1956, Carlsen–Nepomniachtchi WC2021 g6, Kasparov vs the World 1999. Originally-listed games without a verifiable public movetext source (Tal–Larsen 1965, Seville 1987 g24, Short–Timman 1991, …) move to the M6 content runway with a sourcing step._
+- [x] Golden-file tests: fixed PGN + fixed engine depth → byte-identical puzzle JSON (pin Stockfish version in CI via download script)
 
 **CE Principle:** content creation becomes a config-file PR, not an engineering task — after this milestone, adding a puzzle costs ~15 minutes and zero code, and contributors can do it.
 
 **Key pitfalls:** evaluating only the hero's move instead of all legal moves (partial credit becomes impossible); nondeterministic evals (multithreaded SF at low depth varies — pin threads=1, fixed depth or generous fixed nodes); trusting found PGNs blindly (validate every move legally replays; famous games circulate with transcription errors); sourcing PGNs _with annotations_ (copyright — strip to bare movetext).
+
+**Learned in execution:** ① Stockfish silently ignores out-of-range `setoption` values — the engine wrapper introspects declared option bounds from the `uci` handshake, and eval-coverage checks are mandatory. ② chessops encodes castling as king-takes-rook (`e1h1`); the puzzle format standardizes on engine UCI (`e1g1`), converted at core's chess boundary. ③ Fixed-depth MultiPV in mate-heavy positions is pathologically slow (Gold Coins Game: 98 min at depth 16 — every losing move gets searched to full depth). Before the M6 batch, add a per-move node cap or use lower depth for positions where the hero move mates. ④ Built puzzles in `dist/puzzles/` are FROZEN committed artifacts (non-negotiable #6); rebuilding a shipped puzzle requires an ADR.
 
 **Definition of Done**
 
