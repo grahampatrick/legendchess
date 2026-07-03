@@ -135,12 +135,12 @@ pnpm forge build games/*.pgn && pnpm forge validate dist/puzzles/   # 10/10 puzz
 
 **Deliverables**
 
-- [ ] Next.js app; chessground board with drag + click-move, legal-move dests from chessops, last-move + check highlights, sensible piece set/theme (lichess defaults, GPL assets)
-- [ ] Game flow screens: intro (story blurb, "You are Magnus" framing) → auto-replay to window start → guess loop with lives/hints UI → finale (full game replay, score, grid)
-- [ ] Board is a thin adapter over `core`'s session — no game rules in React
-- [ ] Responsive: one-hand mobile play; board ≥ 90vw on phones
-- [ ] Playwright e2e: plays fixture 0001 through win path and out-of-lives path via the real UI
-- [ ] Dev route `/play/[puzzleId]` loading from local `dist/puzzles/`
+- [x] Next.js app; chessground board with drag + click-move, legal-move dests from chessops, last-move + check highlights, sensible piece set/theme (lichess defaults, GPL assets)
+- [x] Game flow screens: intro (story blurb, "You are Magnus" framing) → auto-replay to window start → guess loop with lives/hints UI → finale (full game replay, score, grid)
+- [x] Board is a thin adapter over `core`'s session — no game rules in React
+- [x] Responsive: one-hand mobile play; board ≥ 90vw on phones
+- [x] Playwright e2e: plays fixture 0001 through win path and out-of-lives path via the real UI
+- [x] Dev route `/play/[puzzleId]` loading from local `dist/puzzles/`
 
 **CE Principle:** e2e tests drive the same fixture as M1's unit tests — a rules change that breaks the UI contract fails in CI before a human ever sees it.
 

@@ -12,7 +12,7 @@ import { spawn, type ChildProcessWithoutNullStreams } from 'node:child_process';
 
 import { MATE_CP } from '@playthelegend/core';
 
-import { EngineError } from './errors.js';
+import { EngineError } from './errors';
 
 export interface EngineOptions {
   /** Path to a stockfish binary. */

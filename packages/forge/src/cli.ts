@@ -10,11 +10,11 @@ import { mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'n
 import path from 'node:path';
 import process from 'node:process';
 
-import { CurationConfigSchema } from './config.js';
-import { buildPuzzle, puzzleToJson } from './build.js';
-import { createEngine } from './engine.js';
-import { gatePuzzle } from './gate.js';
-import { parseGame } from './pgn.js';
+import { CurationConfigSchema } from './config';
+import { buildPuzzle, puzzleToJson } from './build';
+import { createEngine } from './engine';
+import { gatePuzzle } from './gate';
+import { parseGame } from './pgn';
 
 interface Flags {
   out: string;

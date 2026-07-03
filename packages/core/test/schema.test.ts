@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { PuzzleSchema, validatePuzzle, PuzzleDataError } from '../src/index.js';
-import { standardSynthetic } from './helpers/synthetic.js';
+import { PuzzleSchema, validatePuzzle, PuzzleDataError } from '../src/index';
+import { standardSynthetic } from './helpers/synthetic';
 
 describe('PuzzleSchema', () => {
   it('accepts a well-formed puzzle', () => {

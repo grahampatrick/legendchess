@@ -15,10 +15,10 @@ import {
   type Puzzle,
 } from '@playthelegend/core';
 
-import type { CurationConfig } from './config.js';
-import type { MoveEvaluator } from './engine.js';
-import { CurationError } from './errors.js';
-import type { ParsedGame } from './pgn.js';
+import type { CurationConfig } from './config';
+import type { MoveEvaluator } from './engine';
+import { CurationError } from './errors';
+import type { ParsedGame } from './pgn';
 
 interface ReplayedPly {
   san: string;

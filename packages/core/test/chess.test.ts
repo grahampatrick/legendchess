@@ -8,7 +8,7 @@ import {
   playUci,
   sanOfUci,
   uciOfSan,
-} from '../src/index.js';
+} from '../src/index';
 
 describe('castling UCI convention (engine form, not chessops king-takes-rook)', () => {
   const castlingReady = () => {

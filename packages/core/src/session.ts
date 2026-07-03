@@ -9,15 +9,15 @@ import {
   toSquareOf,
   type Position,
   type Role,
-} from './chess.js';
+} from './chess';
 import {
   IllegalMoveError,
   NoMoreHintsError,
   PuzzleDataError,
   SessionCompleteError,
-} from './errors.js';
-import { RULES, type Rules } from './rules.js';
-import type { DecisionPoint, Puzzle } from './schema.js';
+} from './errors';
+import { RULES, type Rules } from './rules';
+import type { DecisionPoint, Puzzle } from './schema';
 
 export type GuessResult = 'exact' | 'equivalent' | 'miss';
 export type Phase = 'playing' | 'solved' | 'spectator';

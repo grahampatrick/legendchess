@@ -11,7 +11,7 @@ import {
   playSan,
   sanOfUci,
   type Puzzle,
-} from '../../src/index.js';
+} from '../../src/index';
 
 interface SyntheticPoint {
   heroSan: string;

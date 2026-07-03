@@ -9,8 +9,8 @@ import {
   emojiGrid,
   scoreSession,
   validatePuzzle,
-} from '../src/index.js';
-import { standardSynthetic } from './helpers/synthetic.js';
+} from '../src/index';
+import { standardSynthetic } from './helpers/synthetic';
 
 describe('synthetic puzzle integrity', () => {
   it('passes full validation', () => {

@@ -12,7 +12,7 @@ import {
 } from '@playthelegend/core';
 
 import { PuzzleDataError } from '@playthelegend/core';
-import { lintPuzzle, type LintWarning } from './lint.js';
+import { lintPuzzle, type LintWarning } from './lint';
 
 export interface GateResult {
   puzzle: Puzzle;

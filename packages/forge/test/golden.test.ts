@@ -13,10 +13,10 @@ import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 
-import { CurationConfigSchema } from '../src/config.js';
-import { buildPuzzle, puzzleToJson } from '../src/build.js';
-import { createEngine } from '../src/engine.js';
-import { parseGame } from '../src/pgn.js';
+import { CurationConfigSchema } from '../src/config';
+import { buildPuzzle, puzzleToJson } from '../src/build';
+import { createEngine } from '../src/engine';
+import { parseGame } from '../src/pgn';
 
 const PINNED = 'Stockfish 18';
 const DEPTH = 8;

@@ -16,8 +16,8 @@ import {
 } from 'chessops/util';
 import type { Move, Role } from 'chessops/types';
 
-import { IllegalMoveError, MalformedUciError, PuzzleDataError } from './errors.js';
-import { UCI_REGEX } from './schema.js';
+import { IllegalMoveError, MalformedUciError, PuzzleDataError } from './errors';
+import { UCI_REGEX } from './schema';
 
 export type Position = Chess;
 export type { Role };
@@ -133,6 +133,9 @@ export const roleAtFrom = (pos: Position, uci: string): Role => {
   if (!piece) throw new IllegalMoveError(uci, fenOf(pos));
   return piece.role;
 };
+
+/** Whether the side to move in this FEN is in check (for UI highlights). */
+export const fenIsCheck = (fen: string): boolean => positionFromFen(fen).isCheck();
 
 /** Destination square name of a UCI move, e.g. "d4". */
 export const toSquareOf = (uci: string): string => {

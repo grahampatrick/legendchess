@@ -7,8 +7,8 @@ export {
   NoMoreHintsError,
   PuzzleDataError,
   PlayTheLegendError,
-} from './errors.js';
-export { RULES, type Rules } from './rules.js';
+} from './errors';
+export { RULES, type Rules } from './rules';
 export {
   PuzzleSchema,
   MATE_CP,
@@ -16,7 +16,7 @@ export {
   type Puzzle,
   type DecisionPoint,
   type PuzzleMove,
-} from './schema.js';
+} from './schema';
 export {
   initialPosition,
   positionFromFen,
@@ -27,9 +27,10 @@ export {
   playUci,
   sanOfUci,
   uciOfSan,
+  fenIsCheck,
   INITIAL_FEN,
   type Position,
-} from './chess.js';
+} from './chess';
 export {
   createSession,
   type Session,
@@ -40,7 +41,7 @@ export {
   type Level,
   type Phase,
   type PointRecord,
-} from './session.js';
+} from './session';
 export {
   emojiGrid,
   pointEmoji,
@@ -48,5 +49,5 @@ export {
   maxScore,
   formatShareText,
   type ShareTextInput,
-} from './score.js';
-export { validatePuzzle } from './validate.js';
+} from './score';
+export { validatePuzzle } from './validate';

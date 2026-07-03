@@ -17,7 +17,7 @@ import {
   scoreSession,
   validatePuzzle,
   type Puzzle,
-} from '../src/index.js';
+} from '../src/index';
 
 const FIXTURE_PATH = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),

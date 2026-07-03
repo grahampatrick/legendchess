@@ -5,7 +5,24 @@
   "type": "module",
   "description": "Next.js app: lichess-style board (chessground), daily loop, share grid. Thin adapter over @playthelegend/core.",
   "scripts": {
+    "dev": "next dev -p 3105",
+    "build": "next build",
+    "start": "next start -p 3105",
+    "e2e": "playwright test",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@playthelegend/core": "workspace:*",
+    "chessground": "^9.2.1",
+    "next": "^16.2.10",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3"
   }
 }

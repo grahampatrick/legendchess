@@ -1,6 +1,6 @@
-import { RULES, type Rules } from './rules.js';
-import type { Puzzle } from './schema.js';
-import type { Level, PointRecord, SessionState } from './session.js';
+import { RULES, type Rules } from './rules';
+import type { Puzzle } from './schema';
+import type { Level, PointRecord, SessionState } from './session';
 
 const EMOJI_BY_LEVEL: Record<Level, string> = { 3: '🟩', 2: '🟨', 1: '🟥', 0: '⬛' };
 

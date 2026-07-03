@@ -7,9 +7,9 @@ import {
   positionFromFen,
   sanOfUci,
   turnOf,
-} from './chess.js';
-import { PuzzleDataError } from './errors.js';
-import { PuzzleSchema, type Puzzle } from './schema.js';
+} from './chess';
+import { PuzzleDataError } from './errors';
+import { PuzzleSchema, type Puzzle } from './schema';
 
 /**
  * Full integrity check beyond zod shape validation: the prelude must replay to

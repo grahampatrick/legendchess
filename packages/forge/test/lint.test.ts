@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import type { Puzzle } from '@playthelegend/core';
 
-import { lintPuzzle } from '../src/lint.js';
+import { lintPuzzle } from '../src/lint';
 
 /** lint only reads decisionPoints, so a minimal stub is safe here. */
 const puzzleWith = (dps: Puzzle['decisionPoints']): Puzzle =>

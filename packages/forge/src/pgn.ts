@@ -6,7 +6,7 @@
  */
 import { parsePgn } from 'chessops/pgn';
 
-import { PgnParseError } from './errors.js';
+import { PgnParseError } from './errors';
 
 export interface ParsedGame {
   headers: ReadonlyMap<string, string>;

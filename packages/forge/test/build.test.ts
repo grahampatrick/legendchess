@@ -11,12 +11,12 @@ import { describe, expect, it } from 'vitest';
 
 import { legalUcis, positionFromFen, type Puzzle } from '@playthelegend/core';
 
-import { CurationConfigSchema } from '../src/config.js';
-import { buildPuzzle, heroPly } from '../src/build.js';
-import { CurationError } from '../src/errors.js';
-import { gatePuzzle } from '../src/gate.js';
-import { parseGame } from '../src/pgn.js';
-import type { MoveEvaluator } from '../src/engine.js';
+import { CurationConfigSchema } from '../src/config';
+import { buildPuzzle, heroPly } from '../src/build';
+import { CurationError } from '../src/errors';
+import { gatePuzzle } from '../src/gate';
+import { parseGame } from '../src/pgn';
+import type { MoveEvaluator } from '../src/engine';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const GAME_DIR = path.join(ROOT, 'games/0001-kasparov-topalov-1999');
