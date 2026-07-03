@@ -29,7 +29,12 @@ export interface ShareTextInput {
  * The shareable result block. From M4 on this format is a public API
  * (snapshot-tested; changes need an ADR).
  */
-export const formatShareText = ({ puzzle, state, dayNumber, rules = RULES }: ShareTextInput): string => {
+export const formatShareText = ({
+  puzzle,
+  state,
+  dayNumber,
+  rules = RULES,
+}: ShareTextInput): string => {
   const day = dayNumber === undefined ? '' : ` #${dayNumber}`;
   const hearts = state.livesLeft > 0 ? '❤'.repeat(state.livesLeft) : '💀';
   const score = scoreSession(state.records, rules);

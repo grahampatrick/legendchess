@@ -41,10 +41,10 @@ Every day at 00:00 UTC, anyone in the world can open the site in <2 seconds, pla
 ### The core mechanic (v1 ruleset — tune in M1, don't reinvent later)
 
 - You are shown the game up to the window start (auto-replayed with the story blurb), then play as the hero for **10–15 decision points**.
-- Per decision point: guess by moving a piece. **Exact match** → best result (🟩). **Engine-equivalent** (within N centipawns of the hero's move, N≈30) → partial credit (🟨), and the game continues with the _hero's actual move_ so history stays on rails. **Miss** → lose a life (🟥), see hint, retry.
-- **3 lives for the whole game.** Out of lives → remaining moves auto-play, you finish as a spectator (you still see the masterpiece — never a dead end).
-- **Hints** (each downgrades your square): 1) which piece moved, 2) destination square, 3) full arrow.
-- Score = weighted sum; share grid = one emoji per decision point + streak + day number. `Play the Legend #37 — Kasparov, London 1993. 🟩🟩🟨🟩🟥🟩🟩🟨🟩🟩 (2❤ left)`
+- Per decision point: guess by moving a piece. Each point resolves at a **level**: 3 🟩 · 2 🟨 · 1 🟥 · 0 ⬛. It starts at 3; every **miss** (costs a life, auto-reveals the next hint) and every **voluntary hint** downgrades it one step (floor 1 while guessing). **Exact match** resolves at the current level; **engine-equivalent** (within 30cp of the hero's move, or better) resolves at min(level, 2) and the game continues with the _hero's actual move_ so history stays on rails. _(Refined during M1 — the authoritative spec is ADR 0004.)_
+- **3 lives for the whole game.** Out of lives → the current point resolves ⬛, remaining moves auto-play, you finish as a spectator (you still see the masterpiece — never a dead end).
+- **Hints** (each downgrades your square one step): 1) which piece moved, 2) destination square, 3) full arrow.
+- Score = points per level (100/60/25/0); share grid = one emoji per decision point + lives + day number, e.g. `Play the Legend #37 — Garry Kasparov, Hoogovens Tournament, Wijk aan Zee 1999` / `🟩🟩🟨🟩🟨🟩🟩🟨🟩🟩` / `❤❤ 820/1000`
 
 ---
 
@@ -56,12 +56,12 @@ Every day at 00:00 UTC, anyone in the world can open the site in <2 seconds, pla
 
 **Deliverables**
 
-- [ ] pnpm workspace: `packages/core`, `packages/forge`, `apps/web` (empty shells with `package.json` + one passing placeholder test each)
-- [ ] TypeScript strict config shared via `tsconfig.base.json`
-- [ ] ESLint + Prettier, Vitest wired at workspace root
-- [ ] GitHub Actions CI: `pnpm lint && pnpm typecheck && pnpm test` on every PR
-- [ ] `LICENSE` (GPL-3.0), `README.md` (pitch + this plan linked), `CONTRIBUTING.md` stub
-- [ ] `docs/adr/0001-no-engine-in-client.md`, `0002-gpl-license.md`, `0003-puzzles-are-data.md` (record decisions above)
+- [x] pnpm workspace: `packages/core`, `packages/forge`, `apps/web` (empty shells with `package.json` + one passing placeholder test each)
+- [x] TypeScript strict config shared via `tsconfig.base.json`
+- [x] ESLint + Prettier, Vitest wired at workspace root
+- [x] GitHub Actions CI: `pnpm lint && pnpm typecheck && pnpm test` on every PR
+- [x] `LICENSE` (GPL-3.0), `README.md` (pitch + this plan linked), `CONTRIBUTING.md` stub
+- [x] `docs/adr/0001-no-engine-in-client.md`, `0002-gpl-license.md`, `0003-puzzles-are-data.md` (record decisions above)
 
 **CE Principle:** every later milestone lands as a PR against already-running gates — quality is enforced from commit #1, not retrofitted.
 
@@ -95,7 +95,7 @@ pnpm install && pnpm lint && pnpm typecheck && pnpm test   # all green locally a
 **Definition of Done**
 
 ```bash
-pnpm --filter core test        # includes full playthrough of fixture 0001 in all 3 outcome paths
+pnpm --filter @playthelegend/core test   # includes full playthrough of fixture 0001 in all 3 outcome paths
 pnpm typecheck && pnpm lint
 ```
 
@@ -121,7 +121,7 @@ pnpm typecheck && pnpm lint
 **Definition of Done**
 
 ```bash
-pnpm --filter forge test
+pnpm --filter @playthelegend/forge test
 pnpm forge build games/*.pgn && pnpm forge validate dist/puzzles/   # 10/10 puzzles pass core validation
 ```
 
@@ -147,7 +147,7 @@ pnpm forge build games/*.pgn && pnpm forge validate dist/puzzles/   # 10/10 puzz
 **Definition of Done**
 
 ```bash
-pnpm --filter web test && pnpm --filter web e2e     # playwright green
+pnpm --filter @playthelegend/web test && pnpm --filter @playthelegend/web e2e     # playwright green
 pnpm dev   # manual demo: play puzzle 0001 start-to-finish on a phone-width viewport
 ```
 
@@ -173,8 +173,8 @@ pnpm dev   # manual demo: play puzzle 0001 start-to-finish on a phone-width view
 **Definition of Done**
 
 ```bash
-pnpm --filter web test   # includes date-rollover + streak unit tests (mocked clock)
-pnpm --filter web e2e    # includes: finish game → share text matches snapshot → countdown visible
+pnpm --filter @playthelegend/web test   # includes date-rollover + streak unit tests (mocked clock)
+pnpm --filter @playthelegend/web e2e    # includes: finish game → share text matches snapshot → countdown visible
 ```
 
 ---
@@ -198,7 +198,7 @@ pnpm --filter web e2e    # includes: finish game → share text matches snapshot
 **Definition of Done**
 
 ```bash
-pnpm --filter web test && pnpm --filter web e2e   # incl. auth-mocked submit path
+pnpm --filter @playthelegend/web test && pnpm --filter @playthelegend/web e2e   # incl. auth-mocked submit path
 supabase test db          # RLS policy tests green
 ```
 

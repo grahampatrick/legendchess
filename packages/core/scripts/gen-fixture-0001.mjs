@@ -91,7 +91,9 @@ for (let i = 0; i < SAN_MOVES.length; i++) {
   pos.play(move);
 }
 
-console.log(`prelude ${prelude.length} plies, ${points.length} decision points, finale ${finale.length} plies`);
+console.log(
+  `prelude ${prelude.length} plies, ${points.length} decision points, finale ${finale.length} plies`,
+);
 console.log(`startFen: ${startFen}`);
 
 // ---- Stockfish: eval every legal move at each decision point -------------
@@ -166,9 +168,7 @@ for (const dp of points) {
   const missing = dp.legal.filter((u) => !(u in dp.evals));
   const extra = Object.keys(dp.evals).filter((u) => !dp.legal.includes(u));
   if (missing.length || extra.length)
-    throw new Error(
-      `ply ${dp.ply}: eval coverage mismatch. missing=[${missing}] extra=[${extra}]`,
-    );
+    throw new Error(`ply ${dp.ply}: eval coverage mismatch. missing=[${missing}] extra=[${extra}]`);
   const heroCp = dp.evals[dp.heroUci];
   const best = Math.max(...Object.values(dp.evals));
   console.log(

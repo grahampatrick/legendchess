@@ -23,10 +23,7 @@ export type GuessResult = 'exact' | 'equivalent' | 'miss';
 export type Phase = 'playing' | 'solved' | 'spectator';
 export type Level = 0 | 1 | 2 | 3;
 
-export type Hint =
-  | { tier: 1; piece: Role }
-  | { tier: 2; to: string }
-  | { tier: 3; uci: string };
+export type Hint = { tier: 1; piece: Role } | { tier: 2; to: string } | { tier: 3; uci: string };
 
 export interface PointRecord {
   /** Index into puzzle.decisionPoints. */

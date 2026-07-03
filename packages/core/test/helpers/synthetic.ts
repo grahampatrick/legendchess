@@ -24,7 +24,10 @@ interface SyntheticPoint {
 export const HERO_CP_DEFAULT = 50;
 export const NON_HERO_CP_DEFAULT = -200;
 
-export const buildSyntheticPuzzle = (points: SyntheticPoint[], finaleSan: string[] = []): Puzzle => {
+export const buildSyntheticPuzzle = (
+  points: SyntheticPoint[],
+  finaleSan: string[] = [],
+): Puzzle => {
   const pos = initialPosition();
   const decisionPoints: Puzzle['decisionPoints'] = [];
   let ply = 1;

@@ -43,7 +43,9 @@ export const validatePuzzle = (input: unknown): Puzzle => {
       throw new PuzzleDataError(`At ply ${dp.ply} it is not the hero's move`);
     }
     if (dp.ply !== expectedPly) {
-      throw new PuzzleDataError(`Decision point ply ${dp.ply} out of sequence (expected ${expectedPly})`);
+      throw new PuzzleDataError(
+        `Decision point ply ${dp.ply} out of sequence (expected ${expectedPly})`,
+      );
     }
 
     const legal = legalUcis(pos).sort();
