@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 
 import PlayView from '../../../components/PlayView';
 import { loadPuzzle } from '../../../lib/puzzles.server';
+import { sealPuzzle } from '../../../lib/seal';
 
 export default async function PlayPage({ params }: { params: Promise<{ puzzleId: string }> }) {
   const { puzzleId } = await params;
@@ -12,9 +13,10 @@ export default async function PlayPage({ params }: { params: Promise<{ puzzleId:
       <div className="site-title">
         <a href="/">
           <span className="knight">♞</span> Play the Legend
-        </a>
+        </a>{' '}
+        <span style={{ color: 'var(--text-dim)' }}>· free play</span>
       </div>
-      <PlayView puzzleJson={puzzle} />
+      <PlayView sealed={sealPuzzle(puzzle)} mode="free" />
     </main>
   );
 }

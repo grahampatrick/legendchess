@@ -7,10 +7,18 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:3105',
     viewport: { width: 1200, height: 800 },
+    permissions: ['clipboard-read', 'clipboard-write'],
   },
   projects: [
     { name: 'desktop', use: { viewport: { width: 1200, height: 800 } } },
-    { name: 'mobile', use: { viewport: { width: 390, height: 844 }, hasTouch: true } },
+    {
+      name: 'mobile',
+      use: {
+        viewport: { width: 390, height: 844 },
+        hasTouch: true,
+        permissions: ['clipboard-read', 'clipboard-write'],
+      },
+    },
   ],
   webServer: {
     command: 'pnpm dev',

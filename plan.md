@@ -161,12 +161,12 @@ pnpm dev   # manual demo: play puzzle 0001 start-to-finish on a phone-width view
 
 **Deliverables**
 
-- [ ] Daily selection: content calendar file mapping UTC date → puzzle id, published ahead; `/` always serves today's
-- [ ] localStorage persistence: today's progress (refresh-safe), streak, history, stats (games played, 🟩-rate)
-- [ ] Share: native share sheet + clipboard fallback, grid format locked and snapshot-tested (it's a public API now)
-- [ ] Post-game countdown to next puzzle + "yesterday's solution" archive page (past days playable but marked, don't count for streaks)
-- [ ] Per-day OG image (event, year, hero silhouette-free art, day #) via `@vercel/og`
-- [ ] Anti-spoiler: solution moves lightly obfuscated in the JSON (XOR/base64 — deters view-source, not determined cheaters; ADR why that's enough for anonymous play)
+- [x] Daily selection: content calendar file mapping UTC date → puzzle id, published ahead; `/` always serves today's
+- [x] localStorage persistence: today's progress (refresh-safe), streak, history, stats (games played, 🟩-rate)
+- [x] Share: native share sheet + clipboard fallback, grid format locked and snapshot-tested (it's a public API now)
+- [x] Post-game countdown to next puzzle + "yesterday's solution" archive page (past days playable but marked, don't count for streaks)
+- [x] Per-day OG image (event, year, hero silhouette-free art, day #) via `@vercel/og`
+- [x] Anti-spoiler: solution moves lightly obfuscated in the JSON (XOR/base64 — deters view-source, not determined cheaters; ADR why that's enough for anonymous play)
 
 **CE Principle:** the calendar + archive turn every M2 content PR into a scheduled asset — the content runway and the product decouple; shipping code and shipping puzzles are independent pipelines.
 

@@ -4,6 +4,10 @@
  * The game flow: intro → prelude replay → guess loop → reveal/spectate → done.
  * A thin adapter over core's session — no game rules live here (non-negotiable
  * #5); this component only sequences frames and renders state.
+ *
+ * Daily mode adds persistence: every guess/hint is appended to a localStorage
+ * action log which replays through a fresh core session on reload — one
+ * ruleset implementation, no serialized game state to drift (ADR 0004/0005).
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
 
@@ -17,14 +21,25 @@ import {
   formatShareText,
   maxScore,
   scoreSession,
-  validatePuzzle,
   type Hint,
   type SessionState,
 } from '@playthelegend/core';
 import type { DrawShape } from 'chessground/draw';
 
 import Board from './Board';
+import Countdown from './Countdown';
 import { destsFromUcis, promotionChoices } from '../lib/dests';
+import { previousDateKey } from '../lib/daily';
+import { unsealPuzzle, type SealedPuzzle } from '../lib/seal';
+import {
+  appendAction,
+  completeDay,
+  dayRecord,
+  displayStreak,
+  loadState,
+  saveState,
+  type DailyAction,
+} from '../lib/storage';
 import {
   framesFromSan,
   preludeFrames,
@@ -40,20 +55,20 @@ interface Status {
   text: string;
 }
 
+export interface PlayViewProps {
+  sealed: SealedPuzzle;
+  mode: 'daily' | 'free';
+  /** Daily context (both required in daily mode). */
+  dayNumber?: number;
+  dateKey?: string;
+}
+
 const FRAME_MS: Record<string, number> = { replay: 220, reveal: 500, spectate: 550 };
-const PIECE_NAMES: Record<string, string> = {
-  pawn: 'pawn',
-  knight: 'knight',
-  bishop: 'bishop',
-  rook: 'rook',
-  queen: 'queen',
-  king: 'king',
-};
 
 const hintText = (hint: Hint): string => {
   switch (hint.tier) {
     case 1:
-      return `Hint: the ${PIECE_NAMES[hint.piece] ?? hint.piece} moves.`;
+      return `Hint: the ${hint.piece} moves.`;
     case 2:
       return `Hint: the move lands on ${hint.to}.`;
     case 3:
@@ -61,13 +76,14 @@ const hintText = (hint: Hint): string => {
   }
 };
 
-export default function PlayView({ puzzleJson }: { puzzleJson: unknown }) {
-  const puzzle = useMemo(() => validatePuzzle(puzzleJson), [puzzleJson]);
+export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewProps) {
+  const puzzle = useMemo(() => unsealPuzzle(sealed), [sealed]);
   const sessionRef = useRef<ReturnType<typeof createSession> | null>(null);
   sessionRef.current ??= createSession(puzzle);
   const session = sessionRef.current;
 
   const heroLastName = puzzle.meta.heroName.split(' ').at(-1)!;
+  const isDaily = mode === 'daily' && !!dateKey;
 
   const [phase, setPhase] = useState<Phase>('intro');
   const [snap, setSnap] = useState<SessionState>(() => session.state());
@@ -81,6 +97,55 @@ export default function PlayView({ puzzleJson }: { puzzleJson: unknown }) {
   const [promo, setPromo] = useState<{ from: string; to: string; choices: string[] } | null>(null);
   const [uciText, setUciText] = useState('');
   const [copied, setCopied] = useState(false);
+  const [streakNow, setStreakNow] = useState<number | null>(null);
+
+  const persist = (action: DailyAction, done: boolean) => {
+    if (!isDaily || !dateKey) return;
+    let state = appendAction(
+      loadState(),
+      dateKey,
+      { dayNumber: dayNumber ?? 0, puzzleId: puzzle.id },
+      action,
+    );
+    if (done) {
+      state = completeDay(state, dateKey, previousDateKey(dateKey));
+      setStreakNow(state.streak.current);
+    }
+    saveState(state);
+  };
+
+  // Daily restore: replay the stored action log through a fresh session.
+  // Runs once, client-side only (localStorage), after hydration.
+  useEffect(() => {
+    if (!isDaily || !dateKey) return;
+    const state = loadState();
+    const record = dayRecord(state, dateKey);
+    setStreakNow(displayStreak(state.streak, dateKey, previousDateKey(dateKey)));
+    if (!record || record.puzzleId !== puzzle.id || record.actions.length === 0) return;
+    try {
+      const restored = createSession(puzzle);
+      for (const action of record.actions) {
+        if (action.type === 'hint') restored.requestHint();
+        else restored.guess(action.uci);
+      }
+      sessionRef.current = restored;
+      const restoredSnap = restored.state();
+      setSnap(restoredSnap);
+      setDisplay({ fen: restoredSnap.fen });
+      if (restoredSnap.phase === 'playing') {
+        setStatus({ kind: 'info', text: 'Welcome back — the legend is waiting.' });
+        setPhase('play');
+      } else {
+        setPhase('done');
+      }
+    } catch {
+      // Corrupt log (schema change, tampering): start the day fresh.
+      const state2 = loadState();
+      delete state2.days[dateKey];
+      saveState(state2);
+    }
+    // (intentionally run once on mount)
+  }, []);
 
   // Frame queue player: one frame per tick, speed depends on phase.
   useEffect(() => {
@@ -120,18 +185,15 @@ export default function PlayView({ puzzleJson }: { puzzleJson: unknown }) {
     const before = session.state();
     try {
       const outcome = session.guess(uci);
-      const after = session.state();
-      setSnap(after);
+      persist({ type: 'guess', uci }, outcome.done);
+      setSnap(session.state());
       setHint(null);
       setShapes([]);
       setUciText('');
 
       if (outcome.result === 'miss') {
         if (outcome.done) {
-          setStatus({
-            kind: 'miss',
-            text: `Out of lives. Watch how ${heroLastName} finished it.`,
-          });
+          setStatus({ kind: 'miss', text: `Out of lives. Watch how ${heroLastName} finished it.` });
           setQueue(remainderFrames(puzzle, before.currentIndex, before.fen));
           setPhase('spectate');
         } else {
@@ -191,6 +253,7 @@ export default function PlayView({ puzzleJson }: { puzzleJson: unknown }) {
   const requestHint = () => {
     try {
       const h = session.requestHint();
+      persist({ type: 'hint' }, false);
       setSnap(session.state());
       setHint(h);
       if (h.tier === 3) {
@@ -208,7 +271,7 @@ export default function PlayView({ puzzleJson }: { puzzleJson: unknown }) {
   };
 
   const share = async () => {
-    const text = formatShareText({ puzzle, state: snap });
+    const text = formatShareText({ puzzle, state: snap, dayNumber });
     try {
       if (navigator.share) await navigator.share({ text });
       else await navigator.clipboard.writeText(text);
@@ -231,6 +294,7 @@ export default function PlayView({ puzzleJson }: { puzzleJson: unknown }) {
     '❤'.repeat(snap.livesLeft) +
     (snap.livesLeft < session.rules.lives ? '♡'.repeat(session.rules.lives - snap.livesLeft) : '');
   const pointNumber = Math.min(snap.currentIndex + 1, puzzle.decisionPoints.length);
+  const dayTag = dayNumber === undefined ? '' : `#${dayNumber} · `;
 
   return (
     <div className="play-grid">
@@ -251,7 +315,10 @@ export default function PlayView({ puzzleJson }: { puzzleJson: unknown }) {
         {phase === 'intro' && (
           <div className="overlay" data-testid="intro">
             <div className="card">
-              <h2>{puzzle.meta.title}</h2>
+              <h2>
+                {dayTag}
+                {puzzle.meta.title}
+              </h2>
               <div className="meta">
                 {puzzle.meta.event} · {puzzle.meta.year} · vs {puzzle.meta.opponentName}
               </div>
@@ -298,17 +365,26 @@ export default function PlayView({ puzzleJson }: { puzzleJson: unknown }) {
               <div data-testid="final-score">
                 {scoreSession(snap.records)} / {maxScore(puzzle)} · {hearts}
               </div>
+              {isDaily && streakNow !== null && streakNow > 0 && (
+                <div data-testid="streak">🔥 {streakNow}-day streak</div>
+              )}
               <button className="btn" data-testid="share-btn" onClick={share}>
                 {copied ? 'Copied!' : 'Share your result'}
               </button>
-              <a href="/">All puzzles</a>
+              {isDaily && <Countdown />}
+              <div>
+                <a href="/archive">Archive</a> · <a href="/library">All puzzles</a>
+              </div>
             </div>
           </div>
         )}
       </div>
 
       <aside className="panel">
-        <h1>{puzzle.meta.title}</h1>
+        <h1>
+          {dayTag}
+          {puzzle.meta.title}
+        </h1>
         <div className="meta">
           {puzzle.meta.heroName} vs {puzzle.meta.opponentName} · {puzzle.meta.event} ·{' '}
           {puzzle.meta.year}
