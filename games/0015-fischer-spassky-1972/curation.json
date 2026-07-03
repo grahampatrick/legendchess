@@ -1,0 +1,13 @@
+{
+  "id": "0015-fischer-spassky-1972",
+  "title": "The Match of the Century, Game 6",
+  "heroName": "Bobby Fischer",
+  "heroColor": "white",
+  "window": { "fromMove": 19, "toMove": 29 },
+  "blurb": "Reykjavik, 1972 — game six of the Match of the Century, the Cold War on sixty-four squares. You are Bobby Fischer, and you have just opened with 1.c4 for practically the first time in your life. What follows is chess so clean that Boris Spassky himself stood and applauded with the audience. Play it like Bobby.",
+  "sources": ["https://en.wikipedia.org/wiki/World_Chess_Championship_1972"],
+  "overrides": {
+    "opponentName": "Boris Spassky",
+    "event": "World Chess Championship, Reykjavik"
+  }
+}

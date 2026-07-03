@@ -1,0 +1,13 @@
+{
+  "id": "0014-najdorf-polish-1930",
+  "title": "The Polish Immortal",
+  "heroName": "Miguel Najdorf",
+  "heroColor": "black",
+  "window": { "fromMove": 9, "toMove": 22 },
+  "blurb": "Warsaw, around 1930. You are young Miguel Najdorf, playing Black in a quiet Dutch Defence that is about to become anything but quiet: all four of your minor pieces are going into the fire, one after another, and the final blow is delivered by a pawn stepping to h5. Najdorf spent the rest of his life calling this his Polish Immortal.",
+  "sources": ["https://en.wikipedia.org/wiki/Polish_Immortal"],
+  "overrides": {
+    "year": 1930,
+    "opponentName": "Glücksberg"
+  }
+}

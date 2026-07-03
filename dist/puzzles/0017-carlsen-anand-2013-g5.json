@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 1,
+  "id": "0017-carlsen-anand-2013-g5",
+  "meta": {
+    "title": "The First Crown, Game 5",
+    "event": "World Chess Championship, Chennai",
+    "site": "Chennai IND",
+    "year": 2013,
+    "heroName": "Magnus Carlsen",
+    "heroColor": "white",
+    "opponentName": "Viswanathan Anand",
+    "result": "1-0",
+    "blurb": "Chennai, 2013, game five — the match is level and Anand has held everything so far. You are Magnus Carlsen, 22, and there is no attack to find here: just a rook endgame that everyone in the press room called drawn. Squeeze it the way only Magnus squeezes, and win the first game of your first world title.",
+    "sources": [
+      "https://en.wikipedia.org/wiki/World_Chess_Championship_2013"
+    ]
+  },
+  "prelude": {
+    "san": [
+      "c4",
+      "e6",
+      "d4",
+      "d5",
+      "Nc3",
+      "c6",
+      "e4",
+      "dxe4",
+      "Nxe4",
+      "Bb4+",
+      "Nc3",
+      "c5",
+      "a3",
+      "Ba5",
+      "Nf3",
+      "Nf6",
+      "Be3",
+      "Nc6",
+      "Qd3",
+      "cxd4",
+      "Nxd4",
+      "Ng4",
+      "O-O-O",
+      "Nxe3",
+      "fxe3",
+      "Bc7",
+      "Nxc6",
+      "bxc6",
+      "Qxd8+",
+      "Bxd8",
+      "Be2",
+      "Ke7",
+      "Bf3",
+      "Bd7",
+      "Ne4",
+      "Bb6",
+      "c5",
+      "f5",
+      "cxb6",
+      "fxe4",
+      "b7",
+      "Rab8",
+      "Bxe4",
+      "Rxb7",
+      "Rhf1",
+      "Rb5",
+      "Rf4",
+      "g5",
+      "Rf3",
+      "h5",
+      "Rdf1",
+      "Be8",
+      "Bc2",
+      "Rc5",
+      "Rf6",
+      "h4",
+      "e4",
+      "a5",
+      "Kd2",
+      "Rb5",
+      "b3",
+      "Bh5",
+      "Kc3",
+      "Rc5+",
+      "Kb2",
+      "Rd8",
+      "R1f2",
+      "Rd4",
+      "Rh6",
+      "Bd1",
+      "Bb1",
+      "Rb5",
+      "Kc3",
+      "c5",
+      "Rb2",
+      "e5",
+      "Rg6",
+      "a4",
+      "Rxg5",
+      "Rxb3+",
+      "Rxb3",
+      "Bxb3",
+      "Rxe5+",
+      "Kd6",
+      "Rh5",
+      "Rd1",
+      "e5+",
+      "Kd5",
+      "Bh7",
+      "Rc1+",
+      "Kb2",
+      "Rg1",
+      "Bg8+",
+      "Kc6"
+    ]
+  },
+  "startFen": "6B1/8/2k5/2p1P2R/p6p/Pb6/1K4PP/6r1 w - - 7 48",
+  "decisionPoints": [
+    {
+      "ply": 95,
+      "hero": {
+        "uci": "h5h6",
+        "san": "Rh6+"
+      },
+      "evals": {
+        "b2c3": -384,
+        "e5e6": -463,
+        "g2g3": -431,
+        "g2g4": -441,
+        "g8b3": 15,
+        "g8c4": -468,
+        "g8d5": -469,
+        "g8e6": -530,
+        "g8f7": -494,
+        "g8h7": -21,
+        "h2h3": -494,
+        "h5f5": -532,
+        "h5g5": -141,
+        "h5h4": -452,
+        "h5h6": 42,
+        "h5h7": -467,
+        "h5h8": -462
+      },
+      "reply": {
+        "uci": "c6d7",
+        "san": "Kd7"
+      }
+    },
+    {
+      "ply": 97,
+      "hero": {
+        "uci": "g8b3",
+        "san": "Bxb3"
+      },
+      "evals": {
+        "b2c3": -391,
+        "e5e6": -11,
+        "g2g3": -403,
+        "g2g4": -418,
+        "g8b3": 42,
+        "g8c4": -454,
+        "g8d5": -22,
+        "g8e6": -446,
+        "g8f7": -449,
+        "g8h7": -14,
+        "h2h3": -473,
+        "h6a6": -480,
+        "h6b6": -480,
+        "h6c6": -665,
+        "h6d6": 3,
+        "h6e6": -706,
+        "h6f6": -473,
+        "h6g6": -146,
+        "h6h4": -441,
+        "h6h5": -461,
+        "h6h7": 43,
+        "h6h8": -472
+      },
+      "reply": {
+        "uci": "a4b3",
+        "san": "axb3"
+      }
+    },
+    {
+      "ply": 99,
+      "hero": {
+        "uci": "b2b3",
+        "san": "Kxb3"
+      },
+      "evals": {
+        "a3a4": -31,
+        "b2b3": 28,
+        "b2c3": -13,
+        "e5e6": 1,
+        "g2g3": -30,
+        "g2g4": -37,
+        "h2h3": -19,
+        "h6a6": -25,
+        "h6b6": -25,
+        "h6c6": -691,
+        "h6d6": 0,
+        "h6e6": -684,
+        "h6f6": -20,
+        "h6g6": -26,
+        "h6h4": 32,
+        "h6h5": -456,
+        "h6h7": 0,
+        "h6h8": -441
+      },
+      "reply": {
+        "uci": "g1g2",
+        "san": "Rxg2"
+      }
+    },
+    {
+      "ply": 101,
+      "hero": {
+        "uci": "h6h4",
+        "san": "Rxh4"
+      },
+      "evals": {
+        "a3a4": 0,
+        "b3a4": -3,
+        "b3c3": -3,
+        "b3c4": 0,
+        "e5e6": 10,
+        "h2h3": -3,
+        "h6a6": -9,
+        "h6b6": -9,
+        "h6c6": -755,
+        "h6d6": 0,
+        "h6e6": -715,
+        "h6f6": -10,
+        "h6g6": -673,
+        "h6h4": 39,
+        "h6h5": -8,
+        "h6h7": 0,
+        "h6h8": -9
+      },
+      "reply": {
+        "uci": "d7e6",
+        "san": "Ke6"
+      }
+    },
+    {
+      "ply": 103,
+      "hero": {
+        "uci": "a3a4",
+        "san": "a4"
+      },
+      "evals": {
+        "a3a4": 381,
+        "b3a4": 30,
+        "b3c3": 44,
+        "b3c4": 87,
+        "h2h3": 28,
+        "h4a4": 22,
+        "h4b4": -470,
+        "h4c4": 296,
+        "h4d4": -1132,
+        "h4e4": 30,
+        "h4f4": 21,
+        "h4g4": -641,
+        "h4h3": 33,
+        "h4h5": 37,
+        "h4h6": 43,
+        "h4h7": 40,
+        "h4h8": 39
+      },
+      "reply": {
+        "uci": "e6e5",
+        "san": "Kxe5"
+      }
+    },
+    {
+      "ply": 105,
+      "hero": {
+        "uci": "a4a5",
+        "san": "a5"
+      },
+      "evals": {
+        "a4a5": 398,
+        "b3a3": 11,
+        "b3c3": 25,
+        "b3c4": 72,
+        "h2h3": 12,
+        "h4b4": -514,
+        "h4c4": 5,
+        "h4d4": -7018,
+        "h4e4": -6458,
+        "h4f4": -583,
+        "h4g4": -6979,
+        "h4h3": 15,
+        "h4h5": 35,
+        "h4h6": 30,
+        "h4h7": 23,
+        "h4h8": 21
+      },
+      "reply": {
+        "uci": "e5d6",
+        "san": "Kd6"
+      }
+    },
+    {
+      "ply": 107,
+      "hero": {
+        "uci": "h4h7",
+        "san": "Rh7"
+      },
+      "evals": {
+        "a5a6": 394,
+        "b3a3": 41,
+        "b3a4": 21,
+        "b3c3": 61,
+        "b3c4": 91,
+        "h2h3": 71,
+        "h4a4": 4,
+        "h4b4": -479,
+        "h4c4": 8,
+        "h4d4": -876,
+        "h4e4": 6,
+        "h4f4": 27,
+        "h4g4": -658,
+        "h4h3": 70,
+        "h4h5": 67,
+        "h4h6": 85,
+        "h4h7": 440,
+        "h4h8": 67
+      },
+      "reply": {
+        "uci": "d6d5",
+        "san": "Kd5"
+      }
+    },
+    {
+      "ply": 109,
+      "hero": {
+        "uci": "a5a6",
+        "san": "a6"
+      },
+      "evals": {
+        "a5a6": 409,
+        "b3a3": 16,
+        "b3a4": 4,
+        "b3c3": 31,
+        "h2h3": 18,
+        "h2h4": 8,
+        "h7a7": 0,
+        "h7b7": 0,
+        "h7c7": 4,
+        "h7d7": 7,
+        "h7e7": 5,
+        "h7f7": 9,
+        "h7g7": -592,
+        "h7h3": 32,
+        "h7h4": 49,
+        "h7h5": 48,
+        "h7h6": 109,
+        "h7h8": 33
+      },
+      "reply": {
+        "uci": "c5c4",
+        "san": "c4+"
+      }
+    },
+    {
+      "ply": 111,
+      "hero": {
+        "uci": "b3c3",
+        "san": "Kc3"
+      },
+      "evals": {
+        "b3a3": 442,
+        "b3a4": 58,
+        "b3b4": 401,
+        "b3c3": 441
+      },
+      "reply": {
+        "uci": "g2a2",
+        "san": "Ra2"
+      }
+    },
+    {
+      "ply": 113,
+      "hero": {
+        "uci": "a6a7",
+        "san": "a7"
+      },
+      "evals": {
+        "a6a7": 434,
+        "c3b4": 44,
+        "h2h3": 43,
+        "h2h4": 43,
+        "h7a7": 61,
+        "h7b7": 42,
+        "h7c7": 42,
+        "h7d7": 434,
+        "h7e7": 45,
+        "h7f7": 44,
+        "h7g7": 41,
+        "h7h3": -623,
+        "h7h4": 42,
+        "h7h5": 417,
+        "h7h6": 449,
+        "h7h8": 45
+      },
+      "reply": {
+        "uci": "d5c5",
+        "san": "Kc5"
+      }
+    },
+    {
+      "ply": 115,
+      "hero": {
+        "uci": "h2h4",
+        "san": "h4"
+      },
+      "evals": {
+        "a7a8b": 31,
+        "a7a8n": 28,
+        "a7a8q": 31,
+        "a7a8r": 30,
+        "h2h3": 507,
+        "h2h4": 532,
+        "h7b7": 576,
+        "h7c7": 507,
+        "h7d7": 531,
+        "h7e7": 507,
+        "h7f7": 500,
+        "h7g7": 565,
+        "h7h3": 18,
+        "h7h4": 170,
+        "h7h5": 474,
+        "h7h6": 16,
+        "h7h8": 33
+      },
+      "reply": null
+    }
+  ],
+  "finale": {
+    "san": []
+  }
+}

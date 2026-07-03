@@ -1,0 +1,13 @@
+{
+  "id": "0019-carlsen-anand-2013-g9",
+  "title": "The Runaway Pawn",
+  "heroName": "Magnus Carlsen",
+  "heroColor": "black",
+  "window": { "fromMove": 18, "toMove": 28 },
+  "blurb": "Chennai, 2013, game nine — Anand's last stand. For once he gets exactly what he wants: pawns storming your king, pieces massing for mate. You are Magnus Carlsen, and your whole defence is one b-pawn quietly running down the other side of the board. Let his attack come — your pawn arrives first, wearing a crown.",
+  "sources": ["https://en.wikipedia.org/wiki/World_Chess_Championship_2013"],
+  "overrides": {
+    "opponentName": "Viswanathan Anand",
+    "event": "World Chess Championship, Chennai"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "0017-carlsen-anand-2013-g5",
+  "title": "The First Crown, Game 5",
+  "heroName": "Magnus Carlsen",
+  "heroColor": "white",
+  "window": { "fromMove": 48, "toMove": 58 },
+  "blurb": "Chennai, 2013, game five — the match is level and Anand has held everything so far. You are Magnus Carlsen, 22, and there is no attack to find here: just a rook endgame that everyone in the press room called drawn. Squeeze it the way only Magnus squeezes, and win the first game of your first world title.",
+  "sources": ["https://en.wikipedia.org/wiki/World_Chess_Championship_2013"],
+  "overrides": {
+    "opponentName": "Viswanathan Anand",
+    "event": "World Chess Championship, Chennai"
+  }
+}

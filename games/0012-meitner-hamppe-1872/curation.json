@@ -1,0 +1,13 @@
+{
+  "id": "0012-meitner-hamppe-1872",
+  "title": "The Immortal Draw",
+  "heroName": "Philipp Meitner",
+  "heroColor": "black",
+  "window": { "fromMove": 3, "toMove": 12 },
+  "blurb": "Vienna, 1872. You are Philipp Meitner. Sacrifice your bishop on move three, your queen on move nine, and chase Carl Hamppe's king on foot to c6 — the middle of the board — where he survives only because you allow him to. Half a point has never been more beautiful: the Immortal Draw.",
+  "sources": ["https://en.wikipedia.org/wiki/Immortal_Draw"],
+  "overrides": {
+    "year": 1872,
+    "opponentName": "Carl Hamppe"
+  }
+}

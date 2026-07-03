@@ -1,0 +1,13 @@
+{
+  "id": "0011-deepblue-kasparov-1996",
+  "title": "The Machine Wins",
+  "heroName": "Deep Blue",
+  "heroColor": "white",
+  "window": { "fromMove": 27, "toMove": 37 },
+  "blurb": "Philadelphia, February 1996. No computer has ever beaten a reigning world champion at classical time controls, and across the board sits Garry Kasparov. You are Deep Blue — IBM's machine, a hundred million positions a second — and you are about to make history that made the whole world look up from its newspaper.",
+  "sources": ["https://en.wikipedia.org/wiki/Deep_Blue_versus_Kasparov,_1996,_Game_1"],
+  "overrides": {
+    "opponentName": "Garry Kasparov",
+    "event": "IBM Man vs Machine, Philadelphia"
+  }
+}

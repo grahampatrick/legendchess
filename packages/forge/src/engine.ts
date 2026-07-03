@@ -22,6 +22,13 @@ export interface EngineOptions {
   /** Search threads. >1 is faster but NOT deterministic; goldens use 1. */
   threads?: number;
   hashMb?: number;
+  /**
+   * Node ceiling per position. Mate-heavy positions are pathological at fixed
+   * depth under MultiPV (every losing move searched to full depth — the Gold
+   * Coins Game took 98 min at depth 16); a cap bounds the worst case while
+   * leaving normal positions at full depth.
+   */
+  maxNodes?: number;
 }
 
 /** Evaluate a position: centipawns per legal move (UCI), side-to-move POV. */
@@ -37,7 +44,7 @@ const INFO_RE =
   /^info depth (\d+) .*?multipv \d+ score (cp|mate) (-?\d+) (?!.*\b(?:lower|upper)bound\b).*?pv ([a-h][1-8][a-h][1-8][qrbn]?)/;
 
 export const createEngine = async (options: EngineOptions): Promise<Engine> => {
-  const { path, depth, threads = 1, hashMb = 256 } = options;
+  const { path, depth, threads = 1, hashMb = 256, maxNodes } = options;
   let proc: ChildProcessWithoutNullStreams;
   try {
     proc = spawn(path);
@@ -113,7 +120,7 @@ export const createEngine = async (options: EngineOptions): Promise<Engine> => {
     send('isready');
     await drainUntil((l) => l === 'readyok');
     send(`position fen ${fen}`);
-    send(`go depth ${depth}`);
+    send(`go depth ${depth}${maxNodes ? ` nodes ${maxNodes}` : ''}`);
 
     const best = new Map<string, { depth: number; cp: number }>();
     for (;;) {

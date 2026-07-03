@@ -28,6 +28,7 @@ import type { DrawShape } from 'chessground/draw';
 
 import Board from './Board';
 import Countdown from './Countdown';
+import { track } from '../lib/analytics';
 import { destsFromUcis, promotionChoices } from '../lib/dests';
 import { previousDateKey } from '../lib/daily';
 import { unsealPuzzle, type SealedPuzzle } from '../lib/seal';
@@ -154,6 +155,12 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
   useEffect(() => {
     if (phase !== 'done' || !isDaily || !dateKey || submittedRef.current) return;
     submittedRef.current = true;
+    track('game_complete', {
+      puzzle: puzzle.id,
+      outcome: snap.phase,
+      score: scoreSession(snap.records),
+      ...(dayNumber !== undefined ? { day: dayNumber } : {}),
+    });
     const record = dayRecord(loadState(), dateKey);
     if (!record?.done) return;
     void fetch('/api/submit', {
@@ -196,6 +203,7 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
   }, [queue.length, phase]);
 
   const startGame = () => {
+    track('game_start', { puzzle: puzzle.id, mode });
     const frames = preludeFrames(puzzle);
     setDisplay(frames[0]!);
     setQueue(frames.slice(1));
@@ -283,6 +291,7 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
   const requestHint = () => {
     try {
       const h = session.requestHint();
+      track('hint_used', { puzzle: puzzle.id, tier: h.tier });
       persist({ type: 'hint' }, false);
       setSnap(session.state());
       setHint(h);
@@ -301,6 +310,10 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
   };
 
   const share = async () => {
+    track('share_click', {
+      puzzle: puzzle.id,
+      ...(dayNumber !== undefined ? { day: dayNumber } : {}),
+    });
     const text = formatShareText({ puzzle, state: snap, dayNumber });
     try {
       if (navigator.share) await navigator.share({ text });

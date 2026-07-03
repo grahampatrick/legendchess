@@ -21,6 +21,7 @@ interface Flags {
   stockfish: string;
   depth: number;
   threads: number;
+  nodes: number;
 }
 
 /** pnpm runs scripts with the package as cwd; resolve user paths from where they invoked. */
@@ -38,6 +39,7 @@ const parseArgs = (argv: string[]): { command: string; targets: string[]; flags:
       1,
       (process.env['FORGE_THREADS'] ? Number(process.env['FORGE_THREADS']) : 4) | 0,
     ),
+    nodes: 60_000_000, // bounds mate-heavy pathological positions to seconds
   };
   for (let i = 0; i < rest.length; i++) {
     const arg = rest[i]!;
@@ -45,6 +47,7 @@ const parseArgs = (argv: string[]): { command: string; targets: string[]; flags:
     else if (arg === '--stockfish') flags.stockfish = rest[++i]!;
     else if (arg === '--depth') flags.depth = Number(rest[++i]);
     else if (arg === '--threads') flags.threads = Number(rest[++i]);
+    else if (arg === '--nodes') flags.nodes = Number(rest[++i]);
     else targets.push(arg);
   }
   return { command, targets, flags };
@@ -60,8 +63,11 @@ const build = async (targets: string[], flags: Flags): Promise<void> => {
     path: flags.stockfish,
     depth: flags.depth,
     threads: flags.threads,
+    maxNodes: flags.nodes,
   });
-  console.log(`engine: ${engine.name} · depth ${flags.depth} · threads ${flags.threads}`);
+  console.log(
+    `engine: ${engine.name} · depth ${flags.depth} · threads ${flags.threads} · nodes ≤ ${flags.nodes}`,
+  );
   try {
     const outDir = fromInvokeCwd(flags.out);
     mkdirSync(outDir, { recursive: true });

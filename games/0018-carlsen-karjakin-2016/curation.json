@@ -1,0 +1,13 @@
+{
+  "id": "0018-carlsen-karjakin-2016",
+  "title": "The Queen Sacrifice Finish",
+  "heroName": "Magnus Carlsen",
+  "heroColor": "white",
+  "window": { "fromMove": 43, "toMove": 50 },
+  "blurb": "New York, 2016 — the final rapid tiebreak game, on your 26th birthday. Karjakin must win to keep the match alive, so he lunges. You are Magnus Carlsen, and the door he left open is shaped exactly like your queen: finish the world championship with what Kavalek called the most brilliant final move in title-match history.",
+  "sources": ["https://en.wikipedia.org/wiki/World_Chess_Championship_2016"],
+  "overrides": {
+    "opponentName": "Sergey Karjakin",
+    "event": "World Chess Championship Tiebreak, New York"
+  }
+}

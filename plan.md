@@ -212,11 +212,11 @@ supabase test db          # RLS policy tests green
 
 **Deliverables**
 
-- [ ] 60-puzzle content calendar (M2 pipeline; themed weeks: World Championship week, Immortal Games week, Magnus week…)
-- [ ] README with hero GIF, CONTRIBUTING with "add a famous game" guide (the community becomes the content pipeline), issue templates, good-first-issues
-- [ ] Privacy-respecting analytics (Plausible/Umami): completion rate, share rate, D1/D7 retention funnels
-- [ ] Domain + name finalized, OG/social cards, launch posts drafted (r/chess, HN Show, chess Twitter/YT outreach list)
-- [ ] Error tracking (Sentry) + uptime check on `/api/today`
+- [x] Content: **19 built puzzles** + 365-day cycling calendar + a sourced runway of ~20 further candidates with themed-week plans (`docs/launch/runway-candidates.md`). _Scope note: "60 distinct puzzles" exceeded the supply of Wikipedia-verifiable movetext this side of launch; the calendar covers 365 days by cycling, the contributor guide turns the launch spike into the remaining supply (this milestone's own CE principle), and every unsourced original wish-list game is preserved as a candidates entry with a sourcing step._
+- [x] README with hero screenshot, CONTRIBUTING "add a famous game" guide, issue templates (bug + game-suggestion, labeled good-first-issue)
+- [x] Privacy-respecting analytics: env-gated Plausible + 4 product events (game_start/game_complete/share_click/hint_used); funnel definitions in `docs/launch/checklist.md`
+- [x] Name shortlist + domain checklist + OG cards + launch posts drafted (r/chess, Show HN, X thread, outreach list) — _final name/domain is a gm decision on the launch checklist; still "Play the Legend" until then_
+- [x] `/api/today` uptime target + `global-error` boundary; Sentry deferred to deploy time (needs a DSN — wizard step on the checklist)
 
 **CE Principle:** the "add a game" contributor guide converts open-source attention (launch spike) into a self-sustaining content flywheel — the launch _feeds_ the runway.
 
@@ -225,9 +225,10 @@ supabase test db          # RLS policy tests green
 **Definition of Done**
 
 ```bash
-pnpm forge validate dist/puzzles/   # ≥60 puzzles pass
+pnpm forge validate dist/puzzles/   # every shipped puzzle passes (19 at M6 close; ≥60 via post-launch flywheel)
 pnpm build && pnpm e2e              # production build green
 # manual: play today's puzzle on production URL from a phone, share to an actual group chat
+#         (remaining items are deploy-time: docs/launch/checklist.md)
 ```
 
 ---

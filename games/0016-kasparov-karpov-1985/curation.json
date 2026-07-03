@@ -1,0 +1,13 @@
+{
+  "id": "0016-kasparov-karpov-1985",
+  "title": "The Octopus Game",
+  "heroName": "Garry Kasparov",
+  "heroColor": "black",
+  "window": { "fromMove": 33, "toMove": 40 },
+  "blurb": "Moscow, 1985, game sixteen. You are Garry Kasparov, 22 years old, playing for the crown against Karpov himself. Your knight has sat on d3 since move sixteen — the 'octopus', strangling White's whole position from inside his own camp. Now the harvest: eight moves that made this the most famous game of the most famous match of its era.",
+  "sources": ["https://en.wikipedia.org/wiki/World_Chess_Championship_1985"],
+  "overrides": {
+    "opponentName": "Anatoly Karpov",
+    "event": "World Chess Championship, Moscow"
+  }
+}

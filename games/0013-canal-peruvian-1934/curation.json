@@ -1,0 +1,13 @@
+{
+  "id": "0013-canal-peruvian-1934",
+  "title": "The Peruvian Immortal",
+  "heroName": "Esteban Canal",
+  "heroColor": "white",
+  "window": { "fromMove": 7, "toMove": 14 },
+  "blurb": "Budapest, 1934, a simultaneous exhibition against an unknown amateur. You are Esteban Canal, and you have fourteen moves and almost your entire army to give away: both rooks, then the queen — and what's left on the board is one of the cleanest mates ever played. They named it the Peruvian Immortal.",
+  "sources": ["https://en.wikipedia.org/wiki/Peruvian_Immortal"],
+  "overrides": {
+    "year": 1934,
+    "opponentName": "N.N."
+  }
+}
