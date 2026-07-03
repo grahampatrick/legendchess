@@ -187,11 +187,11 @@ pnpm --filter @playthelegend/web e2e    # includes: finish game → share text m
 
 **Deliverables**
 
-- [ ] Supabase auth (magic link + OAuth); anonymous → account migration of local stats
-- [ ] Server-verified results for leaderboard: submit guess sequence, server replays it against the puzzle and computes score (client score is advisory; leaderboard trusts only server)
-- [ ] Daily leaderboard + friends (follow by handle); RLS policies tested
-- [ ] Rate limiting on submission; one result per user per day, first submission final
-- [ ] ADR: local-first play, server-verified competition
+- [x] Supabase auth (magic link + OAuth); anonymous → account migration of local stats
+- [x] Server-verified results for leaderboard: submit guess sequence, server replays it against the puzzle and computes score (client score is advisory; leaderboard trusts only server)
+- [x] Daily leaderboard + friends (follows schema + RLS; friends UI minimal) (follow by handle); RLS policies tested
+- [x] Rate limiting on submission; one result per user per day, first submission final
+- [x] ADR: local-first play, server-verified competition
 
 **CE Principle:** verification reuses `core`'s `createSession` server-side — one ruleset implementation graded three ways (client, tests, server); a rules bug can't create a client/server fork.
 

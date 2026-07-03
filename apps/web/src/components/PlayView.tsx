@@ -98,6 +98,8 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
   const [uciText, setUciText] = useState('');
   const [copied, setCopied] = useState(false);
   const [streakNow, setStreakNow] = useState<number | null>(null);
+  const [board, setBoard] = useState<string | null>(null); // leaderboard submit status
+  const submittedRef = useRef(false);
 
   const persist = (action: DailyAction, done: boolean) => {
     if (!isDaily || !dateKey) return;
@@ -146,6 +148,34 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
     }
     // (intentionally run once on mount)
   }, []);
+
+  // On finishing the daily, submit the action log for server verification
+  // (ADR 0006). Best-effort and additive: 401 → sign-in nudge, 503 → silent.
+  useEffect(() => {
+    if (phase !== 'done' || !isDaily || !dateKey || submittedRef.current) return;
+    submittedRef.current = true;
+    const record = dayRecord(loadState(), dateKey);
+    if (!record?.done) return;
+    void fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ dateKey, actions: record.actions }),
+    })
+      .then(async (res) => {
+        if (res.status === 401) setBoard('signin');
+        else if (res.ok) {
+          const data = (await res.json()) as { outcome: string; score: number };
+          setBoard(
+            data.outcome === 'already-submitted'
+              ? 'Already on today’s leaderboard.'
+              : `On the leaderboard: ${data.score} pts.`,
+          );
+        }
+      })
+      .catch(() => {
+        /* offline or unconfigured — the game owes the player nothing here */
+      });
+  }, [phase, isDaily, dateKey]);
 
   // Frame queue player: one frame per tick, speed depends on phase.
   useEffect(() => {
@@ -368,6 +398,15 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
               {isDaily && streakNow !== null && streakNow > 0 && (
                 <div data-testid="streak">🔥 {streakNow}-day streak</div>
               )}
+              {board === 'signin' ? (
+                <div className="meta" data-testid="leaderboard-cta">
+                  <a href="/account">Sign in</a> to enter <a href="/leaderboard">the leaderboard</a>
+                </div>
+              ) : board ? (
+                <div className="meta" data-testid="leaderboard-cta">
+                  {board} <a href="/leaderboard">View</a>
+                </div>
+              ) : null}
               <button className="btn" data-testid="share-btn" onClick={share}>
                 {copied ? 'Copied!' : 'Share your result'}
               </button>
