@@ -81,12 +81,12 @@ pnpm install && pnpm lint && pnpm typecheck && pnpm test   # all green locally a
 
 **Deliverables**
 
-- [ ] `PuzzleSchema` (zod): metadata, startFen, decision points, opponent replies, eval tables — this schema is the contract between forge, web, and tests
-- [ ] `createSession(puzzle)` state machine: `guess(uci) → {result: 'exact'|'equivalent'|'miss', livesLeft, hint?, done}`
-- [ ] Scoring + emoji share-grid generator (pure function of session history)
-- [ ] Fixture: `fixtures/puzzles/0001-kasparov-topalov-1999.json` **hand-authored** (evals entered manually from an engine GUI) — the "Kasparov's Immortal" 24.Rxd4 game or similar
-- [ ] Exhaustive unit tests: exact/equivalent/miss paths, life exhaustion → spectator mode, hint escalation, grid output snapshot
-- [ ] `docs/adr/0004-scoring-ruleset-v1.md` with the tunable constants (cp threshold, life count, hint costs) in one exported `RULES` object
+- [x] `PuzzleSchema` (zod): metadata, startFen, decision points, opponent replies, eval tables — this schema is the contract between forge, web, and tests
+- [x] `createSession(puzzle)` state machine: `guess(uci) → {result: 'exact'|'equivalent'|'miss', livesLeft, hint?, done}`
+- [x] Scoring + emoji share-grid generator (pure function of session history)
+- [x] Fixture: `fixtures/puzzles/0001-kasparov-topalov-1999.json` **hand-authored** (evals entered manually from an engine GUI) — the "Kasparov's Immortal" 24.Rxd4 game or similar
+- [x] Exhaustive unit tests: exact/equivalent/miss paths, life exhaustion → spectator mode, hint escalation, grid output snapshot
+- [x] `docs/adr/0004-scoring-ruleset-v1.md` with the tunable constants (cp threshold, life count, hint costs) in one exported `RULES` object
 
 **CE Principle:** the schema + fixture become the shared test bed for _every_ downstream package — forge must emit it, web must render it, e2e must play it. One fixture, three consumers.
 
