@@ -305,6 +305,70 @@ button.icon-btn:hover {
   background: #3a3835;
 }
 
+/* ---- stats modal ---- */
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+}
+.stat {
+  text-align: center;
+}
+.stat-num {
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.stats-dist {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+}
+.dist-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+.dist-label {
+  flex: 0 0 84px;
+  color: var(--text-dim);
+}
+.dist-bar-track {
+  flex: 1;
+}
+.dist-bar {
+  display: inline-block;
+  background: var(--accent);
+  color: #1b1a17;
+  font-weight: 700;
+  border-radius: 3px;
+  padding: 1px 6px;
+  min-width: 14px;
+  text-align: right;
+}
+.dist-bar.empty {
+  background: #3a3835;
+  color: var(--text-dim);
+}
+button.link-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+}
+button.link-btn:hover {
+  text-decoration: underline;
+}
+
 /* ---- index ---- */
 ul.puzzle-list {
   list-style: none;

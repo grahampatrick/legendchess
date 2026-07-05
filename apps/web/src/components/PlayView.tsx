@@ -29,6 +29,7 @@ import type { DrawShape } from 'chessground/draw';
 import Board from './Board';
 import { Confetti, CountUp, GridReveal } from './Celebration';
 import Countdown from './Countdown';
+import StatsModal from './StatsModal';
 import { track } from '../lib/analytics';
 import { destsFromUcis, promotionChoices } from '../lib/dests';
 import { previousDateKey } from '../lib/daily';
@@ -105,6 +106,7 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
   const [board, setBoard] = useState<string | null>(null); // leaderboard submit status
   const submittedRef = useRef(false);
   const [showRules, setShowRules] = useState(false);
+  const [showStats, setShowStats] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
   const [stats, setStats] = useState<{ foundFirstTry: number[]; scores: number[] } | null>(null);
 
@@ -131,7 +133,13 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
       action,
     );
     if (done) {
-      state = completeDay(state, dateKey, previousDateKey(dateKey));
+      const final = session.state();
+      state = completeDay(state, dateKey, previousDateKey(dateKey), {
+        score: scoreSession(final.records),
+        max: maxScore(puzzle),
+        solved: final.phase === 'solved',
+        grid: emojiGrid(final.records),
+      });
       setStreakNow(state.streak.current);
     }
     saveState(state);
@@ -402,6 +410,7 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
             </div>
           </div>
         )}
+        {showStats && <StatsModal streakNow={streakNow} onClose={() => setShowStats(false)} />}
         {showRules && (
           <div className="overlay" data-testid="rules" onClick={() => setShowRules(false)}>
             <div className="card" onClick={(e) => e.stopPropagation()}>
@@ -486,7 +495,14 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
               </button>
               {isDaily && <Countdown />}
               <div>
-                <a href="/archive">Archive</a> · <a href="/library">All puzzles</a>
+                <button
+                  className="link-btn"
+                  data-testid="done-stats"
+                  onClick={() => setShowStats(true)}
+                >
+                  Stats
+                </button>{' '}
+                · <a href="/archive">Archive</a> · <a href="/library">All puzzles</a>
               </div>
             </div>
           </div>
@@ -500,6 +516,14 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
             {puzzle.meta.title}
           </h1>
           <div className="panel-tools">
+            <button
+              className="icon-btn"
+              data-testid="stats-btn"
+              title="Your record"
+              onClick={() => setShowStats(true)}
+            >
+              📊
+            </button>
             <button
               className="icon-btn"
               data-testid="sound-btn"

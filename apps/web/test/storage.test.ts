@@ -5,7 +5,9 @@ import {
   completeDay,
   displayStreak,
   emptyState,
+  lifetimeStats,
   streakAfterCompletion,
+  type DayResult,
   type Streak,
 } from '../src/lib/storage';
 
@@ -74,5 +76,56 @@ describe('day records', () => {
   it('completing an untracked day is a no-op', () => {
     const s = completeDay(emptyState(), '2026-07-04', '2026-07-03');
     expect(s.streak.current).toBe(0);
+  });
+
+  it('stores the result snapshot at completion', () => {
+    let s = emptyState();
+    s = appendAction(s, '2026-07-04', meta, { type: 'guess', uci: 'c1g5' });
+    const result: DayResult = { score: 860, max: 900, solved: true, grid: '🟩🟨🟩🟩🟩🟩🟩🟩🟩' };
+    s = completeDay(s, '2026-07-04', '2026-07-03', result);
+    expect(s.days['2026-07-04']?.result).toEqual(result);
+  });
+});
+
+describe('lifetimeStats', () => {
+  const meta = { dayNumber: 1, puzzleId: '0001-kasparov-topalov-1999' };
+  const dayWith = (
+    s: ReturnType<typeof emptyState>,
+    dateKey: string,
+    yesterday: string,
+    result: DayResult,
+  ) =>
+    completeDay(
+      appendAction(s, dateKey, meta, { type: 'guess', uci: 'd1d4' }),
+      dateKey,
+      yesterday,
+      result,
+    );
+
+  it('bands finished days by score share, with unfinished separate', () => {
+    let s = emptyState();
+    s = dayWith(s, '2026-07-01', '2026-06-30', { score: 1000, max: 1000, solved: true, grid: '' });
+    s = dayWith(s, '2026-07-02', '2026-07-01', { score: 850, max: 1000, solved: true, grid: '' });
+    s = dayWith(s, '2026-07-03', '2026-07-02', { score: 610, max: 1000, solved: true, grid: '' });
+    s = dayWith(s, '2026-07-04', '2026-07-03', { score: 300, max: 1000, solved: false, grid: '' });
+    const stats = lifetimeStats(s);
+    expect(stats.played).toBe(4);
+    expect(stats.perfect).toBe(1);
+    expect(stats.solveRate).toBe(75);
+    expect(stats.distribution.map((d) => d.count)).toEqual([1, 1, 1, 0, 0, 1]);
+  });
+
+  it('records without results still count as played, never in the bands', () => {
+    let s = emptyState();
+    s = appendAction(s, '2026-07-01', meta, { type: 'hint' });
+    s = completeDay(s, '2026-07-01', '2026-06-30'); // pre-stats record: no result
+    const stats = lifetimeStats(s);
+    expect(stats.played).toBe(1);
+    expect(stats.solveRate).toBe(0);
+    expect(stats.distribution.every((d) => d.count === 0)).toBe(true);
+  });
+
+  it('is all zeros on a fresh state', () => {
+    expect(lifetimeStats(emptyState()).played).toBe(0);
   });
 });

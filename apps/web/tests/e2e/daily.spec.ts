@@ -90,6 +90,12 @@ test('completing the daily: locked share format, streak, countdown', async ({ pa
   // A completed day restores to the done card, not to the game.
   await page.reload();
   await expect(page.getByTestId('done-card')).toBeVisible({ timeout: 15_000 });
+
+  // Lifetime stats recorded the perfect day.
+  await page.getByTestId('done-stats').click();
+  await expect(page.getByTestId('stats')).toBeVisible();
+  await expect(page.getByTestId('stat-played')).toHaveText('1');
+  await expect(page.getByTestId('stats')).toContainText('Perfect');
 });
 
 test('free play (/play) never touches the streak', async ({ page }) => {

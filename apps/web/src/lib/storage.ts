@@ -10,12 +10,22 @@
 
 export type DailyAction = { type: 'guess'; uci: string } | { type: 'hint' };
 
+/** Outcome snapshot stored at completion — powers the lifetime stats modal. */
+export interface DayResult {
+  score: number;
+  max: number;
+  solved: boolean;
+  grid: string;
+}
+
 export interface DayRecord {
   dayNumber: number;
   puzzleId: string;
   actions: DailyAction[];
   /** Set when the session finished (solved or spectator). */
   done: boolean;
+  /** Optional for records written before stats existed. */
+  result?: DayResult;
 }
 
 export interface Streak {
@@ -109,6 +119,7 @@ export const completeDay = (
   state: StoredState,
   dateKey: string,
   yesterdayKey: string,
+  result?: DayResult,
 ): StoredState => {
   const existing = state.days[dateKey];
   if (!existing || existing.done) {
@@ -116,7 +127,42 @@ export const completeDay = (
   }
   return {
     ...state,
-    days: { ...state.days, [dateKey]: { ...existing, done: true } },
+    days: { ...state.days, [dateKey]: { ...existing, done: true, ...(result ? { result } : {}) } },
     streak: streakAfterCompletion(state.streak, dateKey, yesterdayKey),
+  };
+};
+
+/** Lifetime numbers for the stats modal — pure, derived entirely from state. */
+export interface LifetimeStats {
+  played: number;
+  /** Whole percentage of finished days that ended solved (result-bearing only). */
+  solveRate: number;
+  perfect: number;
+  distribution: { label: string; count: number }[];
+}
+
+const BAND_LABELS = ['Perfect', '80%+', '60–79%', '40–59%', 'Under 40%', 'Unfinished'] as const;
+
+const band = (r: DayResult): number => {
+  if (!r.solved) return 5;
+  const pct = r.max > 0 ? r.score / r.max : 0;
+  if (pct >= 1) return 0;
+  if (pct >= 0.8) return 1;
+  if (pct >= 0.6) return 2;
+  if (pct >= 0.4) return 3;
+  return 4;
+};
+
+export const lifetimeStats = (state: StoredState): LifetimeStats => {
+  const finished = Object.values(state.days).filter((d) => d.done);
+  const results = finished.map((d) => d.result).filter((r): r is DayResult => r !== undefined);
+  const counts = [0, 0, 0, 0, 0, 0];
+  for (const r of results) counts[band(r)]! += 1;
+  const solved = results.filter((r) => r.solved).length;
+  return {
+    played: finished.length,
+    solveRate: results.length ? Math.round((solved / results.length) * 100) : 0,
+    perfect: counts[0]!,
+    distribution: BAND_LABELS.map((label, i) => ({ label, count: counts[i]! })),
   };
 };
