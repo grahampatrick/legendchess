@@ -5,6 +5,8 @@ import 'chessground/assets/chessground.brown.css';
 import 'chessground/assets/chessground.cburnett.css';
 import './globals.css';
 
+import AuthSessionSync from '../components/AuthSessionSync';
+
 export const metadata: Metadata = {
   title: 'Play the Legend',
   description:
@@ -29,7 +31,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           ></script>
         )}
       </head>
-      <body>{children}</body>
+      <body>
+        <AuthSessionSync />
+        {children}
+      </body>
     </html>
   );
 }
