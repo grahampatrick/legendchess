@@ -30,6 +30,7 @@ import Board from './Board';
 import { Confetti, CountUp, GridReveal } from './Celebration';
 import Countdown from './Countdown';
 import StatsModal from './StatsModal';
+import { legendByHeroName } from '../data/legends';
 import { track } from '../lib/analytics';
 import { destsFromUcis, promotionChoices } from '../lib/dests';
 import { previousDateKey } from '../lib/daily';
@@ -88,6 +89,7 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
   const session = sessionRef.current;
 
   const heroLastName = puzzle.meta.heroName.split(' ').at(-1)!;
+  const legend = legendByHeroName(puzzle.meta.heroName);
   const isDaily = mode === 'daily' && !!dateKey;
 
   const [phase, setPhase] = useState<Phase>('intro');
@@ -399,6 +401,12 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
                 {puzzle.meta.event} · {puzzle.meta.year} · vs {puzzle.meta.opponentName}
               </div>
               <div className="you-are">You are {puzzle.meta.heroName}.</div>
+              {legend && (
+                <div className="legend-line">
+                  {legend.years} · {legend.epithet} ·{' '}
+                  <a href={`/legends#${legend.slug}`}>meet the legend</a>
+                </div>
+              )}
               <p className="blurb">{puzzle.meta.blurb}</p>
               <div className="rules-strip" data-testid="rules-strip">
                 Find the moves they actually played · 🟩 exact · 🟨 engine says just as good · ❤❤❤

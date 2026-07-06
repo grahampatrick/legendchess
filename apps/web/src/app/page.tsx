@@ -35,7 +35,8 @@ export default async function DailyPage() {
           <span className="knight">♞</span> Play the Legend
         </a>{' '}
         <span style={{ color: 'var(--text-dim)' }}>
-          · daily #{entry.dayNumber} · <Link href="/archive">archive</Link>
+          · daily #{entry.dayNumber} · <Link href="/archive">archive</Link> ·{' '}
+          <Link href="/legends">legends</Link>
         </span>
       </div>
       <PlayView

@@ -369,6 +369,67 @@ button.link-btn:hover {
   text-decoration: underline;
 }
 
+/* ---- legends ---- */
+.legend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.legend-card {
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.legend-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.legend-head h2 {
+  font-size: 1.05rem;
+  margin: 0;
+}
+.legend-portrait {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* duotone-ish treatment: unify old scans with the board palette */
+  filter: grayscale(1) sepia(0.28) contrast(1.05) brightness(0.96);
+  flex-shrink: 0;
+}
+.legend-monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3a3835;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.03em;
+}
+.legend-bio {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin: 0;
+}
+.legend-games {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 0.85rem;
+}
+.legend-line {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: -6px;
+}
+
 /* ---- index ---- */
 ul.puzzle-list {
   list-style: none;
