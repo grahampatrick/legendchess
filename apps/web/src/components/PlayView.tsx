@@ -31,7 +31,7 @@ import { Confetti, CountUp, GridReveal } from './Celebration';
 import Countdown from './Countdown';
 import StatsModal from './StatsModal';
 import { legendByHeroName } from '../data/legends';
-import { track } from '../lib/analytics';
+import { gamesBucket, streakBucket, track } from '../lib/analytics';
 import { destsFromUcis, promotionChoices } from '../lib/dests';
 import { previousDateKey } from '../lib/daily';
 import { percentile } from '../lib/stats';
@@ -42,6 +42,7 @@ import {
   completeDay,
   dayRecord,
   displayStreak,
+  lifetimeStats,
   loadState,
   saveState,
   type DailyAction,
@@ -185,10 +186,15 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
   useEffect(() => {
     if (phase !== 'done' || !isDaily || !dateKey || submittedRef.current) return;
     submittedRef.current = true;
+    // persist() already wrote the completed day, so localStorage carries the
+    // post-completion streak and lifetime count for the retention buckets.
+    const stored = loadState();
     track('game_complete', {
       puzzle: puzzle.id,
       outcome: snap.phase,
       score: scoreSession(snap.records),
+      streak: streakBucket(stored.streak.current),
+      games: gamesBucket(lifetimeStats(stored).played),
       ...(dayNumber !== undefined ? { day: dayNumber } : {}),
     });
     const record = dayRecord(loadState(), dateKey);

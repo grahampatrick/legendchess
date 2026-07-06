@@ -66,6 +66,12 @@ test('daily page shows the day number and persists progress across reload', asyn
 });
 
 test('completing the daily: locked share format, streak, countdown', async ({ page }) => {
+  // Capture analytics calls: the retention buckets must ride game_complete.
+  await page.addInitScript(() => {
+    const w = window as unknown as { __events: unknown[]; plausible: (...a: unknown[]) => void };
+    w.__events = [];
+    w.plausible = (...args: unknown[]) => w.__events.push(args);
+  });
   await startDaily(page);
   for (const dp of puzzle!.decisionPoints) {
     await typeMove(page, dp.hero.uci);
@@ -73,6 +79,14 @@ test('completing the daily: locked share format, streak, countdown', async ({ pa
   await expect(page.getByTestId('done-card')).toBeVisible({ timeout: 60_000 });
   await expect(page.getByTestId('streak')).toContainText('1-day streak');
   await expect(page.getByTestId('countdown')).toContainText('Next legend in');
+
+  // game_complete carries the identifier-free retention buckets.
+  const events = (await page.evaluate(
+    () => (window as unknown as { __events: unknown[] }).__events,
+  )) as [string, { props?: Record<string, string | number> }][];
+  const complete = events.find(([name]) => name === 'game_complete');
+  expect(complete).toBeDefined();
+  expect(complete![1].props).toMatchObject({ streak: '1', games: '1', outcome: 'solved' });
 
   await page.getByTestId('share-btn').click();
   const clipboard = await page.evaluate(() => navigator.clipboard.readText());
