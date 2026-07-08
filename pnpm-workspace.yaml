@@ -1,3 +1,9 @@
 packages:
   - packages/*
   - apps/*
+
+# pnpm blocks dependency postinstall scripts by default; these two are the
+# only ones we trust to build (esbuild binaries, sharp for @vercel/og).
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
