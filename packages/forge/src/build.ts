@@ -13,7 +13,7 @@ import {
   uciOfSan,
   validatePuzzle,
   type Puzzle,
-} from '@playthelegend/core';
+} from '@legendchess/core';
 
 import type { CurationConfig } from './config';
 import type { MoveEvaluator } from './engine';

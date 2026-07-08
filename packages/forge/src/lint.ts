@@ -3,7 +3,7 @@
  * points. A curator reads these and adjusts the window; the build still
  * succeeds so experimentation stays cheap.
  */
-import { RULES, type Puzzle } from '@playthelegend/core';
+import { RULES, type Puzzle } from '@legendchess/core';
 
 export interface LintWarning {
   ply: number;

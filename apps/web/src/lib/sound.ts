@@ -4,7 +4,7 @@
  * thud). The toggle persists per device.
  */
 
-const KEY = 'playthelegend.sound';
+const KEY = 'legendchess.sound';
 
 export const soundEnabled = (): boolean =>
   typeof window !== 'undefined' && window.localStorage.getItem(KEY) === 'on';

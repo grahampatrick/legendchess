@@ -1,4 +1,4 @@
-# @playthelegend/core
+# @legendchess/core
 
 The pure game domain: puzzle schema, guess grading, lives, hints, scoring, and the share
 grid. No DOM, no network, no clock, no engine — it runs identically in the browser, in Node
@@ -8,7 +8,7 @@ tests, and in server-side verification. This is the **only** implementation of t
 ## Usage
 
 ```ts
-import { createSession, formatShareText, validatePuzzle } from '@playthelegend/core';
+import { createSession, formatShareText, validatePuzzle } from '@legendchess/core';
 
 const puzzle = validatePuzzle(JSON.parse(json)); // zod shape + full replay integrity
 
@@ -21,7 +21,7 @@ session.requestHint(); // { tier: 1, piece: 'rook' } — downgrades the square
 
 const state = session.state(); // { phase, livesLeft, currentIndex, fen, records }
 formatShareText({ puzzle, state, dayNumber: 37 });
-// Play the Legend #37 — Garry Kasparov, Hoogovens Tournament, Wijk aan Zee 1999
+// LegendChess #37 — Garry Kasparov, Hoogovens Tournament, Wijk aan Zee 1999
 // 🟩🟩🟨🟩🟩🟩🟩🟨🟩🟩
 // ❤❤ 820/1000
 ```
@@ -32,7 +32,7 @@ is 🟨 and the real game continues; anything else costs a life.
 
 ## Errors
 
-All errors extend `PlayTheLegendError`: `MalformedUciError`, `IllegalMoveError`,
+All errors extend `LegendChessError`: `MalformedUciError`, `IllegalMoveError`,
 `SessionCompleteError`, `NoMoreHintsError`, `PuzzleDataError`.
 
 ## Fixtures

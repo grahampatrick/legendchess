@@ -95,7 +95,7 @@ test('completing the daily: locked share format, streak, countdown', async ({ pa
   // asserts the daily page feeds it the right day number and outcome).
   expect(clipboard).toBe(
     [
-      `Play the Legend #${dayIndex + 1} — ${puzzle!.meta.heroName}, ${puzzle!.meta.event} ${puzzle!.meta.year}`,
+      `LegendChess #${dayIndex + 1} — ${puzzle!.meta.heroName}, ${puzzle!.meta.event} ${puzzle!.meta.year}`,
       `♞${'🟩'.repeat(n)}`,
       `❤❤❤ ${n * 100}/${n * 100}`,
     ].join('\n'),
@@ -117,6 +117,6 @@ test('free play (/play) never touches the streak', async ({ page }) => {
   await page.getByTestId('start-btn').click();
   await page.getByTestId('skip-btn').click();
   await typeMove(page, puzzle!.decisionPoints[0]!.hero.uci);
-  const stored = await page.evaluate(() => window.localStorage.getItem('playthelegend.v1'));
+  const stored = await page.evaluate(() => window.localStorage.getItem('legendchess.v1'));
   expect(stored).toBeNull();
 });

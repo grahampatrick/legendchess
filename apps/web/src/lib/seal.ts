@@ -5,7 +5,7 @@
  * tab spoilers; it is deliberately NOT security — competitive integrity comes
  * from server-side verification in M5.
  */
-import { PuzzleSchema, validatePuzzle, type Puzzle } from '@playthelegend/core';
+import { PuzzleSchema, validatePuzzle, type Puzzle } from '@legendchess/core';
 import { z } from 'zod';
 
 const XOR_KEY = 'the-legend-plays-first';

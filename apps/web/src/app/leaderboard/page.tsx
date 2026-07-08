@@ -18,7 +18,7 @@ export default async function Leaderboard() {
   const header = (
     <div className="site-title">
       <a href="/">
-        <span className="knight">♞</span> Play the Legend
+        <span className="knight">♞</span> LegendChess
       </a>{' '}
       <span style={{ color: 'var(--text-dim)' }}>· leaderboard</span>
     </div>

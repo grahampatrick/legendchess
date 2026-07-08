@@ -3,7 +3,7 @@
  * whole auth → calendar → verify → insert path unit-tests with fakes and the
  * route handler stays a two-line adapter.
  */
-import { type Puzzle } from '@playthelegend/core';
+import { type Puzzle } from '@legendchess/core';
 import { z } from 'zod';
 
 import { entryForDate, utcDateKey, type Calendar } from './daily';

@@ -1,9 +1,9 @@
 {
-  "name": "@playthelegend/web",
+  "name": "@legendchess/web",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Next.js app: lichess-style board (chessground), daily loop, share grid. Thin adapter over @playthelegend/core.",
+  "description": "Next.js app: lichess-style board (chessground), daily loop, share grid. Thin adapter over @legendchess/core.",
   "scripts": {
     "dev": "next dev -p 3105",
     "build": "next build",
@@ -13,7 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@playthelegend/core": "workspace:*",
+    "@legendchess/core": "workspace:*",
     "@supabase/ssr": "^0.12.0",
     "@supabase/supabase-js": "^2.110.0",
     "chessground": "^9.2.1",

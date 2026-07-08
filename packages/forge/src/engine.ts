@@ -10,7 +10,7 @@
  */
 import { spawn, type ChildProcessWithoutNullStreams } from 'node:child_process';
 
-import { MATE_CP } from '@playthelegend/core';
+import { MATE_CP } from '@legendchess/core';
 
 import { EngineError } from './errors';
 

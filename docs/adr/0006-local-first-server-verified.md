@@ -14,7 +14,7 @@ solution readable on purpose).
   No account, no network round-trip, ever, to play the daily.
 - **Competition is server-verified.** On finishing the daily, a signed-in
   client submits its raw **action log** (guesses + hints), not a score. The
-  submit route replays the log through `@playthelegend/core`'s `createSession`
+  submit route replays the log through `@legendchess/core`'s `createSession`
   — the same code that graded the client and that the tests exercise — and
   computes score/grid/solved itself (`apps/web/src/lib/verify.ts`). One
   ruleset implementation, graded three ways (non-negotiable #5).

@@ -18,7 +18,7 @@ export default async function DailyPage() {
     return (
       <main className="page">
         <div className="site-title">
-          <span className="knight">♞</span> Play the Legend
+          <span className="knight">♞</span> LegendChess
         </div>
         <p className="blurb">
           No daily legend is scheduled for today — the calendar resumes soon. Meanwhile,{' '}
@@ -32,7 +32,7 @@ export default async function DailyPage() {
     <main className="page">
       <div className="site-title">
         <a href="/">
-          <span className="knight">♞</span> Play the Legend
+          <span className="knight">♞</span> LegendChess
         </a>{' '}
         <span style={{ color: 'var(--text-dim)' }}>
           · daily #{entry.dayNumber} · <Link href="/archive">archive</Link> ·{' '}

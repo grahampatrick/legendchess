@@ -5,7 +5,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
-import { PuzzleSchema, type Puzzle } from '@playthelegend/core';
+import { PuzzleSchema, type Puzzle } from '@legendchess/core';
 
 const PUZZLE_ID = /^[0-9]{4}-[a-z0-9-]+$/;
 const PUZZLES_DIR = path.resolve(process.cwd(), '../../dist/puzzles');

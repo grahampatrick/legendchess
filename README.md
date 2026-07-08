@@ -1,4 +1,4 @@
-# ♞ Play the Legend
+# ♞ LegendChess
 
 _Working title — see `docs/launch/checklist.md`._ An open-source daily chess
 game: step into the shoes of a legend — Kasparov, Fischer, Morphy, Magnus —
@@ -20,7 +20,7 @@ everyone on Earth.
 4. Share your grid. Come back tomorrow. Keep the streak. 🔥
 
 ```
-Play the Legend #1 — Garry Kasparov, Hoogovens Tournament, Wijk aan Zee 1999
+LegendChess #1 — Garry Kasparov, Hoogovens Tournament, Wijk aan Zee 1999
 🟩🟩🟨🟩🟩🟥🟩🟩🟨🟩
 ❤❤ 745/1000
 ```
@@ -60,8 +60,8 @@ Prerequisites: Node ≥ 22, pnpm ≥ 9. Stockfish only if you author puzzles.
 ```bash
 pnpm install
 pnpm lint && pnpm typecheck && pnpm test      # all packages
-pnpm --filter @playthelegend/web dev          # http://localhost:3105
-pnpm --filter @playthelegend/web e2e          # playwright, desktop + mobile
+pnpm --filter @legendchess/web dev          # http://localhost:3105
+pnpm --filter @legendchess/web e2e          # playwright, desktop + mobile
 ```
 
 ## License

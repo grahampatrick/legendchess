@@ -7,7 +7,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "forge": "pnpm --filter @playthelegend/forge cli",
+    "forge": "pnpm --filter @legendchess/forge cli",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
     "typecheck": "pnpm -r typecheck",

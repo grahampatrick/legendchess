@@ -1,4 +1,4 @@
--- Play the Legend — accounts, verified results, follows (M5).
+-- LegendChess — accounts, verified results, follows (M5).
 -- Design (ADR 0006): anonymous play never touches this database. Results are
 -- written ONLY by the server after replaying the submitted action log through
 -- the core ruleset — clients cannot insert or mutate rows.

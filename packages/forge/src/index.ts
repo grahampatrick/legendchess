@@ -1,4 +1,4 @@
-export const PACKAGE_NAME = '@playthelegend/forge';
+export const PACKAGE_NAME = '@legendchess/forge';
 
 export { CurationConfigSchema, type CurationConfig } from './config';
 export { parseGame, type ParsedGame } from './pgn';

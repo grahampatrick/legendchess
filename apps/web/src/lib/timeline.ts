@@ -3,7 +3,7 @@
  * spectator/finale playback. All rules work happens in core; this only walks
  * positions and emits FEN frames.
  */
-import { fenOf, initialPosition, playSan, positionFromFen, type Puzzle } from '@playthelegend/core';
+import { fenOf, initialPosition, playSan, positionFromFen, type Puzzle } from '@legendchess/core';
 
 export interface Frame {
   fen: string;

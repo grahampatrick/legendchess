@@ -5,7 +5,7 @@ import { entryForNow } from '../lib/daily';
 import { loadPuzzle } from '../lib/puzzles.server';
 
 export const runtime = 'nodejs';
-export const alt = 'Play the Legend — the daily chess game';
+export const alt = 'LegendChess — the daily chess game';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -29,7 +29,7 @@ export default async function OgImage() {
         gap: 28,
       }}
     >
-      <div style={{ display: 'flex', fontSize: 54, color: '#7cb342' }}>PLAY THE LEGEND</div>
+      <div style={{ display: 'flex', fontSize: 54, color: '#7cb342' }}>LEGENDCHESS</div>
       <div style={{ display: 'flex', fontSize: 64, fontWeight: 700, textAlign: 'center' }}>
         {puzzle && entry ? `Day ${entry.dayNumber}: ${puzzle.meta.title}` : 'The daily chess game'}
       </div>

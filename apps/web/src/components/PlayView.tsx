@@ -23,7 +23,7 @@ import {
   scoreSession,
   type Hint,
   type SessionState,
-} from '@playthelegend/core';
+} from '@legendchess/core';
 import type { DrawShape } from 'chessground/draw';
 
 import Board from './Board';

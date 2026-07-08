@@ -1,4 +1,4 @@
-# Play the Legend — Compound Engineering Plan
+# LegendChess — Compound Engineering Plan
 
 _Working title. Open-source daily chess game: step into the shoes of a legend — Magnus, Kasparov, Fischer, Tal — and find the moves they actually played in their most famous games, with limited attempts. Wordle-style daily cadence, shareable results, mass FOMO._
 
@@ -44,7 +44,7 @@ Every day at 00:00 UTC, anyone in the world can open the site in <2 seconds, pla
 - Per decision point: guess by moving a piece. Each point resolves at a **level**: 3 🟩 · 2 🟨 · 1 🟥 · 0 ⬛. It starts at 3; every **miss** (costs a life, auto-reveals the next hint) and every **voluntary hint** downgrades it one step (floor 1 while guessing). **Exact match** resolves at the current level; **engine-equivalent** (within 30cp of the hero's move, or better) resolves at min(level, 2) and the game continues with the _hero's actual move_ so history stays on rails. _(Refined during M1 — the authoritative spec is ADR 0004.)_
 - **3 lives for the whole game.** Out of lives → the current point resolves ⬛, remaining moves auto-play, you finish as a spectator (you still see the masterpiece — never a dead end).
 - **Hints** (each downgrades your square one step): 1) which piece moved, 2) destination square, 3) full arrow.
-- Score = points per level (100/60/25/0); share grid = one emoji per decision point + lives + day number, e.g. `Play the Legend #37 — Garry Kasparov, Hoogovens Tournament, Wijk aan Zee 1999` / `🟩🟩🟨🟩🟨🟩🟩🟨🟩🟩` / `❤❤ 820/1000`
+- Score = points per level (100/60/25/0); share grid = one emoji per decision point + lives + day number, e.g. `LegendChess #37 — Garry Kasparov, Hoogovens Tournament, Wijk aan Zee 1999` / `🟩🟩🟨🟩🟨🟩🟩🟨🟩🟩` / `❤❤ 820/1000`
 
 ---
 
@@ -95,7 +95,7 @@ pnpm install && pnpm lint && pnpm typecheck && pnpm test   # all green locally a
 **Definition of Done**
 
 ```bash
-pnpm --filter @playthelegend/core test   # includes full playthrough of fixture 0001 in all 3 outcome paths
+pnpm --filter @legendchess/core test   # includes full playthrough of fixture 0001 in all 3 outcome paths
 pnpm typecheck && pnpm lint
 ```
 
@@ -123,7 +123,7 @@ pnpm typecheck && pnpm lint
 **Definition of Done**
 
 ```bash
-pnpm --filter @playthelegend/forge test
+pnpm --filter @legendchess/forge test
 pnpm forge build games/*.pgn && pnpm forge validate dist/puzzles/   # 10/10 puzzles pass core validation
 ```
 
@@ -149,7 +149,7 @@ pnpm forge build games/*.pgn && pnpm forge validate dist/puzzles/   # 10/10 puzz
 **Definition of Done**
 
 ```bash
-pnpm --filter @playthelegend/web test && pnpm --filter @playthelegend/web e2e     # playwright green
+pnpm --filter @legendchess/web test && pnpm --filter @legendchess/web e2e     # playwright green
 pnpm dev   # manual demo: play puzzle 0001 start-to-finish on a phone-width viewport
 ```
 
@@ -175,8 +175,8 @@ pnpm dev   # manual demo: play puzzle 0001 start-to-finish on a phone-width view
 **Definition of Done**
 
 ```bash
-pnpm --filter @playthelegend/web test   # includes date-rollover + streak unit tests (mocked clock)
-pnpm --filter @playthelegend/web e2e    # includes: finish game → share text matches snapshot → countdown visible
+pnpm --filter @legendchess/web test   # includes date-rollover + streak unit tests (mocked clock)
+pnpm --filter @legendchess/web e2e    # includes: finish game → share text matches snapshot → countdown visible
 ```
 
 ---
@@ -200,7 +200,7 @@ pnpm --filter @playthelegend/web e2e    # includes: finish game → share text m
 **Definition of Done**
 
 ```bash
-pnpm --filter @playthelegend/web test && pnpm --filter @playthelegend/web e2e   # incl. auth-mocked submit path
+pnpm --filter @legendchess/web test && pnpm --filter @legendchess/web e2e   # incl. auth-mocked submit path
 supabase test db          # RLS policy tests green
 ```
 
@@ -215,7 +215,7 @@ supabase test db          # RLS policy tests green
 - [x] Content: **19 built puzzles** + 365-day cycling calendar + a sourced runway of ~20 further candidates with themed-week plans (`docs/launch/runway-candidates.md`). _Scope note: "60 distinct puzzles" exceeded the supply of Wikipedia-verifiable movetext this side of launch; the calendar covers 365 days by cycling, the contributor guide turns the launch spike into the remaining supply (this milestone's own CE principle), and every unsourced original wish-list game is preserved as a candidates entry with a sourcing step._
 - [x] README with hero screenshot, CONTRIBUTING "add a famous game" guide, issue templates (bug + game-suggestion, labeled good-first-issue)
 - [x] Privacy-respecting analytics: env-gated Plausible + 4 product events (game_start/game_complete/share_click/hint_used); funnel definitions in `docs/launch/checklist.md`
-- [x] Name shortlist + domain checklist + OG cards + launch posts drafted (r/chess, Show HN, X thread, outreach list) — _final name/domain is a gm decision on the launch checklist; still "Play the Legend" until then_
+- [x] Name shortlist + domain checklist + OG cards + launch posts drafted (r/chess, Show HN, X thread, outreach list) — _final name/domain is a gm decision on the launch checklist; still "LegendChess" until then_
 - [x] `/api/today` uptime target + `global-error` boundary; Sentry deferred to deploy time (needs a DSN — wizard step on the checklist)
 
 **CE Principle:** the "add a game" contributor guide converts open-source attention (launch spike) into a self-sustaining content flywheel — the launch _feeds_ the runway.
@@ -235,15 +235,15 @@ pnpm build && pnpm e2e              # production build green
 
 ## Open Questions
 
-| Question                                                       | Owner            | Resolution Path                                                                                                                                                                                                                         |
-| -------------------------------------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Name + domain ("Play the Legend" is a placeholder)             | gm               | Shortlist 5 by end of M1; check domains + npm/GitHub collisions; pick before M4 (share grid embeds the name — locked after launch)                                                                                                      |
-| Engine-equivalence threshold (30cp? scaled by eval magnitude?) | gm + playtesting | Ship v1 constant in `RULES`; playtest 10 people on 3 puzzles during M3; tune once before launch; ADR the final value                                                                                                                    |
-| Lives: 3 per game vs N per move                                | gm               | Prototype both in core (cheap — it's one state machine flag) during M1; decide via M3 playtests                                                                                                                                         |
-| Living players' names (Magnus, etc.) — publicity-rights risk?  | gm               | Factual/editorial use of names + no likeness imagery + disclaimer is the standard posture (Chessguessr, books, databases all do this). Add disclaimer in M4 footer; if the project gets big, get a real opinion then. Don't block on it |
-| Hard daily puzzle vs difficulty tiers                          | gm               | Launch with one puzzle/day (FOMO needs a single shared experience). Revisit tiers post-launch only if analytics show completion <40%                                                                                                    |
-| Stockfish in CI: download vs vendor                            | implementer      | M2: pin version via checksummed download script in CI; golden tests catch drift. Revisit if flaky                                                                                                                                       |
-| Monetization                                                   | gm               | None at launch (open source, viral first). Decide post-traction; nothing in the architecture may assume it                                                                                                                              |
+| Question                                                               | Owner            | Resolution Path                                                                                                                                                                                                                         |
+| ---------------------------------------------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name + domain — **RESOLVED: LegendChess / legendchess.com (ADR 0008)** | gm               | Decided 2026-07-08; rename sweep applied repo-wide; immortal.day recommended as defensive registration                                                                                                                                  |
+| Engine-equivalence threshold (30cp? scaled by eval magnitude?)         | gm + playtesting | Ship v1 constant in `RULES`; playtest 10 people on 3 puzzles during M3; tune once before launch; ADR the final value                                                                                                                    |
+| Lives: 3 per game vs N per move                                        | gm               | Prototype both in core (cheap — it's one state machine flag) during M1; decide via M3 playtests                                                                                                                                         |
+| Living players' names (Magnus, etc.) — publicity-rights risk?          | gm               | Factual/editorial use of names + no likeness imagery + disclaimer is the standard posture (Chessguessr, books, databases all do this). Add disclaimer in M4 footer; if the project gets big, get a real opinion then. Don't block on it |
+| Hard daily puzzle vs difficulty tiers                                  | gm               | Launch with one puzzle/day (FOMO needs a single shared experience). Revisit tiers post-launch only if analytics show completion <40%                                                                                                    |
+| Stockfish in CI: download vs vendor                                    | implementer      | M2: pin version via checksummed download script in CI; golden tests catch drift. Revisit if flaky                                                                                                                                       |
+| Monetization                                                           | gm               | None at launch (open source, viral first). Decide post-traction; nothing in the architecture may assume it                                                                                                                              |
 
 ---
 

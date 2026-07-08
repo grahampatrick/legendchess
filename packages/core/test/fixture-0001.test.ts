@@ -104,7 +104,7 @@ describe('fixture 0001 — playthroughs', () => {
     for (const dp of puzzle.decisionPoints) session.guess(dp.hero.uci);
     expect(formatShareText({ puzzle, state: session.state(), dayNumber: 1 })).toBe(
       [
-        'Play the Legend #1 — Garry Kasparov, Hoogovens Tournament, Wijk aan Zee 1999',
+        'LegendChess #1 — Garry Kasparov, Hoogovens Tournament, Wijk aan Zee 1999',
         '♞🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩',
         '❤❤❤ 1000/1000',
       ].join('\n'),

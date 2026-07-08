@@ -3,15 +3,9 @@
  * core's full replay validation AND plays through the real session machine on
  * the exact path to a solved, full-score finish.
  */
-import {
-  RULES,
-  createSession,
-  scoreSession,
-  validatePuzzle,
-  type Puzzle,
-} from '@playthelegend/core';
+import { RULES, createSession, scoreSession, validatePuzzle, type Puzzle } from '@legendchess/core';
 
-import { PuzzleDataError } from '@playthelegend/core';
+import { PuzzleDataError } from '@legendchess/core';
 import { lintPuzzle, type LintWarning } from './lint';
 
 export interface GateResult {

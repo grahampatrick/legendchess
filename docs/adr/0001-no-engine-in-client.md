@@ -11,10 +11,10 @@ nondeterministic evals across devices, and make daily results non-comparable bet
 
 ## Decision
 
-Stockfish runs **only** in the offline authoring pipeline (`@playthelegend/forge`). At authoring
+Stockfish runs **only** in the offline authoring pipeline (`@legendchess/forge`). At authoring
 time, forge evaluates **every legal move** at every hero decision point and embeds the resulting
 centipawn table in the puzzle JSON. The client grades guesses by table lookup via
-`@playthelegend/core`. Move legality and board state come from `chessops` (rules library, no
+`@legendchess/core`. Move legality and board state come from `chessops` (rules library, no
 search). The board UI is `chessground`.
 
 ## Consequences

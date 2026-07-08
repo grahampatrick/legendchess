@@ -1,4 +1,4 @@
-export const PACKAGE_NAME = '@playthelegend/core';
+export const PACKAGE_NAME = '@legendchess/core';
 
 export {
   MalformedUciError,
@@ -6,7 +6,7 @@ export {
   SessionCompleteError,
   NoMoreHintsError,
   PuzzleDataError,
-  PlayTheLegendError,
+  LegendChessError,
 } from './errors';
 export { RULES, type Rules } from './rules';
 export {

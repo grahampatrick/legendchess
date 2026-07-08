@@ -22,8 +22,8 @@ jobs:
       - run: pnpm test
         env:
           STOCKFISH_PATH: /usr/local/bin/stockfish
-      - run: pnpm --filter @playthelegend/web exec playwright install --with-deps chromium
-      - run: pnpm --filter @playthelegend/web e2e
+      - run: pnpm --filter @legendchess/web exec playwright install --with-deps chromium
+      - run: pnpm --filter @legendchess/web e2e
         env:
           CI: 'true'
 

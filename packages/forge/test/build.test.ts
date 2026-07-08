@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 
-import { legalUcis, positionFromFen, type Puzzle } from '@playthelegend/core';
+import { legalUcis, positionFromFen, type Puzzle } from '@legendchess/core';
 
 import { CurationConfigSchema } from '../src/config';
 import { buildPuzzle, heroPly } from '../src/build';

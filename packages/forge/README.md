@@ -1,4 +1,4 @@
-# @playthelegend/forge
+# @legendchess/forge
 
 The authoring pipeline: bare PGN + a small curation config in, a validated,
 self-contained puzzle JSON with Stockfish eval tables out (ADR 0003). Adding a

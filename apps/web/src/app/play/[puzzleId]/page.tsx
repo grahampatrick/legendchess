@@ -12,7 +12,7 @@ export default async function PlayPage({ params }: { params: Promise<{ puzzleId:
     <main className="page">
       <div className="site-title">
         <a href="/">
-          <span className="knight">♞</span> Play the Legend
+          <span className="knight">♞</span> LegendChess
         </a>{' '}
         <span style={{ color: 'var(--text-dim)' }}>· free play</span>
       </div>

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 
-import { validatePuzzle } from '@playthelegend/core';
+import { validatePuzzle } from '@legendchess/core';
 
 import { VerificationError, verifySubmission, type SubmittedAction } from '../src/lib/verify';
 

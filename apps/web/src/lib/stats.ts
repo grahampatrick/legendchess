@@ -4,7 +4,7 @@
  * percentile for a score. Pure — rows in, numbers out; the action logs replay
  * through the same core session that graded them (one ruleset, everywhere).
  */
-import { createSession, type Puzzle } from '@playthelegend/core';
+import { createSession, type Puzzle } from '@legendchess/core';
 
 import type { SubmittedAction } from './verify';
 

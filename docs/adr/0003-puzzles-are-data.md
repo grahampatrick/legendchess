@@ -10,7 +10,7 @@ work, content stalls when engineers are busy — and open-source contributors ca
 ## Decision
 
 A puzzle is one self-contained JSON document conforming to the zod `PuzzleSchema` in
-`@playthelegend/core`: metadata (event, year, hero, story blurb, sources), start FEN, prelude
+`@legendchess/core`: metadata (event, year, hero, story blurb, sources), start FEN, prelude
 moves, hero decision points with per-legal-move eval tables, opponent replies, and finale moves.
 Puzzles are produced by `forge` from a bare PGN plus a small curation config, validated against
 the schema, and auto-played through the real session state machine before they may ship.

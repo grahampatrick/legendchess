@@ -40,7 +40,7 @@ export const formatShareText = ({
   const hearts = state.livesLeft > 0 ? '❤'.repeat(state.livesLeft) : '💀';
   const score = scoreSession(state.records, rules);
   return [
-    `Play the Legend${day} — ${puzzle.meta.heroName}, ${puzzle.meta.event} ${puzzle.meta.year}`,
+    `LegendChess${day} — ${puzzle.meta.heroName}, ${puzzle.meta.event} ${puzzle.meta.year}`,
     `♞${emojiGrid(state.records)}`,
     `${hearts} ${score}/${maxScore(puzzle, rules)}`,
   ].join('\n');

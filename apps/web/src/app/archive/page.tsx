@@ -15,7 +15,7 @@ export default async function Archive() {
     <main className="page">
       <div className="site-title">
         <a href="/">
-          <span className="knight">♞</span> Play the Legend
+          <span className="knight">♞</span> LegendChess
         </a>{' '}
         <span style={{ color: 'var(--text-dim)' }}>· archive</span>
       </div>

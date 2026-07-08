@@ -6,7 +6,7 @@
  * move, then writes fixtures/puzzles/0001-kasparov-topalov-1999.json.
  *
  * Kept for provenance: this is how the "hand-authored" M1 fixture's numbers
- * were produced. Superseded by @playthelegend/forge in M2.
+ * were produced. Superseded by @legendchess/forge in M2.
  *
  * Usage: node packages/core/scripts/gen-fixture-0001.mjs [stockfish-path]
  */

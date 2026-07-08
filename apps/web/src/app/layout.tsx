@@ -8,7 +8,7 @@ import './globals.css';
 import AuthSessionSync from '../components/AuthSessionSync';
 
 export const metadata: Metadata = {
-  title: 'Play the Legend',
+  title: 'LegendChess',
   description:
     'Step into the shoes of a chess legend and find the moves they actually played. A daily chess game.',
 };

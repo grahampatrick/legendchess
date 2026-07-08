@@ -36,7 +36,7 @@ every puzzle. If the moves replay and the blurb is yours, you're in.
   **Architectural Non-Negotiables** (no engine in the client, core stays pure,
   one ruleset implementation, anonymous play is sacred).
 - `pnpm lint && pnpm typecheck && pnpm test` must be green; UI changes need
-  `pnpm --filter @playthelegend/web e2e` too.
+  `pnpm --filter @legendchess/web e2e` too.
 - Non-obvious decisions get an ADR in `docs/adr/` in the same PR.
 - Scoring/ruleset changes: `RULES` lives in `packages/core/src/rules.ts` and
   is governed by ADR 0004 — update the ADR with the change.

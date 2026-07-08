@@ -2,7 +2,7 @@
 
 These files are the repo's shared test bed (see plan.md, "CE Feedback Loops"): core unit
 tests, forge validation tests, web e2e, and server verification all consume the same JSON
-documents. Every file must pass `validatePuzzle` from `@playthelegend/core` — schema shape
+documents. Every file must pass `validatePuzzle` from `@legendchess/core` — schema shape
 plus full replay integrity (prelude → startFen, eval coverage of every legal move, SAN/UCI
 agreement, finale replay).
 

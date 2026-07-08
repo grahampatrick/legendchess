@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import type { Puzzle } from '@playthelegend/core';
+import type { Puzzle } from '@legendchess/core';
 
 import { lintPuzzle } from '../src/lint';
 

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 
-import { INITIAL_FEN, validatePuzzle } from '@playthelegend/core';
+import { INITIAL_FEN, validatePuzzle } from '@legendchess/core';
 
 import { destsFromUcis, promotionChoices } from '../src/lib/dests';
 import { framesFromSan, preludeFrames, remainderFrames, revealFrames } from '../src/lib/timeline';

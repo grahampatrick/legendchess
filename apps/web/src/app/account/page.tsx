@@ -57,7 +57,7 @@ export default function AccountPage() {
   const header = (
     <div className="site-title">
       <a href="/">
-        <span className="knight">♞</span> Play the Legend
+        <span className="knight">♞</span> LegendChess
       </a>{' '}
       <span style={{ color: 'var(--text-dim)' }}>· account</span>
     </div>

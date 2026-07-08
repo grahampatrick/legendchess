@@ -1,5 +1,5 @@
 {
-  "name": "@playthelegend/forge",
+  "name": "@legendchess/forge",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -13,7 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@playthelegend/core": "workspace:*",
+    "@legendchess/core": "workspace:*",
     "chessops": "^0.15.0",
     "zod": "^4.4.3"
   },

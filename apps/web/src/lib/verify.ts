@@ -5,12 +5,12 @@
  * claimed score is never read, let alone trusted.
  */
 import {
-  PlayTheLegendError,
+  LegendChessError,
   createSession,
   emojiGrid,
   scoreSession,
   type Puzzle,
-} from '@playthelegend/core';
+} from '@legendchess/core';
 import { z } from 'zod';
 
 export const ActionLogSchema = z
@@ -24,7 +24,7 @@ export const ActionLogSchema = z
 
 export type SubmittedAction = z.infer<typeof ActionLogSchema>[number];
 
-export class VerificationError extends PlayTheLegendError {}
+export class VerificationError extends LegendChessError {}
 
 export interface VerifiedResult {
   score: number;

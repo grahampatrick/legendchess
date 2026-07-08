@@ -5,7 +5,7 @@ import { LEGENDS, monogram } from '../../data/legends';
 import { listPuzzles } from '../../lib/puzzles.server';
 
 export const metadata: Metadata = {
-  title: 'The Legends — Play the Legend',
+  title: 'The Legends — LegendChess',
   description:
     'The players you step in for: Morphy, Anderssen, Rubinstein, Marshall, Nimzowitsch, Fischer, Kasparov, Carlsen.',
 };
@@ -16,7 +16,7 @@ export default async function Legends() {
     <main className="page">
       <div className="site-title">
         <a href="/">
-          <span className="knight">♞</span> Play the Legend
+          <span className="knight">♞</span> LegendChess
         </a>{' '}
         <span style={{ color: 'var(--text-dim)' }}>· legends</span>
       </div>

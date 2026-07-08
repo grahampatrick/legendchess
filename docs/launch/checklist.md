@@ -35,15 +35,15 @@ button. In rough order:
       `docs/launch/runway-candidates.md` so launch-day visitors find the
       contribution path immediately.
 
-## Name shortlist (working title: "Play the Legend")
+## Name shortlist (working title: "LegendChess")
 
-| Name            | Feel              | Share-grid line           |
-| --------------- | ----------------- | ------------------------- |
-| Play the Legend | on-the-nose, warm | `Play the Legend #37 — …` |
-| Legends Daily   | wordle-family     | `Legends Daily #37 — …`   |
-| GrandmasterMe   | cheeky            | `GrandmasterMe #37 — …`   |
-| The Hero Move   | evocative         | `The Hero Move #37 — …`   |
-| Immortal        | one word, huge    | `Immortal #37 — …`        |
+| Name          | Feel              | Share-grid line         |
+| ------------- | ----------------- | ----------------------- |
+| LegendChess   | on-the-nose, warm | `LegendChess #37 — …`   |
+| Legends Daily | wordle-family     | `Legends Daily #37 — …` |
+| GrandmasterMe | cheeky            | `GrandmasterMe #37 — …` |
+| The Hero Move | evocative         | `The Hero Move #37 — …` |
+| Immortal      | one word, huge    | `Immortal #37 — …`      |
 
 Check `.com`/`.gg` + social handles before falling in love. One-line change in
 `formatShareText` + snapshot updates + OG title.

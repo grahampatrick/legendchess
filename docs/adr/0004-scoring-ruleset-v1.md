@@ -9,7 +9,7 @@ of misses, hints, and square colors underspecified — e.g. its sample share gri
 after a single lost life, while also saying a miss lets you retry. Implementation forced the
 ambiguity out.
 
-## Decision — the v1 ruleset (implemented once, in `@playthelegend/core`)
+## Decision — the v1 ruleset (implemented once, in `@legendchess/core`)
 
 Every decision point resolves at a **level**: 3 🟩 · 2 🟨 · 1 🟥 · 0 ⬛.
 

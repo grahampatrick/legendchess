@@ -40,7 +40,7 @@ export interface StoredState {
   days: Record<string, DayRecord>;
 }
 
-const KEY = 'playthelegend.v1';
+const KEY = 'legendchess.v1';
 
 export const emptyState = (): StoredState => ({
   version: 1,
