@@ -4,6 +4,7 @@ packages:
 
 # pnpm blocks dependency postinstall scripts by default; these two are the
 # only ones we trust to build (esbuild binaries, sharp for @vercel/og).
-onlyBuiltDependencies:
-  - esbuild
-  - sharp
+# pnpm 11 renamed the setting: allowBuilds map (was onlyBuiltDependencies).
+allowBuilds:
+  esbuild: true
+  sharp: true
