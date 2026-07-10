@@ -22,3 +22,5 @@ Fischer, Kasparov, and Carlsen intentionally have **no photograph** — monogram
 
 - `chessground`, `chessops`, Stockfish: GPL-3.0 (see ADR 0002).
 - Piece set and board theme: chessground's bundled lichess assets (GPL).
+- Favicon/apple icon (`apps/web/src/app/icon.svg`, `apple-icon.tsx`): the cburnett
+  white knight from chessground's piece set on the brand green — same GPL basis.
