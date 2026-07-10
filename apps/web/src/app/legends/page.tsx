@@ -14,12 +14,7 @@ export default async function Legends() {
   const puzzles = await listPuzzles();
   return (
     <main className="page">
-      <div className="site-title">
-        <a href="/">
-          <span className="knight">♞</span> LegendChess
-        </a>{' '}
-        <span style={{ color: 'var(--text-dim)' }}>· legends</span>
-      </div>
+      <div className="page-crumb">legends</div>
       <p className="blurb">
         The players you step in for. Portraits are period photographs in the public domain; this
         site is not affiliated with or endorsed by any player.

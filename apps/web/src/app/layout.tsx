@@ -6,6 +6,8 @@ import 'chessground/assets/chessground.cburnett.css';
 import './globals.css';
 
 import AuthSessionSync from '../components/AuthSessionSync';
+import SiteFooter from '../components/SiteFooter';
+import SiteHeader from '../components/SiteHeader';
 
 export const metadata: Metadata = {
   title: 'LegendChess',
@@ -33,7 +35,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <AuthSessionSync />
+        <SiteHeader />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

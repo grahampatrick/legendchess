@@ -1,0 +1,42 @@
+'use client';
+
+/**
+ * Lichess-flavored top bar: wordmark left, flat lowercase section links,
+ * account on the right. Understated, dense, dark — chrome that gets out of
+ * the way of the board. Rendered once in the root layout.
+ */
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+const LINKS = [
+  { href: '/', label: 'daily' },
+  { href: '/archive', label: 'archive' },
+  { href: '/library', label: 'library' },
+  { href: '/legends', label: 'legends' },
+  { href: '/leaderboard', label: 'leaderboard' },
+];
+
+export default function SiteHeader() {
+  const pathname = usePathname();
+  return (
+    <header className="site-header">
+      <nav className="site-nav" aria-label="Main">
+        <Link href="/" className="wordmark">
+          <span className="knight">♞</span> LegendChess<span className="tld">.com</span>
+        </Link>
+        <div className="nav-links">
+          {LINKS.map((l) => (
+            <Link key={l.href} href={l.href} className={pathname === l.href ? 'active' : undefined}>
+              {l.label}
+            </Link>
+          ))}
+        </div>
+        <div className="nav-right">
+          <Link href="/account" title="Account">
+            account
+          </Link>
+        </div>
+      </nav>
+    </header>
+  );
+}

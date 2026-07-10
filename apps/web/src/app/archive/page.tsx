@@ -13,12 +13,7 @@ export default async function Archive() {
 
   return (
     <main className="page">
-      <div className="site-title">
-        <a href="/">
-          <span className="knight">♞</span> LegendChess
-        </a>{' '}
-        <span style={{ color: 'var(--text-dim)' }}>· archive</span>
-      </div>
+      <div className="page-crumb">archive</div>
       <p className="blurb">
         Past dailies — playable any time, but they don&apos;t count toward your streak.{' '}
         <Link href="/">Today&apos;s puzzle</Link> does.

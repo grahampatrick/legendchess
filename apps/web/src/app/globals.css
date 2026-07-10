@@ -430,6 +430,176 @@ button.link-btn:hover {
   margin-top: -6px;
 }
 
+/* ---- site chrome (lichess-flavored) ---- */
+.site-header {
+  background: var(--bg-card);
+  border-bottom: 1px solid #3a3835;
+}
+.site-nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.site-nav .wordmark {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.02rem;
+  white-space: nowrap;
+}
+.site-nav .wordmark .knight {
+  color: var(--accent);
+}
+.site-nav .wordmark .tld {
+  color: var(--text-dim);
+  font-weight: 400;
+  font-size: 0.85em;
+}
+.nav-links {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-links::-webkit-scrollbar {
+  display: none;
+}
+.nav-links a,
+.nav-right a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.88rem;
+  padding: 6px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.nav-links a:hover,
+.nav-right a:hover {
+  color: var(--text);
+  background: #3a3835;
+}
+.nav-links a.active {
+  color: var(--text);
+}
+.nav-right {
+  margin-left: auto;
+}
+
+.page-crumb {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+  margin: 14px 0 4px;
+}
+
+.home-modules {
+  max-width: 1100px;
+  margin: 22px auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+.module-card {
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.module-card h3 {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+}
+.module-card h3 a {
+  color: var(--text);
+  text-decoration: none;
+}
+.module-card h3 a:hover {
+  color: var(--accent);
+}
+.lb-mini {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+.lb-mini .lb-rank {
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 6px;
+}
+.lb-mini .lb-score {
+  float: right;
+  color: var(--text-dim);
+}
+.legend-strip {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.strip-portrait {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(1) sepia(0.28) contrast(1.05) brightness(0.96);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.strip-monogram {
+  background: #3a3835;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.75rem;
+  filter: none;
+}
+
+.site-footer {
+  margin-top: 40px;
+  background: var(--bg-card);
+  border-top: 1px solid #3a3835;
+  padding: 26px 16px 34px;
+}
+.footer-cols {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 22px;
+}
+.footer-cols h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  margin: 0 0 8px;
+}
+.footer-cols a {
+  display: block;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.88rem;
+  padding: 3px 0;
+}
+.footer-cols a:hover {
+  color: var(--accent);
+}
+.footer-note {
+  display: block;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
 /* ---- index ---- */
 ul.puzzle-list {
   list-style: none;

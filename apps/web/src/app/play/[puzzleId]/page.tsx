@@ -10,12 +10,7 @@ export default async function PlayPage({ params }: { params: Promise<{ puzzleId:
   if (!puzzle) notFound();
   return (
     <main className="page">
-      <div className="site-title">
-        <a href="/">
-          <span className="knight">♞</span> LegendChess
-        </a>{' '}
-        <span style={{ color: 'var(--text-dim)' }}>· free play</span>
-      </div>
+      <div className="page-crumb">free play</div>
       <PlayView sealed={sealPuzzle(puzzle)} mode="free" />
     </main>
   );

@@ -54,14 +54,7 @@ export default function AccountPage() {
     setMessage(error ? `Handle rejected: ${error.message}` : 'Handle saved.');
   };
 
-  const header = (
-    <div className="site-title">
-      <a href="/">
-        <span className="knight">♞</span> LegendChess
-      </a>{' '}
-      <span style={{ color: 'var(--text-dim)' }}>· account</span>
-    </div>
-  );
+  const header = <div className="page-crumb">account</div>;
 
   if (!client) {
     return (
