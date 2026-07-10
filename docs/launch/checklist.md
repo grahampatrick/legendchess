@@ -5,20 +5,11 @@ button. In rough order:
 
 ## Blocking (do before announcing)
 
-- [ ] **Decide the name** (shortlist below) — it's baked into the share grid
-      (`packages/core/src/score.ts`, snapshot-tested) and the OG card. This is
-      the LAST cheap moment to change it; after launch it's recognizable-grid
-      territory (non-negotiable #8).
-- [ ] Buy the domain; set it in `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` too.
-- [ ] Publish the repo to GitHub (`gh repo create`, push `main`). CI goes
-      green: lint/typecheck/unit/e2e + golden (pinned SF18) + `supabase test db`
-      (first real run of the pgTAP suite — watch it).
-- [ ] Create the Supabase project; run migrations (`supabase db push`); set
-      `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
-      `SUPABASE_SERVICE_ROLE_KEY` in Vercel. Verify: sign in, finish a daily,
-      row appears in `results` with server-computed score.
-- [ ] Deploy to Vercel (root `apps/web`; `dist/puzzles` + `content/` ship with
-      the repo). Smoke-test `/api/today` on production.
+- [x] **Decide the name** — LegendChess (ADR 0008), rename sweep 2026-07-08.
+- [x] Buy the domain — legendchess.com (Namecheap), attached to Vercel + DNS set 2026-07-09.
+- [x] Publish the repo to GitHub — github.com/grahampatrick/legendchess (PRIVATE; flip public at launch). CI fully green on Linux 2026-07-08 incl. golden + pgTAP.
+- [x] Create the Supabase project — done + verified end-to-end 2026-07-07 (sign-in, verified result, leaderboard). Env vars in Vercel. NOTE: Redirect URLs allowlist entry still not matching; harmless (AuthSessionSync), retry during a quiet moment.
+- [x] Deploy to Vercel — live at legendchess.vercel.app 2026-07-09; domain attached; /api/today + all pages 200. (Gotchas fixed: pnpm 11 allowBuilds; git author must be team-associated; CLI uploads hang from this machine — use the git deploy hook.)
 - [ ] Point an uptime monitor at `/api/today` (UptimeRobot/BetterStack).
 - [ ] Set the calendar's real day-1 date (`scripts/gen-calendar.mjs` START) so
       launch day = day #1, and regenerate. Verify ≥30 days of runway.
