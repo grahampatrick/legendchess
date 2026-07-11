@@ -54,7 +54,7 @@ export default function AccountPage() {
     setMessage(error ? `Handle rejected: ${error.message}` : 'Handle saved.');
   };
 
-  const header = <div className="page-crumb">account</div>;
+  const header = <div className="page-crumb">Account</div>;
 
   if (!client) {
     return (

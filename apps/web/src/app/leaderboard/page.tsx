@@ -15,7 +15,7 @@ interface Row {
 }
 
 export default async function Leaderboard() {
-  const header = <div className="page-crumb">leaderboard</div>;
+  const header = <div className="page-crumb">Leaderboard</div>;
 
   if (!supabaseConfigured()) {
     return (

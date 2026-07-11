@@ -14,7 +14,7 @@ export default async function Legends() {
   const puzzles = await listPuzzles();
   return (
     <main className="page">
-      <div className="page-crumb">legends</div>
+      <div className="page-crumb">Legends</div>
       <p className="blurb">
         The players you step in for. Portraits are used editorially under public-domain or Creative
         Commons licenses (

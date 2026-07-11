@@ -501,7 +501,6 @@ button.link-btn:hover {
 .page-crumb {
   color: var(--text-dim);
   font-size: 0.85rem;
-  text-transform: lowercase;
   letter-spacing: 0.04em;
   margin: 14px 0 4px;
 }

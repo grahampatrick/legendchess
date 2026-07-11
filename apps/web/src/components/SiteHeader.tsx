@@ -9,11 +9,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const LINKS = [
-  { href: '/', label: 'daily' },
-  { href: '/archive', label: 'archive' },
-  { href: '/library', label: 'library' },
-  { href: '/legends', label: 'legends' },
-  { href: '/leaderboard', label: 'leaderboard' },
+  { href: '/', label: 'Daily' },
+  { href: '/archive', label: 'Archive' },
+  { href: '/library', label: 'Library' },
+  { href: '/legends', label: 'Legends' },
+  { href: '/leaderboard', label: 'Leaderboard' },
 ];
 
 export default function SiteHeader() {
@@ -33,7 +33,7 @@ export default function SiteHeader() {
         </div>
         <div className="nav-right">
           <Link href="/account" title="Account">
-            account
+            Account
           </Link>
         </div>
       </nav>

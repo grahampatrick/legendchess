@@ -10,7 +10,7 @@ export default async function PlayPage({ params }: { params: Promise<{ puzzleId:
   if (!puzzle) notFound();
   return (
     <main className="page">
-      <div className="page-crumb">free play</div>
+      <div className="page-crumb">Free play</div>
       <PlayView sealed={sealPuzzle(puzzle)} mode="free" />
     </main>
   );

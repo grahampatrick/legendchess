@@ -6,7 +6,7 @@ export default async function Library() {
   const puzzles = await listPuzzles();
   return (
     <main className="page">
-      <div className="page-crumb">training library</div>
+      <div className="page-crumb">Training library</div>
       <p className="blurb">
         Free play — no streaks, no spoiler warnings. <Link href="/">Today&apos;s daily</Link> is the
         real thing.
