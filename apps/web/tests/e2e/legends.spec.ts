@@ -56,5 +56,5 @@ test('intro card carries the legend line with a link to the bio', async ({ page 
   await page.goto('/');
   const line = page.locator('.legend-line');
   await expect(line).toBeVisible();
-  await expect(line).toContainText('meet the legend');
+  await expect(line).toContainText('Meet the Legend');
 });

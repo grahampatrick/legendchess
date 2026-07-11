@@ -437,7 +437,7 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
               {legend && (
                 <div className="legend-line">
                   {legend.years} · {legend.epithet} ·{' '}
-                  <a href={`/legends#${legend.slug}`}>meet the legend</a>
+                  <a href={`/legends#${legend.slug}`}>Meet the Legend</a>
                 </div>
               )}
               <p className="blurb">{puzzle.meta.blurb}</p>
