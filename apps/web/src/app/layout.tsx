@@ -20,17 +20,22 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// Plausible's site-keyed snippet (2025+ onboarding): the queue shim below
+// makes window.plausible callable before the script loads, so lib/analytics
+// track() works unchanged. Env-gated — no key, no analytics, no requests.
+const PLAUSIBLE_INIT =
+  'window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const plausibleDomain = process.env['NEXT_PUBLIC_PLAUSIBLE_DOMAIN'];
+  const plausibleScriptId = process.env['NEXT_PUBLIC_PLAUSIBLE_SCRIPT_ID'];
   return (
     <html lang="en">
       <head>
-        {plausibleDomain && (
-          <script
-            defer
-            data-domain={plausibleDomain}
-            src="https://plausible.io/js/script.js"
-          ></script>
+        {plausibleScriptId && (
+          <>
+            <script async src={`https://plausible.io/js/${plausibleScriptId}.js`}></script>
+            <script dangerouslySetInnerHTML={{ __html: PLAUSIBLE_INIT }} />
+          </>
         )}
       </head>
       <body>
