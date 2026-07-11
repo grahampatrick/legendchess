@@ -1,9 +1,9 @@
 /**
  * The legends roster: original bios (facts are free; the words are ours),
- * epithets for the intro card, and portrait policy per ADR/plan decision #4 —
- * public-domain period portraits for the pre-war masters, monograms for
- * modern players (no likeness use without a license, no implied endorsement).
- * Portrait provenance: docs/licenses.md.
+ * epithets for the intro card, and portraits used editorially under verified
+ * public-domain or Creative Commons licenses (attribution and provenance in
+ * docs/licenses.md; site-wide no-affiliation disclaimer applies). Legends
+ * without a suitably licensed photo fall back to a monogram.
  */
 
 export interface Legend {
@@ -64,7 +64,7 @@ export const LEGENDS: Legend[] = [
     years: '1943–2008',
     epithet: 'The Prodigy of Brooklyn',
     bio: 'At thirteen he played the Game of the Century; at twenty-nine he broke a quarter-century of Soviet dominance to become World Champion in Reykjavik, 1972 — along the way winning twenty consecutive games against the strongest players alive. His precision made brilliance look inevitable.',
-    portrait: null,
+    portrait: 'fischer.jpg',
   },
   {
     slug: 'kasparov',
@@ -72,7 +72,7 @@ export const LEGENDS: Legend[] = [
     years: 'b. 1963',
     epithet: 'The Beast of Baku',
     bio: 'The youngest World Champion in history at twenty-two, world number one for nearly two decades, and the most feared attacking calculator the game has produced. His 1999 win over Topalov at Wijk aan Zee is routinely called the greatest game ever played — and in that same year he beat the combined vote of fifty thousand players as "the World."',
-    portrait: null,
+    portrait: 'kasparov.jpg',
   },
   {
     slug: 'carlsen',
@@ -80,7 +80,7 @@ export const LEGENDS: Legend[] = [
     years: 'b. 1990',
     epithet: 'The Grinder from Norway',
     bio: 'Five-time World Champion, holder of the highest rating ever recorded (2882), and author of a 125-game unbeaten streak in classical chess. His signature weapon is not the sacrifice but the squeeze: equal positions ground into wins over six hours — including the longest world championship game ever played.',
-    portrait: null,
+    portrait: 'carlsen.jpg',
   },
 ];
 

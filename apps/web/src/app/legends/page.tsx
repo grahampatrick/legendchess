@@ -16,8 +16,15 @@ export default async function Legends() {
     <main className="page">
       <div className="page-crumb">legends</div>
       <p className="blurb">
-        The players you step in for. Portraits are period photographs in the public domain; this
-        site is not affiliated with or endorsed by any player.
+        The players you step in for. Portraits are used editorially under public-domain or Creative
+        Commons licenses (
+        <a
+          href="https://github.com/grahampatrick/legendchess/blob/main/docs/licenses.md"
+          rel="noopener"
+        >
+          credits
+        </a>
+        ); this site is not affiliated with or endorsed by any player.
       </p>
       <div className="legend-grid">
         {LEGENDS.map((legend) => {

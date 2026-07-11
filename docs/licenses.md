@@ -4,9 +4,10 @@ Per plan.md non-negotiable #7, every non-code asset's provenance is recorded her
 
 ## Legend portraits (`apps/web/public/legends/`)
 
-Policy (plan.md Foundational Decision #4): public-domain period portraits only, for
-long-deceased players; living/modern players get a monogram treatment — no likeness
-use without a license, no implied endorsement.
+Policy (plan.md Foundational Decision #4): portraits only under a verified public-domain
+or Creative Commons license, used editorially on the biography page with attribution
+recorded here; the site-wide disclaimer (no affiliation/endorsement) applies. Legends
+without a suitably licensed photo get a monogram treatment.
 
 | File              | Subject                      | Source                                                                                                                                                                         | License basis                                                |
 | ----------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -16,7 +17,12 @@ use without a license, no implied endorsement.
 | `marshall.jpg`    | Frank Marshall (1877–1944)   | [Wikimedia Commons: Marshall, Frank James – DPLA](https://commons.wikimedia.org/wiki/File:Marshall,_Frank_James_-_DPLA_-_5a68b2a083f0a91b3a8d6fb699b66f59.jpg)                 | Marked "Public domain" on Commons (DPLA)                     |
 | `nimzowitsch.jpg` | Aron Nimzowitsch (1886–1935) | [Wikimedia Commons: Aron Nimzowitsch.jpg](https://commons.wikimedia.org/wiki/File:Aron_Nimzowitsch.jpg)                                                                        | 1920s photograph; public domain (pre-1930 publication)       |
 
-Fischer, Kasparov, and Carlsen intentionally have **no photograph** — monogram only.
+| `fischer.jpg` | Bobby Fischer (1943–2008) | [Wikimedia Commons: Bobby Fischer 1960 in Leipzig.jpg](https://commons.wikimedia.org/wiki/File:Bobby_Fischer_1960_in_Leipzig.jpg) | CC BY-SA 3.0 de (German Federal Archives) |
+| `kasparov.jpg` | Garry Kasparov (b. 1963) | [Wikimedia Commons: Garry Kasparov European Union 2023 (cropped).jpg](<https://commons.wikimedia.org/wiki/File:Garry_Kasparov_European_Union_2023_(cropped).jpg>) | CC BY 4.0 — photo: Lukasz Kobus |
+| `carlsen.jpg` | Magnus Carlsen (b. 1990) | [Wikimedia Commons: FIDE World FR Chess Championship 2019 – Magnus Carlsen (cropped).jpg](<https://commons.wikimedia.org/wiki/File:FIDE_World_FR_Chess_Championship_2019_-_Magnus_Carlsen_(cropped).jpg>) | CC BY-SA 4.0 — photo: Lennart Ootes |
+
+Site images are duotone-filtered for the house style (a permitted adaptation under
+these licenses); attribution above per license terms.
 
 ## Software
 
