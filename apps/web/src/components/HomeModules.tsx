@@ -7,7 +7,8 @@ import Link from 'next/link';
 
 import { LEGENDS, monogram } from '../data/legends';
 import { loadCalendar } from '../lib/calendar.server';
-import { entryForNow, utcDateKey } from '../lib/daily';
+import { entryForDate, previousDateKey, releaseDateKey, releasedPuzzleIds } from '../lib/daily';
+import { listPuzzles } from '../lib/puzzles.server';
 import { serverClientFromCookies, supabaseConfigured } from '../lib/supabase';
 
 interface LeaderRow {
@@ -16,13 +17,14 @@ interface LeaderRow {
   profiles: { handle: string } | null;
 }
 
-const topThree = async (): Promise<LeaderRow[]> => {
+/** Standings publish once per day: the module shows the last COMPLETED day. */
+const finalTopThree = async (dateKey: string): Promise<LeaderRow[]> => {
   if (!supabaseConfigured()) return [];
   const supabase = await serverClientFromCookies();
   const { data } = (await supabase
     ?.from('results')
     .select('score, solved, profiles(handle)')
-    .eq('date_key', utcDateKey(new Date()))
+    .eq('date_key', dateKey)
     .order('score', { ascending: false })
     .order('created_at', { ascending: true })
     .limit(3)) ?? { data: null };
@@ -30,21 +32,30 @@ const topThree = async (): Promise<LeaderRow[]> => {
 };
 
 export default async function HomeModules() {
-  const [rows, entry] = await Promise.all([
-    topThree(),
-    loadCalendar().then((c) => entryForNow(c, new Date())),
-  ]);
+  const now = new Date();
+  const calendar = await loadCalendar();
+  const finalKey = previousDateKey(releaseDateKey(now));
+  const finalEntry = entryForDate(calendar, finalKey);
+  const rows = finalEntry ? await finalTopThree(finalKey) : [];
+  const released = releasedPuzzleIds(calendar, now);
+  const releasedPuzzles = (await listPuzzles()).filter((p) => released.has(p.id));
+  const revealed = LEGENDS.filter((l) =>
+    releasedPuzzles.some((p) => p.meta.heroName === l.heroName),
+  );
+  const hidden = LEGENDS.length - revealed.length;
 
   return (
     <div className="home-modules">
       <section className="module-card">
         <h3>
-          <Link href="/leaderboard">Today&apos;s leaderboard</Link>
+          <Link href="/leaderboard">Final standings</Link>
         </h3>
         {rows.length === 0 ? (
           <p className="meta">
-            No verified results yet for day #{entry?.dayNumber ?? '—'}.{' '}
-            <Link href="/account">Sign in</Link> and be first.
+            {finalEntry
+              ? `Day #${finalEntry.dayNumber} had no verified finishers.`
+              : "Day #1 standings publish at tomorrow's 8 AM Pacific release."}{' '}
+            <Link href="/account">Sign in</Link> to be on the next board.
           </p>
         ) : (
           <ol className="lb-mini">
@@ -63,7 +74,7 @@ export default async function HomeModules() {
           <Link href="/legends">The legends</Link>
         </h3>
         <div className="legend-strip">
-          {LEGENDS.map((l) =>
+          {revealed.map((l) =>
             l.portrait ? (
               <Link key={l.slug} href={`/legends#${l.slug}`} title={l.heroName}>
                 <img
@@ -81,14 +92,18 @@ export default async function HomeModules() {
             ),
           )}
         </div>
-        <p className="meta">Morphy to Magnus — the players you step in for.</p>
+        <p className="meta">
+          {hidden > 0
+            ? `${revealed.length} revealed — a new legend joins every day at 8 AM Pacific.`
+            : 'Morphy to Magnus — the players you step in for.'}
+        </p>
       </section>
 
       <section className="module-card">
-        <h3>Free, open source, no ads</h3>
+        <h3>Free and open source</h3>
         <p className="meta">
-          One legendary game a day. Engine-verified partial credit. Built in the open under GPL-3.0
-          —{' '}
+          One legendary game a day, released at 8 AM Pacific. Match the legend&apos;s move — or play
+          one the engine rates just as strong and still score. Built in the open under GPL-3.0 —{' '}
           <a href="https://github.com/grahampatrick/legendchess" rel="noopener">
             read the code
           </a>{' '}

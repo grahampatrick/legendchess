@@ -1,7 +1,8 @@
 /**
  * Generates content/calendar.json: 365 days cycling the shipped puzzles,
- * starting 2026-07-03. A placeholder until the M6 curated content runway —
- * the format (date → puzzleId, day number = array index + 1) is final.
+ * starting from the CURRENT release day (a "day" flips at 8am Pacific — the
+ * same clock as apps/web/src/lib/daily.ts). Regenerating resets day #1 to
+ * now. The format (date → puzzleId, day number = array index + 1) is final.
  *
  * Usage: node scripts/gen-calendar.mjs
  */
@@ -10,7 +11,15 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const START = '2026-07-03';
+// Mirror of releaseDateKey in apps/web/src/lib/daily.ts.
+const releaseDateKey = (now) =>
+  new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Los_Angeles',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date(now.getTime() - 8 * 3_600_000));
+const START = releaseDateKey(new Date());
 const DAYS = 365;
 
 const ids = readdirSync(path.join(ROOT, 'dist/puzzles'))

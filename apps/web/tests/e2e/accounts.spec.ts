@@ -8,7 +8,9 @@ import { expect, test } from '@playwright/test';
 
 test('leaderboard page degrades gracefully when unconfigured', async ({ page }) => {
   await page.goto('/leaderboard');
-  await expect(page.locator('body')).toContainText(/leaderboard isn't configured|Day #/);
+  await expect(page.locator('body')).toContainText(
+    /leaderboard isn't configured|Final standings|day #1 ends/,
+  );
 });
 
 test('account page degrades gracefully when unconfigured', async ({ page }) => {

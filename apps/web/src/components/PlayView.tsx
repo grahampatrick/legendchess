@@ -446,7 +446,7 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
                 three lives
               </div>
               <button className="btn" data-testid="start-btn" onClick={startGame}>
-                Take the board
+                Become {heroLastName}
               </button>
             </div>
           </div>
@@ -543,7 +543,7 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
                       ? 'Image saved!'
                       : '📸 Story image'}
               </button>
-              {isDaily && <Countdown />}
+              {isDaily && <Countdown dateKey={dateKey} />}
               <div>
                 <button
                   className="link-btn"
@@ -552,7 +552,7 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
                 >
                   Stats
                 </button>{' '}
-                · <a href="/archive">Archive</a> · <a href="/library">All puzzles</a>
+                · <a href="/library">Your library</a> · <a href="/legends">The legends</a>
               </div>
             </div>
           </div>

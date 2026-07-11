@@ -7,8 +7,7 @@ export default function SiteFooter() {
         <div>
           <h3>Play</h3>
           <Link href="/">Today&apos;s daily</Link>
-          <Link href="/archive">Archive</Link>
-          <Link href="/library">Training library</Link>
+          <Link href="/library">Your library</Link>
           <Link href="/leaderboard">Leaderboard</Link>
         </div>
         <div>

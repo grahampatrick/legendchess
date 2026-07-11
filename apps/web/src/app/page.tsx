@@ -1,7 +1,5 @@
-import Link from 'next/link';
-
 import { loadCalendar } from '../lib/calendar.server';
-import { entryForNow, utcDateKey } from '../lib/daily';
+import { entryForNow, releaseDateKey } from '../lib/daily';
 import { loadPuzzle } from '../lib/puzzles.server';
 import { sealPuzzle } from '../lib/seal';
 import HomeModules from '../components/HomeModules';
@@ -19,8 +17,7 @@ export default async function DailyPage() {
     return (
       <main className="page">
         <p className="blurb">
-          No daily legend is scheduled for today — the calendar resumes soon. Meanwhile,{' '}
-          <Link href="/library">the training library</Link> is open.
+          No legend is scheduled right now — the next one releases at 8&nbsp;AM Pacific.
         </p>
       </main>
     );
@@ -32,7 +29,7 @@ export default async function DailyPage() {
         sealed={sealPuzzle(puzzle)}
         mode="daily"
         dayNumber={entry.dayNumber}
-        dateKey={utcDateKey(now)}
+        dateKey={releaseDateKey(now)}
       />
       <HomeModules />
     </main>

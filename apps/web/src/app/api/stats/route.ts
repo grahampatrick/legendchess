@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { loadCalendar } from '../../../lib/calendar.server';
-import { entryForNow, utcDateKey } from '../../../lib/daily';
+import { entryForNow, releaseDateKey } from '../../../lib/daily';
 import { loadPuzzle } from '../../../lib/puzzles.server';
 import { aggregateDaily, MIN_PLAYERS_FOR_STATS, type ResultRowLike } from '../../../lib/stats';
 import { serverClientFromCookies, supabaseConfigured } from '../../../lib/supabase';
@@ -18,7 +18,7 @@ export async function GET(): Promise<NextResponse> {
     return NextResponse.json({ ok: false, error: 'not configured' }, { status: 503 });
   }
   const now = new Date();
-  const dateKey = utcDateKey(now);
+  const dateKey = releaseDateKey(now);
   if (cache && cache.dateKey === dateKey && Date.now() - cache.at < CACHE_MS) {
     return NextResponse.json(cache.body);
   }

@@ -6,7 +6,7 @@
 import { type Puzzle } from '@legendchess/core';
 import { z } from 'zod';
 
-import { entryForDate, utcDateKey, type Calendar } from './daily';
+import { entryForDate, releaseDateKey, type Calendar } from './daily';
 import { ActionLogSchema, VerificationError, verifySubmission } from './verify';
 
 export const SubmitBodySchema = z.object({
@@ -58,7 +58,7 @@ export const processSubmission = async (
   if (!userId) return { status: 401, body: { ok: false, error: 'sign in to submit' } };
 
   // Only TODAY's daily is submittable — the archive is for fun, not ranking.
-  if (dateKey !== utcDateKey(deps.now())) {
+  if (dateKey !== releaseDateKey(deps.now())) {
     return { status: 422, body: { ok: false, error: 'only today’s daily can be submitted' } };
   }
   const entry = entryForDate(deps.calendar, dateKey);

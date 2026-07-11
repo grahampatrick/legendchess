@@ -48,7 +48,7 @@ const makeDeps = (overrides: Partial<SubmissionDeps> = {}) => {
       inserted.push(row);
       return 'inserted';
     },
-    now: () => new Date('2026-07-03T12:00:00Z'),
+    now: () => new Date('2026-07-03T20:00:00Z'),
     ...overrides,
   };
   return { deps, inserted };
@@ -85,7 +85,7 @@ describe('processSubmission', () => {
   });
 
   it('rejects submissions for any day but today', async () => {
-    const { deps } = makeDeps({ now: () => new Date('2026-07-04T00:00:01Z') });
+    const { deps } = makeDeps({ now: () => new Date('2026-07-04T15:00:01Z') });
     const res = await processSubmission(deps, body);
     expect(res.status).toBe(422);
   });

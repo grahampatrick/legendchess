@@ -9,6 +9,8 @@ import { fileURLToPath } from 'node:url';
 
 import { expect, test, type Page } from '@playwright/test';
 
+import { releaseDateKey } from '../../src/lib/daily';
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
 
 interface CalendarDay {
@@ -20,7 +22,7 @@ const calendar = JSON.parse(readFileSync(path.join(ROOT, 'content/calendar.json'
   days: CalendarDay[];
 };
 
-const todayKey = new Date().toISOString().slice(0, 10);
+const todayKey = releaseDateKey(new Date());
 const dayIndex = calendar.days.findIndex((d) => d.date === todayKey);
 const entry = dayIndex >= 0 ? calendar.days[dayIndex]! : null;
 

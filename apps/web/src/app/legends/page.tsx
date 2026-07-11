@@ -2,7 +2,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { LEGENDS, monogram } from '../../data/legends';
+import { loadCalendar } from '../../lib/calendar.server';
+import { releasedPuzzleIds } from '../../lib/daily';
 import { listPuzzles } from '../../lib/puzzles.server';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'The Legends — LegendChess',
@@ -11,7 +15,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Legends() {
-  const puzzles = await listPuzzles();
+  const released = releasedPuzzleIds(await loadCalendar(), new Date());
+  const puzzles = (await listPuzzles()).filter((p) => released.has(p.id));
+  const revealed = LEGENDS.filter((l) => puzzles.some((p) => p.meta.heroName === l.heroName));
+  const hidden = LEGENDS.length - revealed.length;
   return (
     <main className="page">
       <div className="page-crumb">Legends</div>
@@ -27,7 +34,7 @@ export default async function Legends() {
         ); this site is not affiliated with or endorsed by any player.
       </p>
       <div className="legend-grid">
-        {LEGENDS.map((legend) => {
+        {revealed.map((legend) => {
           const games = puzzles.filter((p) => p.meta.heroName === legend.heroName);
           return (
             <section className="legend-card" id={legend.slug} key={legend.slug}>
@@ -66,6 +73,21 @@ export default async function Legends() {
             </section>
           );
         })}
+        {hidden > 0 && (
+          <section className="legend-card legend-locked" data-testid="locked-legends">
+            <div className="legend-head">
+              <div className="legend-portrait legend-monogram" aria-hidden>
+                ?
+              </div>
+              <div>
+                <h2>
+                  {hidden} more {hidden === 1 ? 'legend' : 'legends'} to come
+                </h2>
+                <div className="meta">A new legend joins every day at 8 AM Pacific.</div>
+              </div>
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );

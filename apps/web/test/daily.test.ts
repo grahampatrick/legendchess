@@ -2,12 +2,12 @@ import { describe, expect, it } from 'vitest';
 
 import {
   CalendarSchema,
-  archiveEntries,
   entryForNow,
   formatCountdown,
-  msUntilNextUtcMidnight,
+  msUntilNextRelease,
   previousDateKey,
-  utcDateKey,
+  releaseDateKey,
+  releasedPuzzleIds,
   type Calendar,
 } from '../src/lib/daily';
 
@@ -17,36 +17,41 @@ const calendar: Calendar = CalendarSchema.parse({
     { date: '2026-07-03', puzzleId: 'a' },
     { date: '2026-07-04', puzzleId: 'b' },
     { date: '2026-07-05', puzzleId: 'c' },
+    { date: '2026-07-06', puzzleId: 'a' }, // cycling repeat — must not double-release
   ],
 });
 
-describe('daily selection and date rollover', () => {
-  it('maps a UTC moment to the calendar entry with its day number', () => {
-    const entry = entryForNow(calendar, new Date('2026-07-04T12:00:00Z'));
+describe('release-day selection (8am America/Los_Angeles)', () => {
+  it('a new day starts exactly at 8am Pacific, not at any midnight', () => {
+    // In July, LA is PDT (UTC-7): 8am PDT = 15:00 UTC.
+    expect(releaseDateKey(new Date('2026-07-04T14:59:59Z'))).toBe('2026-07-03');
+    expect(releaseDateKey(new Date('2026-07-04T15:00:00Z'))).toBe('2026-07-04');
+  });
+
+  it('is DST-correct: in winter the boundary is 8am PST = 16:00 UTC', () => {
+    expect(releaseDateKey(new Date('2026-01-15T15:59:59Z'))).toBe('2026-01-14');
+    expect(releaseDateKey(new Date('2026-01-15T16:00:00Z'))).toBe('2026-01-15');
+  });
+
+  it('maps a moment to the calendar entry with its day number', () => {
+    const entry = entryForNow(calendar, new Date('2026-07-04T20:00:00Z'));
     expect(entry).toEqual({ date: '2026-07-04', puzzleId: 'b', dayNumber: 2 });
   });
 
-  it('the puzzle changes exactly at UTC midnight — the Wordle bug test', () => {
-    const lastMoment = new Date('2026-07-04T23:59:59.999Z');
-    const firstMoment = new Date('2026-07-05T00:00:00.000Z');
-    expect(entryForNow(calendar, lastMoment)?.puzzleId).toBe('b');
-    expect(entryForNow(calendar, firstMoment)?.puzzleId).toBe('c');
-  });
-
-  it('local timezones are irrelevant: the key is derived from UTC', () => {
-    // 2026-07-04 19:00 in UTC-10 is 2026-07-05 05:00 UTC → day 3.
-    const now = new Date('2026-07-05T05:00:00Z');
-    expect(utcDateKey(now)).toBe('2026-07-05');
-    expect(entryForNow(calendar, now)?.dayNumber).toBe(3);
+  it('the puzzle changes exactly at the release boundary — the Wordle bug test', () => {
+    expect(entryForNow(calendar, new Date('2026-07-05T14:59:59.999Z'))?.puzzleId).toBe('b');
+    expect(entryForNow(calendar, new Date('2026-07-05T15:00:00.000Z'))?.puzzleId).toBe('c');
   });
 
   it('returns null outside the calendar', () => {
     expect(entryForNow(calendar, new Date('2030-01-01T00:00:00Z'))).toBeNull();
   });
 
-  it('archive lists only strictly-past days, newest first', () => {
-    expect(archiveEntries(calendar, '2026-07-05').map((e) => e.dayNumber)).toEqual([2, 1]);
-    expect(archiveEntries(calendar, '2026-07-03')).toEqual([]);
+  it('releasedPuzzleIds includes only days on or before the current release day', () => {
+    const now = new Date('2026-07-04T20:00:00Z'); // release day 2026-07-04
+    expect([...releasedPuzzleIds(calendar, now)].sort()).toEqual(['a', 'b']);
+    const dayOne = new Date('2026-07-03T16:00:00Z');
+    expect([...releasedPuzzleIds(calendar, dayOne)]).toEqual(['a']);
   });
 
   it('previousDateKey crosses month and year boundaries', () => {
@@ -57,9 +62,11 @@ describe('daily selection and date rollover', () => {
 });
 
 describe('countdown', () => {
-  it('measures to the next UTC midnight', () => {
-    expect(msUntilNextUtcMidnight(new Date('2026-07-04T23:59:59.000Z'))).toBe(1000);
-    expect(msUntilNextUtcMidnight(new Date('2026-07-04T00:00:00.000Z'))).toBe(86_400_000);
+  it('measures to the next 8am-Pacific release (within bisection tolerance)', () => {
+    const oneHourBefore = msUntilNextRelease(new Date('2026-07-04T14:00:00Z'));
+    expect(Math.abs(oneHourBefore - 3_600_000)).toBeLessThan(2_000);
+    const justAfter = msUntilNextRelease(new Date('2026-07-04T15:00:01Z'));
+    expect(Math.abs(justAfter - (24 * 3_600_000 - 1_000))).toBeLessThan(2_000);
   });
 
   it('formats as HH:MM:SS and clamps at zero', () => {

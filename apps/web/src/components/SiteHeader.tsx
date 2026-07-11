@@ -10,10 +10,9 @@ import { usePathname } from 'next/navigation';
 
 const LINKS = [
   { href: '/', label: 'Daily' },
-  { href: '/archive', label: 'Archive' },
-  { href: '/library', label: 'Library' },
   { href: '/legends', label: 'Legends' },
   { href: '/leaderboard', label: 'Leaderboard' },
+  { href: '/library', label: 'Library' },
 ];
 
 export default function SiteHeader() {
