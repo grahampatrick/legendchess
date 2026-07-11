@@ -41,9 +41,11 @@ test('legends page reveals exactly the legends whose games have released', async
     expect([...releasedIds].some((id) => href?.includes(id))).toBe(true);
   }
 
-  // The unreleased remainder shows as a locked teaser, never as content.
+  // The unreleased remainder shows as a locked teaser — no count, no names
+  // (the library grows; never cap expectations at today's roster).
   if (hidden > 0) {
-    await expect(page.getByTestId('locked-legends')).toContainText(String(hidden));
+    await expect(page.getByTestId('locked-legends')).toContainText('A new legend joins every day');
+    await expect(page.getByTestId('locked-legends')).not.toContainText(String(hidden));
   }
 
   // Attribution stays one click away — a license requirement, not decoration.

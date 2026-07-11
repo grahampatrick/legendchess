@@ -94,7 +94,7 @@ export default async function HomeModules() {
         </div>
         <p className="meta">
           {hidden > 0
-            ? `${revealed.length} revealed — a new legend joins every day at 8 AM Pacific.`
+            ? 'A new legend joins every day at 8 AM Pacific.'
             : 'Morphy to Magnus — the players you step in for.'}
         </p>
       </section>

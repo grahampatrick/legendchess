@@ -80,10 +80,8 @@ export default async function Legends() {
                 ?
               </div>
               <div>
-                <h2>
-                  {hidden} more {hidden === 1 ? 'legend' : 'legends'} to come
-                </h2>
-                <div className="meta">A new legend joins every day at 8 AM Pacific.</div>
+                <h2>A new legend joins every day</h2>
+                <div className="meta">8 AM Pacific, every morning — the library keeps growing.</div>
               </div>
             </div>
           </section>
