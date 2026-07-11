@@ -30,8 +30,8 @@ export default function SiteFooter() {
             GPL-3.0 — free and open source
           </a>
           <span className="footer-note">
-            Not affiliated with or endorsed by any player, federation, or lichess.org. Historical
-            game scores are public-domain facts; the words are ours.
+            Not affiliated with or endorsed by any player, federation, or chess app. Historical game
+            scores are public-domain facts; the words are ours.
           </span>
         </div>
       </div>

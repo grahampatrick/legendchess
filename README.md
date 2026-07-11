@@ -69,6 +69,6 @@ pnpm --filter @legendchess/web e2e          # playwright, desktop + mobile
 [GPL-3.0-or-later](LICENSE) — we stand on lichess's shoulders and keep the
 forks open (see [ADR 0002](docs/adr/0002-gpl-license.md)).
 
-Not affiliated with or endorsed by any chess player, federation, or
-lichess.org. Historical game scores are facts in the public domain; all story
+Not affiliated with or endorsed by any chess player, federation, or chess
+app. Historical game scores are facts in the public domain; all story
 blurbs are original.
