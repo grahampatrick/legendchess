@@ -26,6 +26,13 @@ export interface ShareTextInput {
 }
 
 /**
+ * Lives as hearts, one convention everywhere: filled = remaining, hollow =
+ * spent (♡♡♡ on a loss — spent, not dead; the tone stays warm).
+ */
+export const heartsOf = (livesLeft: number, rules: Rules = RULES): string =>
+  '❤'.repeat(Math.max(0, livesLeft)) + '♡'.repeat(Math.max(0, rules.lives - livesLeft));
+
+/**
  * The shareable result block. This format is a public API (snapshot-tested;
  * changes need an ADR — see 0007). The ♞ prefix is the grid's signature: it
  * makes a pasted result recognizably OURS in any feed or group chat.
@@ -37,7 +44,7 @@ export const formatShareText = ({
   rules = RULES,
 }: ShareTextInput): string => {
   const day = dayNumber === undefined ? '' : ` #${dayNumber}`;
-  const hearts = state.livesLeft > 0 ? '❤'.repeat(state.livesLeft) : '💀';
+  const hearts = heartsOf(state.livesLeft, rules);
   const score = scoreSession(state.records, rules);
   return [
     `LegendChess${day} — ${puzzle.meta.heroName}, ${puzzle.meta.event} ${puzzle.meta.year}`,

@@ -48,6 +48,7 @@ export {
   scoreSession,
   maxScore,
   formatShareText,
+  heartsOf,
   type ShareTextInput,
 } from './score';
 export { validatePuzzle } from './validate';

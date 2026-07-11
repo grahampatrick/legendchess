@@ -7,6 +7,7 @@ import {
   SessionCompleteError,
   createSession,
   emojiGrid,
+  formatShareText,
   scoreSession,
   validatePuzzle,
 } from '../src/index';
@@ -170,6 +171,16 @@ describe('completion, scoring, and share grid', () => {
     const state = session.state();
     expect(emojiGrid(state.records)).toBe('🟨🟨🟩');
     expect(scoreSession(state.records)).toBe(220);
+  });
+
+  it('a lost game shares hollow hearts, never a skull (spent, not dead)', () => {
+    const session = createSession(standardSynthetic());
+    session.guess('a2a3');
+    session.guess('b2b3');
+    session.guess('h2h3');
+    const text = formatShareText({ puzzle: session.puzzle, state: session.state() });
+    expect(text).toContain('♡♡♡');
+    expect(text).not.toContain('💀');
   });
 
   it('state snapshots are defensive copies', () => {

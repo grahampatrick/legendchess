@@ -19,6 +19,7 @@ import {
   emojiGrid,
   fenIsCheck,
   formatShareText,
+  heartsOf,
   maxScore,
   scoreSession,
   type Hint,
@@ -402,9 +403,7 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
     .map((r) => (r.resolved ? { 3: '🟩', 2: '🟨', 1: '🟥', 0: '⬛' }[r.resolved.level] : '⬜'))
     .join('');
   const finalGrid = emojiGrid(snap.records);
-  const hearts =
-    '❤'.repeat(snap.livesLeft) +
-    (snap.livesLeft < session.rules.lives ? '♡'.repeat(session.rules.lives - snap.livesLeft) : '');
+  const hearts = heartsOf(snap.livesLeft, session.rules);
   const pointNumber = Math.min(snap.currentIndex + 1, puzzle.decisionPoints.length);
   const dayTag = dayNumber === undefined ? '' : `#${dayNumber} · `;
 

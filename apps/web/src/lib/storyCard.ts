@@ -5,6 +5,8 @@
  * offers Instagram Stories directly; desktop falls back to a PNG download.
  */
 
+import { heartsOf } from '@legendchess/core';
+
 export interface StoryCardInput {
   title: string;
   heroName: string;
@@ -117,7 +119,7 @@ export const renderStoryCard = async (input: StoryCardInput): Promise<Blob> => {
   ctx.fillText(`${input.score} / ${input.max}`, W / 2, y);
   ctx.font = font(64);
   ctx.fillStyle = input.livesLeft > 0 ? '#e2504c' : DIM;
-  ctx.fillText(input.livesLeft > 0 ? '❤'.repeat(input.livesLeft) : '💀', W / 2, y + 96);
+  ctx.fillText(heartsOf(input.livesLeft), W / 2, y + 96);
   y += 240;
 
   // Challenge line in a card
