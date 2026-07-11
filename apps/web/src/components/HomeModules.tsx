@@ -103,7 +103,7 @@ export default async function HomeModules() {
         <h3>Free and open source</h3>
         <p className="meta">
           One legendary game a day, released at 8 AM Pacific. Match the legend&apos;s move — or play
-          one the engine rates just as strong and still score. Built in the open under GPL-3.0 —{' '}
+          one Stockfish rates just as strong and still score. Built in the open under GPL-3.0 —{' '}
           <a href="https://github.com/grahampatrick/legendchess" rel="noopener">
             read the code
           </a>{' '}
