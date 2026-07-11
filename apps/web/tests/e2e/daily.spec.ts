@@ -101,6 +101,12 @@ test('completing the daily: locked share format, streak, countdown', async ({ pa
     ].join('\n'),
   );
 
+  // The story image renders on-device and downloads on desktop (mobile gets
+  // the native share sheet → Instagram Stories).
+  const download = page.waitForEvent('download');
+  await page.getByTestId('story-btn').click();
+  expect((await download).suggestedFilename()).toBe(`legendchess-day-${dayIndex + 1}.png`);
+
   // A completed day restores to the done card, not to the game.
   await page.reload();
   await expect(page.getByTestId('done-card')).toBeVisible({ timeout: 15_000 });

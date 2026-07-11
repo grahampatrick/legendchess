@@ -1,8 +1,8 @@
 /**
  * Privacy-respecting analytics (Plausible), env-gated and fully optional —
- * exactly four product events, no user identifiers:
- *   game_start, game_complete (outcome/score/day), share_click, hint_used.
- * With no NEXT_PUBLIC_PLAUSIBLE_DOMAIN set, this is a no-op.
+ * exactly five product events, no user identifiers: game_start,
+ * game_complete (outcome/score/day + retention buckets), share_click,
+ * share_story, hint_used. With no NEXT_PUBLIC_PLAUSIBLE_DOMAIN set, no-op.
  */
 
 declare global {

@@ -366,6 +366,34 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
     }
   };
 
+  const [storyState, setStoryState] = useState<'idle' | 'busy' | 'shared' | 'downloaded'>('idle');
+  const shareStory = async () => {
+    track('share_story', {
+      puzzle: puzzle.id,
+      ...(dayNumber !== undefined ? { day: dayNumber } : {}),
+    });
+    setStoryState('busy');
+    try {
+      const { shareStoryCard } = await import('../lib/storyCard');
+      const outcome = await shareStoryCard({
+        title: puzzle.meta.title,
+        heroName: puzzle.meta.heroName,
+        event: puzzle.meta.event,
+        year: puzzle.meta.year,
+        ...(dayNumber !== undefined ? { dayNumber } : {}),
+        grid: emojiGrid(snap.records),
+        score: scoreSession(snap.records),
+        max: maxScore(puzzle),
+        livesLeft: snap.livesLeft,
+        solved: snap.phase === 'solved',
+      });
+      setStoryState(outcome);
+      setTimeout(() => setStoryState('idle'), 2500);
+    } catch {
+      setStoryState('idle');
+    }
+  };
+
   const playing = phase === 'play';
   const dests = playing && !promo ? destsFromUcis(session.legalMoves()) : undefined;
   // In-progress view shows unreached points as ⬜; the final/share grid is
@@ -506,6 +534,15 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
               ) : null}
               <button className="btn" data-testid="share-btn" onClick={share}>
                 {copied ? 'Copied!' : 'Share your result'}
+              </button>
+              <button className="btn btn-secondary" data-testid="story-btn" onClick={shareStory}>
+                {storyState === 'busy'
+                  ? 'Rendering…'
+                  : storyState === 'shared'
+                    ? 'Shared!'
+                    : storyState === 'downloaded'
+                      ? 'Image saved!'
+                      : '📸 Story image'}
               </button>
               {isDaily && <Countdown />}
               <div>

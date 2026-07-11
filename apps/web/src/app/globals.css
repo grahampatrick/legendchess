@@ -229,6 +229,15 @@ input.uci {
   padding: 8px 14px;
 }
 
+.btn.btn-secondary {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid #3a3835;
+}
+.btn.btn-secondary:hover {
+  background: #3a3835;
+}
+
 /* ---- celebration ---- */
 .tile-flip {
   display: inline-block;
