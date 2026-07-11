@@ -66,7 +66,7 @@ pnpm --filter @legendchess/web e2e          # playwright, desktop + mobile
 
 ## License
 
-[GPL-3.0-or-later](LICENSE) — we stand on lichess's shoulders and keep the
+[GPL-3.0-or-later](LICENSE) — we keep the
 forks open (see [ADR 0002](docs/adr/0002-gpl-license.md)).
 
 Not affiliated with or endorsed by any chess player, federation, or chess
