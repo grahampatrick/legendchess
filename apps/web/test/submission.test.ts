@@ -67,7 +67,7 @@ describe('processSubmission', () => {
       day_number: 1,
       puzzle_id: puzzle.id,
       solved: true,
-      lives_left: 3,
+      lives_left: 5,
     });
   });
 

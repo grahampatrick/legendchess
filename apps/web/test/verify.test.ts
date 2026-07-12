@@ -34,7 +34,7 @@ describe('verifySubmission (the server grades, never trusts)', () => {
     expect(verifySubmission(puzzle, perfectLog)).toEqual({
       score: 1000,
       grid: '🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩',
-      livesLeft: 3,
+      livesLeft: 5,
       solved: true,
     });
   });
@@ -47,7 +47,7 @@ describe('verifySubmission (the server grades, never trusts)', () => {
   });
 
   it('verifies an out-of-lives (spectator) finish', () => {
-    const log: SubmittedAction[] = badMoves.slice(0, 3).map((uci) => ({ type: 'guess', uci }));
+    const log: SubmittedAction[] = badMoves.slice(0, 5).map((uci) => ({ type: 'guess', uci }));
     const verified = verifySubmission(puzzle, log);
     expect(verified.solved).toBe(false);
     expect(verified.score).toBe(0);

@@ -20,7 +20,7 @@ export interface Rules {
 }
 
 export const RULES: Rules = {
-  lives: 3,
+  lives: 5,
   cpEquivalenceThreshold: 30,
   pointsByLevel: { 0: 0, 1: 25, 2: 60, 3: 100 },
 };

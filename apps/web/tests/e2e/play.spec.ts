@@ -65,13 +65,13 @@ test('win path: all ten hero moves → solved card, full-green grid, share text'
   await expect(page.getByTestId('final-score')).toContainText('1000 / 1000');
 });
 
-test('out of lives: three bad moves → spectator playback → dark grid', async ({ page }) => {
+test('out of lives: five bad moves → spectator playback → dark grid', async ({ page }) => {
   const dp = puzzle.decisionPoints[0]!;
   const heroCp = dp.evals[dp.hero.uci]!;
   const bad = Object.entries(dp.evals)
     .filter(([uci, cp]) => uci !== dp.hero.uci && cp < heroCp - 200)
     .map(([uci]) => uci);
-  test.skip(bad.length < 3, 'fixture must offer three clearly bad moves');
+  test.skip(bad.length < 5, 'fixture must offer five clearly bad moves');
 
   await startAndSkipReplay(page);
   await typeMove(page, bad[0]!);
@@ -79,6 +79,8 @@ test('out of lives: three bad moves → spectator playback → dark grid', async
   await typeMove(page, bad[1]!);
   await expect(page.getByTestId('hint')).toContainText('lands on d4');
   await typeMove(page, bad[2]!);
+  await typeMove(page, bad[3]!);
+  await typeMove(page, bad[4]!);
   await expect(page.getByTestId('status')).toContainText('Out of lives');
   // Spectator playback runs the remaining ~30 plies, then the done card shows.
   await expect(page.getByTestId('done-card')).toBeVisible({ timeout: 60_000 });
@@ -92,7 +94,7 @@ test('illegal and malformed input is rejected without costing a life', async ({ 
   await expect(page.getByTestId('status')).toContainText('not a legal move');
   await typeMove(page, 'e2e4'); // well-formed but illegal (e2 is empty at move 24)
   await expect(page.getByTestId('status')).toContainText('not a legal move');
-  await expect(page.getByTestId('lives')).toHaveText('❤❤❤');
+  await expect(page.getByTestId('lives')).toHaveText('❤❤❤❤❤');
 });
 
 test('board click-move: d1 then d4 plays 24.Rxd4', async ({ page }) => {

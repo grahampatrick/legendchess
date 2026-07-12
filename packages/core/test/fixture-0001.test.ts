@@ -82,16 +82,15 @@ describe('fixture 0001 — playthroughs', () => {
     expect(state.fen).toMatch(/ b - - \d+ 44$/);
   });
 
-  it('three bad guesses at the first decision point → spectator mode', () => {
+  it('five bad guesses at the first decision point → spectator mode', () => {
     const session = createSession(puzzle);
     const dp = puzzle.decisionPoints[0]!;
     const badMoves = Object.entries(dp.evals)
       .filter(([uci, cp]) => uci !== dp.hero.uci && cp < dp.evals[dp.hero.uci]! - 200)
       .map(([uci]) => uci);
-    expect(badMoves.length).toBeGreaterThanOrEqual(3); // a brilliancy: most moves are bad
-    session.guess(badMoves[0]!);
-    session.guess(badMoves[1]!);
-    const last = session.guess(badMoves[2]!);
+    expect(badMoves.length).toBeGreaterThanOrEqual(5); // a brilliancy: most moves are bad
+    for (const uci of badMoves.slice(0, 4)) session.guess(uci);
+    const last = session.guess(badMoves[4]!);
     expect(last).toEqual({ result: 'miss', livesLeft: 0, done: true });
     const state = session.state();
     expect(state.phase).toBe('spectator');
@@ -106,7 +105,7 @@ describe('fixture 0001 — playthroughs', () => {
       [
         'LegendChess #1 — Garry Kasparov, Hoogovens Tournament, Wijk aan Zee 1999',
         '♞🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩',
-        '❤❤❤ 1000/1000',
+        '❤❤❤❤❤ 1000/1000',
       ].join('\n'),
     );
   });

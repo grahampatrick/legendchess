@@ -23,7 +23,7 @@ describe('grading', () => {
   it('grades the exact hero move 🟩 at full level', () => {
     const session = createSession(standardSynthetic());
     const outcome = session.guess('e2e4');
-    expect(outcome).toEqual({ result: 'exact', livesLeft: 3, done: false });
+    expect(outcome).toEqual({ result: 'exact', livesLeft: 5, done: false });
     expect(session.state().records[0]?.resolved).toEqual({ result: 'exact', level: 3 });
   });
 
@@ -63,7 +63,7 @@ describe('misses, lives, and auto-hints', () => {
     const session = createSession(standardSynthetic());
     const outcome = session.guess('a2a3');
     expect(outcome.result).toBe('miss');
-    expect(outcome.livesLeft).toBe(2);
+    expect(outcome.livesLeft).toBe(4);
     expect(outcome.hint).toEqual({ tier: 1, piece: 'pawn' });
     expect(outcome.done).toBe(false);
   });
@@ -73,7 +73,7 @@ describe('misses, lives, and auto-hints', () => {
     session.guess('a2a3');
     const outcome = session.guess('b2b3');
     expect(outcome.hint).toEqual({ tier: 2, to: 'e4' });
-    expect(outcome.livesLeft).toBe(1);
+    expect(outcome.livesLeft).toBe(3);
   });
 
   it('solving after misses resolves at a downgraded level (🟥)', () => {
@@ -85,10 +85,12 @@ describe('misses, lives, and auto-hints', () => {
     expect(session.state().records[0]?.resolved).toEqual({ result: 'exact', level: 1 });
   });
 
-  it('the third miss ends the game into spectator mode', () => {
+  it('the final miss ends the game into spectator mode', () => {
     const session = createSession(standardSynthetic());
     session.guess('a2a3');
     session.guess('b2b3');
+    session.guess('g2g3');
+    session.guess('f2f3');
     const outcome = session.guess('h2h3');
     expect(outcome).toEqual({ result: 'miss', livesLeft: 0, done: true });
     const state = session.state();
@@ -100,9 +102,7 @@ describe('misses, lives, and auto-hints', () => {
 
   it('rejects guesses and hints after the session ends', () => {
     const session = createSession(standardSynthetic());
-    session.guess('a2a3');
-    session.guess('b2b3');
-    session.guess('h2h3');
+    for (const uci of ['a2a3', 'b2b3', 'g2g3', 'f2f3', 'h2h3']) session.guess(uci);
     expect(() => session.guess('e2e4')).toThrow(SessionCompleteError);
     expect(() => session.requestHint()).toThrow(SessionCompleteError);
   });
@@ -117,7 +117,7 @@ describe('voluntary hints', () => {
     expect(() => session.requestHint()).toThrow(NoMoreHintsError);
     session.guess('e2e4');
     expect(session.state().records[0]?.resolved).toEqual({ result: 'exact', level: 1 });
-    expect(session.state().livesLeft).toBe(3); // hints never cost lives
+    expect(session.state().livesLeft).toBe(5); // hints never cost lives
   });
 
   it('a hint then a miss escalates to tier 2, not tier 1 again', () => {
@@ -143,7 +143,7 @@ describe('input validation', () => {
   it('throws IllegalMoveError for well-formed but illegal moves', () => {
     const session = createSession(standardSynthetic());
     expect(() => session.guess('e2e5')).toThrow(IllegalMoveError);
-    expect(session.state().livesLeft).toBe(3); // illegal input is not a miss
+    expect(session.state().livesLeft).toBe(5); // illegal input is not a miss
   });
 });
 
@@ -175,11 +175,9 @@ describe('completion, scoring, and share grid', () => {
 
   it('a lost game shares hollow hearts, never a skull (spent, not dead)', () => {
     const session = createSession(standardSynthetic());
-    session.guess('a2a3');
-    session.guess('b2b3');
-    session.guess('h2h3');
+    for (const uci of ['a2a3', 'b2b3', 'g2g3', 'f2f3', 'h2h3']) session.guess(uci);
     const text = formatShareText({ puzzle: session.puzzle, state: session.state() });
-    expect(text).toContain('♡♡♡');
+    expect(text).toContain('♡♡♡♡♡');
     expect(text).not.toContain('💀');
   });
 

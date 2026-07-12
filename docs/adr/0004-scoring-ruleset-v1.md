@@ -1,5 +1,9 @@
 # ADR 0004 — Scoring ruleset v1
 
+> **v1.1 (2026-07-12):** `lives` tuned 3 → 5 after launch-week playtest feedback
+> (completion felt too punishing on quiet-positional days). Mechanics unchanged;
+> DB constraint widened in migration 20260712000001.
+
 **Status:** Accepted · **Date:** 2026-07-02
 
 ## Context

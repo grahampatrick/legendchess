@@ -442,8 +442,8 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
               )}
               <p className="blurb">{puzzle.meta.blurb}</p>
               <div className="rules-strip" data-testid="rules-strip">
-                Find the moves they actually played · 🟩 exact · 🟨 engine says just as good · ❤❤❤
-                three lives
+                Find the moves they actually played · 🟩 exact · 🟨 engine says just as good · ❤❤❤❤❤
+                five lives
               </div>
               <button className="btn" data-testid="start-btn" onClick={startGame}>
                 Become {heroLastName}
@@ -467,7 +467,7 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
                 <br />
                 🟥 You needed misses or hints to get there.
                 <br />
-                ❤❤❤ A miss costs a life. Three misses, and you watch the legend finish without you.
+                ❤❤❤❤❤ A miss costs a life. Run out, and you watch the legend finish without you.
                 <br />
                 <br />
                 Move pieces by dragging, tapping, or typing (e.g. <code>e2e4</code>). Hints reveal
