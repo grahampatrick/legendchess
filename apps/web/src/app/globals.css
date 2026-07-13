@@ -118,11 +118,16 @@ main.page {
 
 .lives {
   font-size: 1.2rem;
-  letter-spacing: 0.15em;
 }
-.lives .lost {
-  opacity: 0.25;
-  filter: grayscale(1);
+.pixel-hearts {
+  display: inline-flex;
+  gap: 0.38em;
+  vertical-align: -0.12em;
+}
+.pixel-hearts svg {
+  width: 1.45em;
+  height: auto;
+  display: block;
 }
 
 .result-grid {

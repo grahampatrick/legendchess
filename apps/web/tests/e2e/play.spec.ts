@@ -94,7 +94,7 @@ test('illegal and malformed input is rejected without costing a life', async ({ 
   await expect(page.getByTestId('status')).toContainText('not a legal move');
   await typeMove(page, 'e2e4'); // well-formed but illegal (e2 is empty at move 24)
   await expect(page.getByTestId('status')).toContainText('not a legal move');
-  await expect(page.getByTestId('lives')).toHaveText('❤❤❤❤❤');
+  await expect(page.getByTestId('lives')).toHaveAttribute('aria-label', '5 lives left');
 });
 
 test('board click-move: d1 then d4 plays 24.Rxd4', async ({ page }) => {

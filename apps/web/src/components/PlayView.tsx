@@ -19,7 +19,6 @@ import {
   emojiGrid,
   fenIsCheck,
   formatShareText,
-  heartsOf,
   maxScore,
   scoreSession,
   type Hint,
@@ -30,6 +29,7 @@ import type { DrawShape } from 'chessground/draw';
 import Board from './Board';
 import { Confetti, CountUp, GridReveal } from './Celebration';
 import Countdown from './Countdown';
+import { PixelHearts } from './PixelHearts';
 import StatsModal from './StatsModal';
 import { legendByHeroName } from '../data/legends';
 import { gamesBucket, streakBucket, track } from '../lib/analytics';
@@ -403,7 +403,8 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
     .map((r) => (r.resolved ? { 3: '🟩', 2: '🟨', 1: '🟥', 0: '⬛' }[r.resolved.level] : '⬜'))
     .join('');
   const finalGrid = emojiGrid(snap.records);
-  const hearts = heartsOf(snap.livesLeft, session.rules);
+  const hearts = <PixelHearts livesLeft={snap.livesLeft} total={session.rules.lives} />;
+  const fullHearts = <PixelHearts livesLeft={session.rules.lives} total={session.rules.lives} />;
   const pointNumber = Math.min(snap.currentIndex + 1, puzzle.decisionPoints.length);
   const dayTag = dayNumber === undefined ? '' : `#${dayNumber} · `;
 
@@ -442,8 +443,8 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
               )}
               <p className="blurb">{puzzle.meta.blurb}</p>
               <div className="rules-strip" data-testid="rules-strip">
-                Find the moves they actually played · 🟩 exact · 🟨 engine says just as good · ❤❤❤❤❤
-                five lives
+                Find the moves they actually played · 🟩 exact · 🟨 engine says just as good ·{' '}
+                {fullHearts} five lives
               </div>
               <button className="btn" data-testid="start-btn" onClick={startGame}>
                 Become {heroLastName}
@@ -467,7 +468,8 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
                 <br />
                 🟥 You needed misses or hints to get there.
                 <br />
-                ❤❤❤❤❤ A miss costs a life. Run out, and you watch the legend finish without you.
+                {fullHearts} A miss costs a life. Run out, and you watch the legend finish without
+                you.
                 <br />
                 <br />
                 Move pieces by dragging, tapping, or typing (e.g. <code>e2e4</code>). Hints reveal

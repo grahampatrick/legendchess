@@ -22,7 +22,7 @@ export function GridReveal({ grid }: { grid: string }) {
   );
 }
 
-export function CountUp({ to, max, suffix }: { to: number; max: number; suffix: string }) {
+export function CountUp({ to, max, suffix }: { to: number; max: number; suffix: React.ReactNode }) {
   const [value, setValue] = useState(0);
   useEffect(() => {
     const duration = 900;

@@ -5,7 +5,7 @@
  * offers Instagram Stories directly; desktop falls back to a PNG download.
  */
 
-import { heartsOf } from '@legendchess/core';
+import { HEART_COLORS, HEART_COLS, HEART_ROWS, type HeartCell } from './pixelHeart';
 
 export interface StoryCardInput {
   title: string;
@@ -117,9 +117,7 @@ export const renderStoryCard = async (input: StoryCardInput): Promise<Blob> => {
   ctx.fillStyle = TEXT;
   ctx.font = font(104, 700);
   ctx.fillText(`${input.score} / ${input.max}`, W / 2, y);
-  ctx.font = font(64);
-  ctx.fillStyle = input.livesLeft > 0 ? '#e2504c' : DIM;
-  ctx.fillText(heartsOf(input.livesLeft), W / 2, y + 96);
+  drawPixelHearts(ctx, input.livesLeft, 5, W / 2, y + 44);
   y += 240;
 
   // Challenge line in a card
@@ -168,3 +166,30 @@ export const shareStoryCard = async (input: StoryCardInput): Promise<'shared' | 
   URL.revokeObjectURL(url);
   return 'downloaded';
 };
+
+/** The lives row as 8-bit hearts — same bitmap as the in-game HUD. */
+function drawPixelHearts(
+  ctx: CanvasRenderingContext2D,
+  livesLeft: number,
+  total: number,
+  centerX: number,
+  top: number,
+) {
+  const px = 6;
+  const gap = 22;
+  const heartW = HEART_COLS * px;
+  const rowW = total * heartW + (total - 1) * gap;
+  for (let i = 0; i < total; i++) {
+    const palette = i < livesLeft ? HEART_COLORS.full : HEART_COLORS.spent;
+    const x0 = centerX - rowW / 2 + i * (heartW + gap);
+    HEART_ROWS.forEach((row, cy) => {
+      for (let cx = 0; cx < row.length; cx++) {
+        const cell = row[cx];
+        if (cell === '.') continue;
+        ctx.fillStyle = palette[cell as HeartCell];
+        // +0.5 oversize hides antialiasing seams between cells.
+        ctx.fillRect(x0 + cx * px, top + cy * px, px + 0.5, px + 0.5);
+      }
+    });
+  }
+}
