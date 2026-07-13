@@ -1,26 +1,13 @@
 <svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
   <rect width="1024" height="1024" fill="#7cb342"/>
-  <!-- vintage crest rings -->
-  <circle cx="512" cy="512" r="472" fill="none" stroke="#f6efdd" stroke-width="7"/>
-  <circle cx="512" cy="512" r="448" fill="none" stroke="#f6efdd" stroke-width="3"/>
-  <!-- cburnett knight, cream vintage fill -->
-  <g transform="translate(152,152) scale(16)" fill="none" fill-rule="evenodd" stroke="#17130e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M22 10c10.5 1 16.5 8 16 29H15c0-9 10-6.5 8-21" fill="#f6efdd"/>
-    <path d="M24 18c.38 2.91-5.55 7.37-8 9-3 2-2.82 4.34-5 4-1.042-.94 1.41-3.04 0-3-1 0 .19 1.23-1 2-1 0-4.003 1-4-4 0-2 6-12 6-12s1.89-1.9 2-3.5c-.73-.994-.5-2-.5-3 1-1 3 2.5 3 2.5h2s.78-1.992 2.5-3c1 0 1 3 1 3" fill="#f6efdd"/>
-    <path d="M9.5 25.5a.5.5 0 1 1-1 0 .5.5 0 1 1 1 0zm5.433-9.75a.5 1.5 30 1 1-.866-.5.5 1.5 30 1 1 .866.5z" fill="#17130e" stroke="none"/>
+  <!-- cburnett knight, original logo colors -->
+  <g transform="translate(152,152) scale(16)" fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 10c10.5 1 16.5 8 16 29H15c0-9 10-6.5 8-21" fill="#fff"/>
+    <path d="M24 18c.38 2.91-5.55 7.37-8 9-3 2-2.82 4.34-5 4-1.042-.94 1.41-3.04 0-3-1 0 .19 1.23-1 2-1 0-4.003 1-4-4 0-2 6-12 6-12s1.89-1.9 2-3.5c-.73-.994-.5-2-.5-3 1-1 3 2.5 3 2.5h2s.78-1.992 2.5-3c1 0 1 3 1 3" fill="#fff"/>
+    <path d="M9.5 25.5a.5.5 0 1 1-1 0 .5.5 0 1 1 1 0zm5.433-9.75a.5 1.5 30 1 1-.866-.5.5 1.5 30 1 1 .866.5z" fill="#000" stroke="none"/>
     <!-- monocle over the eye -->
-    <circle cx="14.7" cy="16.0" r="2.6" stroke-width="1.0" fill="rgba(23,19,14,0.07)"/>
+    <circle cx="14.7" cy="16.0" r="2.6" stroke-width="1.0" fill="rgba(0,0,0,0.07)"/>
     <!-- monocle chain, draped down the neck -->
     <path d="M16.6 17.7 C 18.4 20.3, 17.6 23.5, 19.2 26.5 C 20.0 28, 19.6 29.5, 18.8 30.5" stroke-width="0.55" stroke-dasharray="0.9 0.7" fill="none"/>
-    <!-- walrus-handlebar moustache: swallows the whole mouth, tips curl up past the nose -->
-    <g fill="#17130e" stroke="none">
-      <circle cx="8.6" cy="27.4" r="2.0"/><circle cx="10.8" cy="27.4" r="2.0"/>
-      <circle cx="6.4" cy="27.8" r="1.7"/><circle cx="13.0" cy="27.8" r="1.7"/>
-      <circle cx="4.7" cy="27.2" r="1.3"/><circle cx="14.7" cy="27.2" r="1.3"/>
-      <!-- up-curled tips as spiral hooks -->
-      <path d="M4.5 27.5 C 2.9 27.3, 2.2 25.9, 3.2 25.0 C 4.0 24.4, 4.9 25.0, 4.5 25.8" fill="none" stroke="#17130e" stroke-width="1.15" stroke-linecap="round"/>
-      <path d="M14.6 27.4 C 16.2 27.2, 16.9 25.8, 15.9 24.9 C 15.1 24.3, 14.3 25.0, 14.7 25.8" fill="none" stroke="#17130e" stroke-width="1.15" stroke-linecap="round"/>
-      <circle cx="5.0" cy="29.0" r="1.2"/><circle cx="6.8" cy="29.6" r="1.4"/><circle cx="8.8" cy="29.9" r="1.5"/><circle cx="10.6" cy="29.7" r="1.4"/><circle cx="12.3" cy="29.0" r="1.2"/>
-    </g>
   </g>
 </svg>
