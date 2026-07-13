@@ -514,16 +514,8 @@ button.link-btn:hover {
   border-radius: 6px;
 }
 .nav-right .account-link {
-  border: 1px solid #4a4845;
-  border-radius: 999px;
-  padding: 6px 14px;
   color: var(--text);
   font-weight: 600;
-}
-.nav-right .account-link:hover {
-  border-color: var(--accent-bright);
-  color: var(--text-bright);
-  background: none;
 }
 .nav-right .nav-icon:hover {
   color: var(--text);
