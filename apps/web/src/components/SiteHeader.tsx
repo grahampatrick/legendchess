@@ -59,7 +59,10 @@ export default function SiteHeader() {
     <header className="site-header">
       <nav className="site-nav" aria-label="Main">
         <Link href="/" className="wordmark">
-          <Logo size={22} /> LegendChess<span className="tld">.com</span>
+          <Logo size={22} />
+          <span>
+            LegendChess<span className="tld">.com</span>
+          </span>
         </Link>
         <div className="nav-links">
           {LINKS.map((l) => (
