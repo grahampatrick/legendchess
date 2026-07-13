@@ -45,7 +45,11 @@ export default function AccountPage() {
       email,
       options: { emailRedirectTo: window.location.origin + '/account' },
     });
-    setMessage(error ? error.message : 'Check your email for the sign-in link.');
+    setMessage(
+      error
+        ? error.message
+        : 'Check your email for the sign-in link — it arrives from Supabase Auth (our sign-in provider), so look for a Supabase sender and check spam if it hides.',
+    );
   };
 
   const saveHandle = async () => {
