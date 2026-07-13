@@ -470,6 +470,9 @@ button.link-btn:hover {
   font-weight: 700;
   font-size: 1.02rem;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 .site-nav .wordmark .knight {
   color: var(--accent);
@@ -615,6 +618,16 @@ button.link-btn:hover {
   background: var(--bg-card);
   border-top: 1px solid #3a3835;
   padding: 26px 16px 34px;
+}
+.footer-bottom {
+  max-width: 1100px;
+  margin: 26px auto 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 .footer-cols {
   max-width: 1100px;

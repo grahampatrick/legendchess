@@ -13,6 +13,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { Logo } from './Logo';
 import { browserClient, supabaseConfigured } from '../lib/supabase';
 
 const LINKS = [
@@ -58,7 +59,7 @@ export default function SiteHeader() {
     <header className="site-header">
       <nav className="site-nav" aria-label="Main">
         <Link href="/" className="wordmark">
-          <span className="knight">♞</span> LegendChess<span className="tld">.com</span>
+          <Logo size={22} /> LegendChess<span className="tld">.com</span>
         </Link>
         <div className="nav-links">
           {LINKS.map((l) => (

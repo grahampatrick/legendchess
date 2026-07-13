@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { Logo } from './Logo';
+
 export default function SiteFooter() {
   return (
     <footer className="site-footer">
@@ -36,6 +38,10 @@ export default function SiteFooter() {
             scores are public-domain facts; the words are ours.
           </span>
         </div>
+      </div>
+      <div className="footer-bottom">
+        <Logo size={26} />
+        <span>LegendChess.com</span>
       </div>
     </footer>
   );
