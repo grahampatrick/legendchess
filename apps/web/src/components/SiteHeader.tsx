@@ -59,7 +59,7 @@ export default function SiteHeader() {
     <header className="site-header">
       <nav className="site-nav" aria-label="Main">
         <Link href="/" className="wordmark">
-          <Logo size={22} />
+          <Logo size={30} />
           <span>
             LegendChess<span className="tld">.com</span>
           </span>

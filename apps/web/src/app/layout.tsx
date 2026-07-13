@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Fraunces } from 'next/font/google';
 
 import 'chessground/assets/chessground.base.css';
 import 'chessground/assets/chessground.brown.css';
@@ -8,6 +9,13 @@ import './globals.css';
 import AuthSessionSync from '../components/AuthSessionSync';
 import SiteFooter from '../components/SiteFooter';
 import SiteHeader from '../components/SiteHeader';
+
+const brandFont = Fraunces({
+  subsets: ['latin'],
+  weight: ['600', '700'],
+  display: 'swap',
+  variable: '--font-brand',
+});
 
 export const metadata: Metadata = {
   title: 'LegendChess',
@@ -38,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </>
         )}
       </head>
-      <body>
+      <body className={brandFont.variable}>
         <AuthSessionSync />
         <SiteHeader />
         {children}

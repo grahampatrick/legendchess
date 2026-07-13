@@ -459,20 +459,21 @@ button.link-btn:hover {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 16px;
-  height: 46px;
+  height: 54px;
   display: flex;
   align-items: center;
   gap: 18px;
 }
 .site-nav .wordmark {
-  color: var(--text);
+  color: var(--text-bright);
   text-decoration: none;
+  font-family: var(--font-brand), Georgia, serif;
   font-weight: 700;
-  font-size: 1.02rem;
+  font-size: 1.5rem;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 .site-nav .wordmark .knight {
   color: var(--accent);
@@ -521,7 +522,7 @@ button.link-btn:hover {
 
 /* Narrow screens: wrap to two rows — wordmark + account/social on top,
    section links full-width beneath. Nothing scrolls sideways. */
-@media (max-width: 560px) {
+@media (max-width: 760px) {
   .site-nav {
     flex-wrap: wrap;
     height: auto;
@@ -626,7 +627,8 @@ button.link-btn:hover {
   align-items: center;
   gap: 9px;
   color: var(--text-dim);
-  font-size: 0.85rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: 1rem;
   font-weight: 600;
 }
 .footer-cols {
