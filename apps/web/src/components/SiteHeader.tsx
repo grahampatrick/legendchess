@@ -8,8 +8,12 @@
  * On narrow screens the bar wraps to two rows (wordmark + account, then the
  * section links full-width) — nothing scrolls sideways.
  */
+import { useEffect, useMemo, useState } from 'react';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
+import { browserClient, supabaseConfigured } from '../lib/supabase';
 
 const LINKS = [
   { href: '/', label: 'Daily' },
@@ -39,6 +43,17 @@ function InstagramIcon() {
 
 export default function SiteHeader() {
   const pathname = usePathname();
+  // "Sign up" until a session proves otherwise — most visitors are signed out.
+  const client = useMemo(() => (supabaseConfigured() ? browserClient() : null), []);
+  const [signedIn, setSignedIn] = useState(false);
+  useEffect(() => {
+    if (!client) return;
+    client.auth.getSession().then(({ data }) => setSignedIn(!!data.session));
+    const { data: sub } = client.auth.onAuthStateChange((_e, session) => {
+      setSignedIn(!!session);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, [client]);
   return (
     <header className="site-header">
       <nav className="site-nav" aria-label="Main">
@@ -63,8 +78,8 @@ export default function SiteHeader() {
           >
             <InstagramIcon />
           </a>
-          <Link href="/account" title="Account">
-            Account
+          <Link href="/account" title={signedIn ? 'Account' : 'Sign up'}>
+            {signedIn ? 'Account' : 'Sign up'}
           </Link>
         </div>
       </nav>
