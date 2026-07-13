@@ -60,9 +60,7 @@ export default function SiteHeader() {
       <nav className="site-nav" aria-label="Main">
         <Link href="/" className="wordmark">
           <Logo size={30} />
-          <span>
-            LegendChess<span className="tld">.com</span>
-          </span>
+          <span>LegendChess</span>
         </Link>
         <div className="nav-links">
           {LINKS.map((l) => (

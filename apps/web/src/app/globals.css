@@ -475,14 +475,6 @@ button.link-btn:hover {
   align-items: center;
   gap: 10px;
 }
-.site-nav .wordmark .knight {
-  color: var(--accent);
-}
-.site-nav .wordmark .tld {
-  color: var(--text-dim);
-  font-weight: 400;
-  font-size: 0.85em;
-}
 .nav-links {
   display: flex;
   gap: 2px;
@@ -536,9 +528,6 @@ button.link-btn:hover {
   }
   .nav-links a {
     padding: 6px 6px;
-  }
-  .site-nav .wordmark .tld {
-    display: none;
   }
 }
 
