@@ -27,8 +27,8 @@ function InstagramIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
-      width="17"
-      height="17"
+      width="20"
+      height="20"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.8"
@@ -80,7 +80,7 @@ export default function SiteHeader() {
           >
             <InstagramIcon />
           </a>
-          <Link href="/account" title={signedIn ? 'Account' : 'Sign up'}>
+          <Link href="/account" className="account-link" title={signedIn ? 'Account' : 'Sign up'}>
             {signedIn ? 'Account' : 'Sign up'}
           </Link>
         </div>
