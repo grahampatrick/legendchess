@@ -397,12 +397,16 @@ export default function PlayView({ sealed, mode, dayNumber, dateKey }: PlayViewP
 
   const playing = phase === 'play';
   const dests = playing && !promo ? destsFromUcis(session.legalMoves()) : undefined;
-  // In-progress view shows unreached points as ⬜; the final/share grid is
-  // core's canonical emojiGrid (⬛ for unreached) — one scoring presentation.
-  const progressGrid = snap.records
-    .map((r) => (r.resolved ? { 3: '🟩', 2: '🟨', 1: '🟥', 0: '⬛' }[r.resolved.level] : '⬜'))
-    .join('');
   const finalGrid = emojiGrid(snap.records);
+  // While guessing, unreached points show as ⬜ (still to come). Once the
+  // session is over they're gone for good, so the HUD switches to core's
+  // canonical grid (⬛) and matches the done card and share text.
+  const over = phase === 'spectate' || phase === 'done';
+  const progressGrid = over
+    ? finalGrid
+    : snap.records
+        .map((r) => (r.resolved ? { 3: '🟩', 2: '🟨', 1: '🟥', 0: '⬛' }[r.resolved.level] : '⬜'))
+        .join('');
   const hearts = <PixelHearts livesLeft={snap.livesLeft} total={session.rules.lives} />;
   const fullHearts = <PixelHearts livesLeft={session.rules.lives} total={session.rules.lives} />;
   const pointNumber = Math.min(snap.currentIndex + 1, puzzle.decisionPoints.length);
