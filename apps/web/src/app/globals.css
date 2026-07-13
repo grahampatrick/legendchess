@@ -103,7 +103,9 @@ main.page {
   min-height: 120px;
 }
 .panel h1 {
-  font-size: 1.15rem;
+  font-family: var(--font-brand), Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 600;
   margin: 0;
   color: var(--text-bright);
 }
@@ -216,6 +218,9 @@ input.uci {
   text-align: center;
 }
 .overlay .card h2 {
+  font-family: var(--font-brand), Georgia, serif;
+  font-weight: 600;
+  font-size: 1.55rem;
   margin: 0;
   color: var(--text-bright);
 }
