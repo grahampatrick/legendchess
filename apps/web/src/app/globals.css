@@ -482,11 +482,6 @@ button.link-btn:hover {
 .nav-links {
   display: flex;
   gap: 2px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.nav-links::-webkit-scrollbar {
-  display: none;
 }
 .nav-links a,
 .nav-right a {
@@ -507,6 +502,40 @@ button.link-btn:hover {
 }
 .nav-right {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-right .nav-icon {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 8px;
+}
+.nav-right .nav-icon:hover {
+  color: var(--text);
+  background: #3a3835;
+}
+
+/* Narrow screens: wrap to two rows — wordmark + account/social on top,
+   section links full-width beneath. Nothing scrolls sideways. */
+@media (max-width: 560px) {
+  .site-nav {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 6px 10px 8px;
+    gap: 0 10px;
+  }
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .nav-links a {
+    padding: 6px 6px;
+  }
+  .site-nav .wordmark .tld {
+    display: none;
+  }
 }
 
 .page-crumb {

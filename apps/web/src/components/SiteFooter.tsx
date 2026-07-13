@@ -13,6 +13,9 @@ export default function SiteFooter() {
         <div>
           <h3>The game</h3>
           <Link href="/legends">The legends</Link>
+          <a href="https://www.instagram.com/playlegendchess/" rel="noopener">
+            @playlegendchess on Instagram
+          </a>
           <a href="https://github.com/grahampatrick/legendchess" rel="noopener">
             Source code
           </a>
