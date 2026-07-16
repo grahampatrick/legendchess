@@ -27,6 +27,7 @@ export const CONFIG = {
   },
   '0004-anderssen-evergreen-1852': {
     hideHeroMoves: 5, // freeze before 20.Rxe7+ — the whole combination stays hidden
+    portraitFile: 'anderssen-1863.jpg', // 1863 photograph — day 3 already used the engraving
     subtitle:
       "Berlin, 1852. One year after the Immortal,<br>Adolf Anderssen vs Jean Dufresne —<br>the game they call 'the evergreen<br>in the laurel wreath of chess.'",
     intro: "Anderssen is White. Black's attack looks faster. It isn't.",

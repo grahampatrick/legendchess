@@ -75,9 +75,8 @@ const legend = legendFor(meta.heroName);
 const years = cfg.years ?? legend?.years ?? String(meta.year);
 const epithet = cfg.epithet ?? legend?.epithet ?? meta.title;
 const bio = (cfg.bio ?? legend?.bio ?? meta.blurb).replace(/\s+$/, '');
-const portraitPath = legend?.portrait
-  ? path.join(REPO, 'apps/web/public/legends', legend.portrait)
-  : null;
+const portraitFile = cfg.portraitFile ?? legend?.portrait;
+const portraitPath = portraitFile ? path.join(REPO, 'apps/web/public/legends', portraitFile) : null;
 
 // ---------- frames via chessops ----------
 // chessops is ESM-only (its dist/cjs is mislabeled); import the ESM build.
