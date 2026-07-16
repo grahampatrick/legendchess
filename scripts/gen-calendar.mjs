@@ -19,14 +19,43 @@ const releaseDateKey = (now) =>
     month: '2-digit',
     day: '2-digit',
   }).format(new Date(now.getTime() - 8 * 3_600_000));
-const START = releaseDateKey(new Date());
+const startArg = process.argv.find((a) => a.startsWith('--start='))?.slice(8);
+const START = startArg ?? releaseDateKey(new Date());
 const DAYS = 365;
 
-const ids = readdirSync(path.join(ROOT, 'dist/puzzles'))
+// Explicit rotation: no hero appears on consecutive days, including when the
+// cycle wraps (…najdorf → kasparov…). New puzzles must be inserted with the
+// same rule. Kept in sync with dist/puzzles by the check below.
+const ORDER = [
+  '0001-kasparov-topalov-1999',
+  '0002-morphy-opera-1858',
+  '0003-anderssen-immortal-1851',
+  '0008-fischer-byrne-1956',
+  '0007-marshall-levitsky-1912',
+  '0009-carlsen-nepo-2021',
+  '0004-anderssen-evergreen-1852',
+  '0010-kasparov-world-1999',
+  '0006-rubinstein-rotlewi-1907',
+  '0017-carlsen-anand-2013-g5',
+  '0012-meitner-hamppe-1872',
+  '0015-fischer-spassky-1972',
+  '0018-carlsen-karjakin-2016',
+  '0005-nimzowitsch-zugzwang-1923',
+  '0016-kasparov-karpov-1985',
+  '0019-carlsen-anand-2013-g9',
+  '0013-canal-peruvian-1934',
+  '0011-deepblue-kasparov-1996',
+  '0014-najdorf-polish-1930',
+];
+
+const onDisk = readdirSync(path.join(ROOT, 'dist/puzzles'))
   .filter((f) => f.endsWith('.json'))
   .map((f) => f.replace(/\.json$/, ''))
   .sort();
-if (ids.length === 0) throw new Error('no puzzles in dist/puzzles');
+if (onDisk.join() !== [...ORDER].sort().join()) {
+  throw new Error('ORDER is out of sync with dist/puzzles — update the rotation');
+}
+const ids = ORDER;
 
 const start = new Date(`${START}T00:00:00Z`);
 const days = Array.from({ length: DAYS }, (_, i) => {
