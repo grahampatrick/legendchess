@@ -395,7 +395,7 @@ const captions = `DAY ${dayNumber} — ${meta.title} (${meta.heroName}, ${meta.y
 === POST CAPTION ===
 Day ${dayNumber}. Today's Legend: ${meta.heroName}, ${epithet}.
 
-${meta.event} · ${meta.year}. This is the exact position at move ${momentMoveNo} — ${toPlayWord.toLowerCase()} to play. ${hook.replace('From here, ', '')}
+${meta.event} · ${meta.year}. This is the exact position at move ${momentMoveNo} — ${toPlayWord.toLowerCase()} to play. ${(() => { const h = hook.replace('From here, ', ''); return h[0].toUpperCase() + h.slice(1); })()}
 
 Can you find what ${lastName} found? One legendary game a day. 5 lives. Link in bio ♞
 
