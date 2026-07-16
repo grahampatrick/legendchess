@@ -12,3 +12,4 @@ coverage/
 .vercel
 .env*
 .claude/
+tools/social/node_modules/

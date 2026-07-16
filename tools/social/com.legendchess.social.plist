@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.legendchess.social</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/gm/.local/bin/node</string>
+    <string>/Users/gm/play-the-legend/tools/social/generate.mjs</string>
+  </array>
+  <!-- Hourly; the script exits instantly unless a new release day needs assets. -->
+  <key>StartInterval</key><integer>3600</integer>
+  <key>RunAtLoad</key><true/>
+  <key>StandardOutPath</key><string>/Users/gm/Library/Logs/legendchess-social.log</string>
+  <key>StandardErrorPath</key><string>/Users/gm/Library/Logs/legendchess-social.log</string>
+</dict>
+</plist>

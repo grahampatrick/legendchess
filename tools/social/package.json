@@ -1,0 +1,9 @@
+{
+  "name": "@legendchess/social-tools",
+  "private": true,
+  "type": "module",
+  "description": "Daily social asset generator — post card + cliffhanger reel for today's legend",
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0"
+  }
+}
