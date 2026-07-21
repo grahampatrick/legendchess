@@ -288,9 +288,18 @@ window.__total = t;
 </script></body></html>`;
 
 // ---------- post page ----------
+// No free photograph exists for some legends (Canal, Meitner, Najdorf, Deep
+// Blue). Never fabricate a likeness — render a vintage monogram crest instead.
+const initials = meta.heroName.split(' ').map((w) => w[0]).join('').toUpperCase();
 const portraitBlock = portraitPath
   ? `<div class="pframe"><img class="portrait" src="${pathToFileURL(portraitPath)}"></div>`
-  : `<div class="pframe logo-tile">${logo.replace('<svg ', '<svg width="300" height="300" ')}</div>`;
+  : `<div class="pframe crest">
+      <div class="crest-ring">
+        <div class="crest-mono">${initials}</div>
+        <div class="crest-knight">${logo.replace('<svg ', '<svg width="64" height="64" ')}</div>
+        <div class="crest-era">${years.replace(/–/g, ' – ')}</div>
+      </div>
+    </div>`;
 const postFact = cfg.postFact ? ` ${cfg.postFact}` : '';
 const postHtml = `<!doctype html><html><head><meta charset="utf-8">${fontLink}<style>
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -306,8 +315,15 @@ const postHtml = `<!doctype html><html><head><meta charset="utf-8">${fontLink}<s
   .row { margin-top:34px; display:flex; gap:36px; align-items:flex-start; }
   .pframe { border:5px solid #7cb342; border-radius:8px; box-shadow:0 24px 70px rgba(0,0,0,.6);
             font-size:0; }
-  .pframe.logo-tile { width:376px; height:420px; background:#7cb342; display:flex;
-            align-items:center; justify-content:center; }
+  .pframe.crest { width:376px; height:420px; background:#262421; display:flex;
+            align-items:center; justify-content:center; font-size:initial; }
+  .crest-ring { width:316px; height:360px; border:2px solid #6b665c; border-radius:8px;
+            outline:1px solid #46433c; outline-offset:6px; display:flex; flex-direction:column;
+            align-items:center; justify-content:center; gap:18px; }
+  .crest-mono { font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:130px;
+            color:#efeae0; line-height:1; }
+  .crest-knight svg { display:block; }
+  .crest-era { font-size:22px; letter-spacing:4px; color:#8d8677; font-weight:700; }
   .portrait { width:376px; height:420px; object-fit:cover; object-position:top; border-radius:4px;
               filter:grayscale(1) sepia(.35) contrast(1.05); }
   .boardcol { display:flex; flex-direction:column; align-items:center; }
