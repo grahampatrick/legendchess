@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'The Legends — LegendChess',
   description:
-    'The players you step in for: Morphy, Anderssen, Rubinstein, Marshall, Nimzowitsch, Fischer, Kasparov, Carlsen.',
+    'The players you step in for: Morphy, Anderssen, Meitner, Rubinstein, Marshall, Nimzowitsch, Canal, Najdorf, Fischer, Kasparov, Deep Blue, Carlsen.',
 };
 
 export default async function Legends() {

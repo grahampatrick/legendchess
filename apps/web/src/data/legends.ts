@@ -35,6 +35,14 @@ export const LEGENDS: Legend[] = [
     portrait: 'anderssen.jpg',
   },
   {
+    slug: 'meitner',
+    heroName: 'Philipp Meitner',
+    years: '1838–1910',
+    epithet: 'The Immortal Drawer',
+    bio: 'A Viennese lawyer and master remembered above all for one game: the Immortal Draw of 1872, in which his king marches voluntarily into the heart of the enemy army and survives by perpetual check. The most famous draw in chess history — proof that a half point can outlive a thousand wins.',
+    portrait: null,
+  },
+  {
     slug: 'rubinstein',
     heroName: 'Akiba Rubinstein',
     years: '1880–1961',
@@ -59,6 +67,22 @@ export const LEGENDS: Legend[] = [
     portrait: 'nimzowitsch.jpg',
   },
   {
+    slug: 'canal',
+    heroName: 'Esteban Canal',
+    years: '1896–1981',
+    epithet: 'The Peruvian',
+    bio: 'A Peruvian grandmaster who spent his career in the cafés and tournament halls of Europe. In a 1934 simultaneous exhibition in Budapest he sacrificed both rooks and his queen for a mate with his two remaining minor pieces — the Peruvian Immortal. So elusive that no photograph of him survives in the free public record.',
+    portrait: null,
+  },
+  {
+    slug: 'najdorf',
+    heroName: 'Miguel Najdorf',
+    years: '1910–1997',
+    epithet: 'El Viejo',
+    bio: 'The Polish-Argentine legend whose name lives on in the most popular opening variation in chess. As a young man in Warsaw he played the Polish Immortal, sacrificing four pieces for a mate delivered by pawn and knight; later, stranded in Buenos Aires by the war, he became the beloved elder statesman of South American chess.',
+    portrait: null,
+  },
+  {
     slug: 'fischer',
     heroName: 'Bobby Fischer',
     years: '1943–2008',
@@ -73,6 +97,14 @@ export const LEGENDS: Legend[] = [
     epithet: 'The Beast of Baku',
     bio: 'The youngest World Champion in history at twenty-two, world number one for nearly two decades, and the most feared attacking calculator the game has produced. His 1999 win over Topalov at Wijk aan Zee is routinely called the greatest game ever played — and in that same year he beat the combined vote of fifty thousand players as "the World."',
     portrait: 'kasparov.jpg',
+  },
+  {
+    slug: 'deepblue',
+    heroName: 'Deep Blue',
+    years: 'IBM, 1985–1997',
+    epithet: 'The Machine',
+    bio: 'An IBM supercomputer evaluating two hundred million positions per second. In Philadelphia, 1996, it became the first machine ever to beat a reigning World Champion in a classical game — the moment the machines arrived. Kasparov won that match; the rematch, a year later, went the other way.',
+    portrait: null,
   },
   {
     slug: 'carlsen',
