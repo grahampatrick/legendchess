@@ -71,8 +71,8 @@ export const LEGENDS: Legend[] = [
     heroName: 'Esteban Canal',
     years: '1896–1981',
     epithet: 'The Peruvian',
-    bio: 'A Peruvian grandmaster who spent his career in the cafés and tournament halls of Europe. In a 1934 simultaneous exhibition in Budapest he sacrificed both rooks and his queen for a mate with his two remaining minor pieces — the Peruvian Immortal. So elusive that no photograph of him survives in the free public record.',
-    portrait: null,
+    bio: 'A Peruvian grandmaster who spent his career in the cafés and tournament halls of Europe. In a 1934 simultaneous exhibition in Budapest he sacrificed both rooks and his queen for a mate with his two remaining minor pieces — the Peruvian Immortal. FIDE made him an honorary grandmaster at eighty, still at the board.',
+    portrait: 'canal.jpg',
   },
   {
     slug: 'najdorf',
