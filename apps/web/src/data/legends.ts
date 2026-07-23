@@ -40,7 +40,7 @@ export const LEGENDS: Legend[] = [
     years: '1838–1910',
     epithet: 'The Immortal Drawer',
     bio: 'A Viennese lawyer and master remembered above all for one game: the Immortal Draw of 1872, in which his king marches voluntarily into the heart of the enemy army and survives by perpetual check. The most famous draw in chess history — proof that a half point can outlive a thousand wins.',
-    portrait: null,
+    portrait: 'meitner.jpg',
   },
   {
     slug: 'rubinstein',
